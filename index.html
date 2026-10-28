@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agrim Srivastava | Software & AI Systems Engineer</title>
+  <meta name="description" content="Portfolio of Agrim Srivastava — Data Science student at IIT Madras, building multi-agent systems, robotics perception pipelines, and full-stack software." />
+  <meta name="keywords" content="Agrim Srivastava, IIT Madras, Portfolio, Software Engineer, AI Engineer, LangGraph, ROS 2, RAG, Machine Learning, Full-Stack" />
+  <meta name="author" content="Agrim Srivastava" />
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://agrimsri.github.io/" />
+  <meta property="og:title" content="Agrim Srivastava — Software & AI Systems Engineer" />
+  <meta property="og:description" content="BS in Data Science at IIT Madras (GPA 9.1). Building multi-agent systems, robotics perception pipelines, and robust full-stack platforms." />
+  <meta property="og:image" content="https://agrimsri.github.io/assets/profile.jpg" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Agrim Srivastava — Software & AI Systems Engineer" />
+  <meta name="twitter:description" content="Portfolio of Agrim Srivastava — Data Science student at IIT Madras." />
+  <meta name="twitter:image" content="https://agrimsri.github.io/assets/profile.jpg" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%230F0F12'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' font-family='serif' font-weight='bold' font-size='50' fill='%23B08D57'>AS</text></svg>" />
+
+  <!-- Google Fonts: Cinzel & Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            gold: {
+              DEFAULT: '#B08D57',
+              light: '#E5C17C',
+              dark: '#8C6C38',
+              muted: '#B08D5740',
+            },
+            crimson: '#8B2E2E',
+            obsidian: {
+              50: '#18181C',
+              100: '#131317',
+              DEFAULT: '#0D0D10',
+              900: '#070709',
+            },
+            alabaster: {
+              DEFAULT: '#F8F6F0',
+              card: '#FFFFFF',
+              muted: '#EDE9E1',
+            }
+          },
+          fontFamily: {
+            cinzel: ['Cinzel', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          animation: {
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 6s ease-in-out infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Custom refined styling */
+    .glass {
+      background: rgba(18, 18, 22, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .dark .glass-card {
+      background: linear-gradient(135deg, rgba(25, 25, 32, 0.65) 0%, rgba(15, 15, 20, 0.45) 100%);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(176, 141, 87, 0.18);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(176, 141, 87, 0.25);
+    }
+    .dark .glass-card:hover {
+      border-color: rgba(176, 141, 87, 0.45);
+      box-shadow: 0 10px 30px -10px rgba(176, 141, 87, 0.15);
+    }
+    .glass-card:hover {
+      border-color: rgba(176, 141, 87, 0.6);
+      box-shadow: 0 10px 25px -10px rgba(176, 141, 87, 0.2);
+    }
+    .text-glow {
+      text-shadow: 0 0 25px rgba(229, 193, 124, 0.35);
+    }
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #FFF8E7 0%, #E5C17C 50%, #B08D57 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .light .gold-gradient-text {
+      background: linear-gradient(135deg, #1A1A24 0%, #8C6C38 60%, #B08D57 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    /* Ambient backdrop grid */
+    .bg-grid-pattern {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+    .light .bg-grid-pattern {
+      background-image: 
+        linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    }
+  </style>
+</head>
+
+<body class="bg-[#0A0A0D] text-[#E8E8ED] font-sans antialiased selection:bg-gold selection:text-black transition-colors duration-300">
+
+  <!-- Ambient Golden Glow Background Orbs -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-gold/10 rounded-full blur-3xl animate-pulse-slow"></div>
+    <div class="absolute top-1/3 -right-40 w-[500px] h-[500px] bg-gold/5 rounded-full blur-[140px]"></div>
+    <div class="absolute -bottom-40 left-1/3 w-[600px] h-[600px] bg-crimson/5 rounded-full blur-[160px]"></div>
+    <div class="absolute inset-0 bg-grid-pattern opacity-60"></div>
+  </div>
+
+  <!-- Toast Notification Container for Email Copy -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 flex items-center gap-3 px-5 py-3.5 rounded-xl bg-obsidian-50 border border-gold/40 text-gold-light shadow-2xl">
+    <i data-lucide="check-circle" class="w-5 h-5 text-gold-light"></i>
+    <span class="text-sm font-medium" id="toast-message">Email copied to clipboard!</span>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="sticky top-0 z-40 w-full backdrop-blur-xl bg-[#0A0A0D]/80 border-b border-white/5 dark:border-white/5 transition-colors duration-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logo / Monogram -->
+      <a href="#hero" class="group flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl border border-gold/40 flex items-center justify-center font-cinzel font-bold text-lg text-gold bg-gold/5 group-hover:border-gold group-hover:scale-105 transition-all duration-200 shadow-sm">
+          AS
+        </div>
+        <div class="flex flex-col">
+          <span class="font-cinzel tracking-wider text-sm font-bold text-[#F5F5F7] group-hover:text-gold transition">AGRIM SRIVASTAVA</span>
+          <span class="font-mono text-[10px] text-gray-400 tracking-tight">AI & SYSTEMS ENGINEER</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+        <a href="#about" class="hover:text-gold transition-colors duration-150">About</a>
+        <a href="#projects" class="hover:text-gold transition-colors duration-150">Projects</a>
+        <a href="#experience" class="hover:text-gold transition-colors duration-150">Experience</a>
+        <a href="#skills" class="hover:text-gold transition-colors duration-150">Skills</a>
+        <a href="#contact" class="hover:text-gold transition-colors duration-150">Contact</a>
+      </div>
+
+      <!-- Action Buttons (Resume & Dark/Light Toggle) -->
+      <div class="flex items-center gap-3">
+        <a href="./assets/Agrim_Srivastava_Resume.pdf" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider bg-gold/10 hover:bg-gold/20 text-gold-light border border-gold/30 hover:border-gold transition-all duration-200 shadow-sm hover:shadow-gold/10">
+          <i data-lucide="file-text" class="w-4 h-4"></i>
+          <span>Resume</span>
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-gray-400 hover:text-white border border-white/10" aria-label="Toggle menu">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-6 space-y-3 bg-[#0D0D11] border-b border-white/10 text-sm">
+      <a href="#about" class="block py-2 text-gray-300 hover:text-gold mobile-nav-link">About</a>
+      <a href="#projects" class="block py-2 text-gray-300 hover:text-gold mobile-nav-link">Projects</a>
+      <a href="#experience" class="block py-2 text-gray-300 hover:text-gold mobile-nav-link">Experience</a>
+      <a href="#skills" class="block py-2 text-gray-300 hover:text-gold mobile-nav-link">Skills</a>
+      <a href="#contact" class="block py-2 text-gray-300 hover:text-gold mobile-nav-link">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-24">
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="py-12 md:py-24 border-b border-white/5">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left: Intro & Bio -->
+        <div class="lg:col-span-8 space-y-6">
+          
+          <!-- Availability Badge -->
+          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-gray-300">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span class="w-2 h-2 rounded-full bg-emerald-500 -ml-4.5"></span>
+            <span>Open to SWE & AI/ML Opportunities</span>
+          </div>
+
+          <!-- Main Headline -->
+          <div class="space-y-2">
+            <h1 class="font-cinzel text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white">
+              Agrim <span class="gold-gradient-text text-glow">Srivastava</span>
+            </h1>
+            <p class="font-cinzel text-lg sm:text-2xl text-gold-light/90 tracking-wide font-medium">
+              Software Engineer & AI Systems Researcher
+            </p>
+          </div>
+
+          <!-- Narrative Pitch -->
+          <p class="text-base sm:text-lg text-gray-300 max-w-2xl leading-relaxed font-light">
+            BS in Data Science & Applications at <span class="text-white font-medium">IIT Madras</span> (GPA 9.1 / 10). 
+            Architecting <span class="text-gold-light font-medium">multi-agent AI systems</span>, 
+            <span class="text-gold-light font-medium">robotics perception pipelines</span>, and 
+            <span class="text-gold-light font-medium">deterministic high-reliability web platforms</span>. 
+            Passionate about transforming cutting-edge algorithms into dependable production software.
+          </p>
+
+          <!-- Key Metrics Pills -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+            <div class="px-3.5 py-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+              <span class="font-mono text-xl font-bold text-gold-light">9.1<span class="text-xs text-gray-400">/10</span></span>
+              <p class="text-[11px] text-gray-400 uppercase tracking-wider mt-0.5">IIT Madras GPA</p>
+            </div>
+            <div class="px-3.5 py-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+              <span class="font-mono text-xl font-bold text-gold-light">254<span class="text-xs text-emerald-400 font-semibold">/254</span></span>
+              <p class="text-[11px] text-gray-400 uppercase tracking-wider mt-0.5">NutriAgent Tests</p>
+            </div>
+            <div class="px-3.5 py-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+              <span class="font-mono text-xl font-bold text-gold-light">ROS 2</span>
+              <p class="text-[11px] text-gray-400 uppercase tracking-wider mt-0.5">Robotics Perception</p>
+            </div>
+            <div class="px-3.5 py-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+              <span class="font-mono text-xl font-bold text-gold-light">30+</span>
+              <p class="text-[11px] text-gray-400 uppercase tracking-wider mt-0.5">Public Repositories</p>
+            </div>
+          </div>
+
+          <!-- CTAs & Social Links -->
+          <div class="flex flex-wrap items-center gap-4 pt-4">
+            <a href="#projects" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gold hover:bg-gold-light text-[#0A0A0D] font-semibold text-sm transition-all duration-200 shadow-lg shadow-gold/20 hover:scale-[1.02]">
+              <span>Explore Projects</span>
+              <i data-lucide="arrow-down-right" class="w-4 h-4"></i>
+            </a>
+
+            <button onclick="copyEmail()" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-gold/40 text-gray-200 text-sm font-medium transition-all duration-200">
+              <i data-lucide="mail" class="w-4 h-4 text-gold-light"></i>
+              <span>Copy Email</span>
+            </button>
+
+            <!-- Social Icons -->
+            <div class="flex items-center gap-2 ml-auto sm:ml-2">
+              <a href="https://github.com/agrimsri" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-white/5 hover:bg-gold/10 border border-white/10 hover:border-gold/30 text-gray-300 hover:text-gold transition" aria-label="GitHub">
+                <i data-lucide="github" class="w-5 h-5"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/agrim-srivastava-26l" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-white/5 hover:bg-gold/10 border border-white/10 hover:border-gold/30 text-gray-300 hover:text-gold transition" aria-label="LinkedIn">
+                <i data-lucide="linkedin" class="w-5 h-5"></i>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Right: Profile Portrait Artwork -->
+        <div class="lg:col-span-4 flex justify-center">
+          <div class="relative group">
+            <!-- Ambient Golden Aura -->
+            <div class="absolute -inset-3 bg-gradient-to-tr from-gold/30 via-gold/10 to-transparent rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition duration-500"></div>
+            
+            <!-- Frame Container -->
+            <div class="relative rounded-2xl overflow-hidden p-1.5 bg-gradient-to-b from-gold/40 via-white/10 to-gold/20 border border-gold/30 shadow-2xl">
+              <div class="relative w-64 h-80 sm:w-72 sm:h-96 rounded-xl overflow-hidden bg-obsidian-100">
+                <img src="./assets/profile.jpg" alt="Agrim Srivastava" class="w-full h-full object-cover object-top filter contrast-[1.03] group-hover:scale-105 transition-transform duration-500" />
+                
+                <!-- Bottom Glass Overlay Tag -->
+                <div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/90 via-black/60 to-transparent flex flex-col">
+                  <span class="font-cinzel text-xs tracking-widest text-gold-light uppercase font-semibold">Agrim Srivastava</span>
+                  <span class="text-[11px] text-gray-300 font-mono">Lucknow, India &bull; IIT Madras</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Decorative corner brackets -->
+            <div class="absolute -top-2 -left-2 w-5 h-5 border-t-2 border-l-2 border-gold pointer-events-none"></div>
+            <div class="absolute -bottom-2 -right-2 w-5 h-5 border-b-2 border-r-2 border-gold pointer-events-none"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: ABOUT & EDUCATION -->
+    <section id="about" class="py-16 border-b border-white/5">
+      <div class="flex items-center gap-3 mb-8">
+        <span class="font-mono text-xs uppercase tracking-widest text-gold font-semibold">01 &bull; Profile</span>
+        <div class="h-px bg-white/10 flex-grow"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+        <div class="md:col-span-5 space-y-4">
+          <h2 class="font-cinzel text-3xl sm:text-4xl font-bold text-white">Engineering With Precision</h2>
+          <p class="text-gray-300 leading-relaxed font-light text-sm sm:text-base">
+            I am driven by complex systems engineering — whether coordinating autonomous multi-agent teams with LangGraph, fusing LiDAR and camera streams under ROS 2 for off-road navigation, or crafting deterministic full-stack web platforms.
+          </p>
+          <p class="text-gray-400 leading-relaxed text-sm">
+            Currently pursuing my Bachelor of Science in Data Science and Applications at the prestigious <strong class="text-gray-200">Indian Institute of Technology Madras</strong> while building open-source projects, contributing to production systems, and teaching Probability & Statistics.
+          </p>
+        </div>
+
+        <div class="md:col-span-7 space-y-4">
+          <!-- Education Card -->
+          <div class="glass-card p-6 rounded-2xl relative overflow-hidden">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <span class="inline-block px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-gold/10 text-gold-light border border-gold/20 mb-2">
+                  Sept 2023 – Sept 2027
+                </span>
+                <h3 class="font-cinzel text-xl font-bold text-white">Indian Institute of Technology Madras</h3>
+                <p class="text-gold-light text-sm font-medium mt-0.5">BS in Data Science and Applications</p>
+              </div>
+              <div class="text-right">
+                <span class="font-mono text-2xl font-bold text-white">9.1</span>
+                <span class="block text-[11px] font-mono text-gray-400">/ 10.0 GPA</span>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-white/5 space-y-2 text-xs text-gray-300">
+              <p><strong class="text-gold-light font-mono">Core Coursework:</strong> Modern Application Development, Machine Learning, Data Structures & Algorithms, Database Management Systems (DBMS), Linux Systems & Shell Commands.</p>
+              <p><strong class="text-gold-light font-mono">Academic Service:</strong> Appointed Teaching Assistant for undergraduate Probability & Statistics cohort.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: FEATURED PROJECTS -->
+    <section id="projects" class="py-16 border-b border-white/5">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
+        <div>
+          <span class="font-mono text-xs uppercase tracking-widest text-gold font-semibold">02 &bull; Engineering Odyssey</span>
+          <h2 class="font-cinzel text-3xl sm:text-4xl font-bold text-white mt-1">Featured Projects</h2>
+        </div>
+        <p class="text-xs text-gray-400 font-mono">Curated selection from 30+ repositories</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- PROJECT 1: NUTRIAGENT -->
+        <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group transition-all duration-300">
+          <div class="p-6 sm:p-7 space-y-4">
+            
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-2.5 py-1 rounded-md text-[10px] font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                100% Deterministic &bull; ₹0 API Cost
+              </span>
+              <a href="https://github.com/agrimsri/nutri_agent" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-white/5 hover:bg-gold/20 text-gray-300 hover:text-gold transition">
+                <i data-lucide="github" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div>
+              <h3 class="font-cinzel text-2xl font-bold text-white group-hover:text-gold-light transition">
+                NutriAgent
+              </h3>
+              <p class="text-xs font-mono text-gold-light/90 mt-0.5">Multi-Agent RAG Nutrition Coach & Vision Pipeline</p>
+            </div>
+
+            <p class="text-gray-300 text-sm leading-relaxed font-light">
+              Production-grade multimodal nutrition tracking system combining LangGraph multi-agent orchestration, Gemini Vision dish decomposition, and pgvector semantic retrieval over 570+ verified ICMR-NIN/USDA food records.
+            </p>
+
+            <!-- Metrics Highlight -->
+            <div class="p-3 rounded-xl bg-black/40 border border-white/5 space-y-1.5 text-xs font-mono text-gray-300">
+              <div class="flex items-center gap-2 text-emerald-400">
+                <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                <span>Calorie MAPE Error: Reduced 32.3% &rarr; 0.0%</span>
+              </div>
+              <div class="flex items-center gap-2 text-gray-300">
+                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-gold"></i>
+                <span>AST-validated read-only SQL safety guards</span>
+              </div>
+              <div class="flex items-center gap-2 text-gray-300">
+                <i data-lucide="cpu" class="w-3.5 h-3.5 text-gold"></i>
+                <span>254 / 254 test suite passing (100% coverage)</span>
+              </div>
+            </div>
+
+            <!-- Tech Badges -->
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">LangGraph</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Gemini Vision</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Supabase pgvector</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">FastAPI</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Docker</span>
+            </div>
+
+          </div>
+
+          <div class="px-6 py-4 bg-white/[0.02] border-t border-white/5 flex items-center justify-between">
+            <span class="text-xs text-gray-400 font-mono">Python / Multi-Agent</span>
+            <a href="https://github.com/agrimsri/nutri_agent" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-gold hover:text-gold-light transition">
+              <span>View Repository</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT 2: TERRASEM -->
+        <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group transition-all duration-300">
+          <div class="p-6 sm:p-7 space-y-4">
+            
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-2.5 py-1 rounded-md text-[10px] font-mono font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                ROS 2 Humble &bull; Live HuggingFace Demo
+              </span>
+              <div class="flex items-center gap-1.5">
+                <a href="https://huggingface.co/spaces/agrimsri/terrasem" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-white/5 hover:bg-gold/20 text-gray-300 hover:text-gold transition" title="Live Demo">
+                  <i data-lucide="external-link" class="w-4 h-4"></i>
+                </a>
+                <a href="https://github.com/agrimsri/TerraSem" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-white/5 hover:bg-gold/20 text-gray-300 hover:text-gold transition" title="GitHub">
+                  <i data-lucide="github" class="w-4 h-4"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Preview Image -->
+            <div class="rounded-xl overflow-hidden border border-white/10 max-h-44 relative bg-black">
+              <img src="./assets/terrasem-preview.png" alt="TerraSem Traversability Mapping" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+            </div>
+
+            <div>
+              <h3 class="font-cinzel text-2xl font-bold text-white group-hover:text-gold-light transition">
+                TerraSem
+              </h3>
+              <p class="text-xs font-mono text-gold-light/90 mt-0.5">Uncertainty-Aware Semantic Occupancy Mapping</p>
+            </div>
+
+            <p class="text-gray-300 text-sm leading-relaxed font-light">
+              Fuses camera imagery and 3D LiDAR into an intelligent 3D Bayesian Voxel Grid. Calculates epistemic uncertainty so off-road robots safely inflate danger when traversing fog, rain, or deceptive vegetation.
+            </p>
+
+            <!-- Tech Badges -->
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">ROS 2 Humble</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">3D LiDAR + Camera</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Bayesian Voxels</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Docker GHCR</span>
+            </div>
+
+          </div>
+
+          <div class="px-6 py-4 bg-white/[0.02] border-t border-white/5 flex items-center justify-between">
+            <span class="text-xs text-gray-400 font-mono">Robotics Perception</span>
+            <div class="flex items-center gap-3">
+              <a href="https://huggingface.co/spaces/agrimsri/terrasem" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-gold hover:text-gold-light transition">
+                <span>Try Web Demo</span>
+                <i data-lucide="play" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 3: TUTORSOLVE -->
+        <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group transition-all duration-300">
+          <div class="p-6 sm:p-7 space-y-4">
+            
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-2.5 py-1 rounded-md text-[10px] font-mono font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                Full-Stack Marketplace Platform
+              </span>
+              <a href="https://github.com/agrimsri/tutorsolve-website" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-white/5 hover:bg-gold/20 text-gray-300 hover:text-gold transition">
+                <i data-lucide="github" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div>
+              <h3 class="font-cinzel text-2xl font-bold text-white group-hover:text-gold-light transition">
+                TutorSolve
+              </h3>
+              <p class="text-xs font-mono text-gold-light/90 mt-0.5">4-Role Assignment Marketplace & Real-Time Chat</p>
+            </div>
+
+            <p class="text-gray-300 text-sm leading-relaxed font-light">
+              High-concurrency marketplace with isolated Socket.IO chat rooms, multi-phase order lifecycle (Maker-Checker price approval, Stripe escrow split-payments, 25% preview lock until payment), and KYC verification.
+            </p>
+
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Flask REST APIs</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Flask-SocketIO</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">MongoDB Atlas</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Stripe Escrow</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">JWT RBAC</span>
+            </div>
+
+          </div>
+
+          <div class="px-6 py-4 bg-white/[0.02] border-t border-white/5 flex items-center justify-between">
+            <span class="text-xs text-gray-400 font-mono">Full-Stack / WebSockets</span>
+            <a href="https://github.com/agrimsri/tutorsolve-website" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-gold hover:text-gold-light transition">
+              <span>View Code</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT 4: EM-ALGORITHM VISUALIZER -->
+        <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group transition-all duration-300">
+          <div class="p-6 sm:p-7 space-y-4">
+            
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-2.5 py-1 rounded-md text-[10px] font-mono font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                Interactive Vercel Deployment
+              </span>
+              <div class="flex items-center gap-1.5">
+                <a href="https://em-algorithm-visualizer.vercel.app" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-white/5 hover:bg-gold/20 text-gray-300 hover:text-gold transition" title="Live Site">
+                  <i data-lucide="external-link" class="w-4 h-4"></i>
+                </a>
+                <a href="https://github.com/agrimsri/EM-Algorithm-Visualizer" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-white/5 hover:bg-gold/20 text-gray-300 hover:text-gold transition" title="GitHub">
+                  <i data-lucide="github" class="w-4 h-4"></i>
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="font-cinzel text-2xl font-bold text-white group-hover:text-gold-light transition">
+                EM Algorithm Visualizer
+              </h3>
+              <p class="text-xs font-mono text-gold-light/90 mt-0.5">Expectation-Maximization Mathematical Visualizer</p>
+            </div>
+
+            <p class="text-gray-300 text-sm leading-relaxed font-light">
+              Interactive browser tool to simulate and visualize Gaussian Mixture Models (GMM) and Expectation-Maximization step iterations dynamically on custom 2D data distributions.
+            </p>
+
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">JavaScript Canvas</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">GMM & Probability</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Vercel</span>
+            </div>
+
+          </div>
+
+          <div class="px-6 py-4 bg-white/[0.02] border-t border-white/5 flex items-center justify-between">
+            <span class="text-xs text-gray-400 font-mono">Data Science & Math</span>
+            <a href="https://em-algorithm-visualizer.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-gold hover:text-gold-light transition">
+              <span>Launch Visualizer</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT 5: RAG COURSE TA -->
+        <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group transition-all duration-300">
+          <div class="p-6 sm:p-7 space-y-4">
+            
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-2.5 py-1 rounded-md text-[10px] font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                Multimodal RAG &bull; IIT Madras
+              </span>
+              <a href="https://github.com/agrimsri/Teaching-Assistant-RAG-Implementation" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-white/5 hover:bg-gold/20 text-gray-300 hover:text-gold transition">
+                <i data-lucide="github" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div>
+              <h3 class="font-cinzel text-2xl font-bold text-white group-hover:text-gold-light transition">
+                Course TA RAG Implementation
+              </h3>
+              <p class="text-xs font-mono text-gold-light/90 mt-0.5">Intelligent Forum Question Answering Assistant</p>
+            </div>
+
+            <p class="text-gray-300 text-sm leading-relaxed font-light">
+              End-to-end multimodal RAG system trained on IIT Madras academic discourse. Integrates FastAPI with local Ollama embeddings and Gemini for multimodal question resolution with compressed cosine indexing.
+            </p>
+
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">FastAPI</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Gemini Multimodal</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Ollama</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Web Scraping</span>
+            </div>
+
+          </div>
+
+          <div class="px-6 py-4 bg-white/[0.02] border-t border-white/5 flex items-center justify-between">
+            <span class="text-xs text-gray-400 font-mono">NLP / RAG Systems</span>
+            <a href="https://github.com/agrimsri/Teaching-Assistant-RAG-Implementation" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-gold hover:text-gold-light transition">
+              <span>View Code</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT 6: HAVENLY -->
+        <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group transition-all duration-300">
+          <div class="p-6 sm:p-7 space-y-4">
+            
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-2.5 py-1 rounded-md text-[10px] font-mono font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">
+                Service Marketplace Architecture
+              </span>
+              <a href="https://github.com/agrimsri/Household-Application" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-white/5 hover:bg-gold/20 text-gray-300 hover:text-gold transition">
+                <i data-lucide="github" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <!-- Preview Image -->
+            <div class="rounded-xl overflow-hidden border border-white/10 max-h-44 relative bg-black">
+              <img src="./assets/havenly-preview.jpg" alt="Havenly Household Services" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+            </div>
+
+            <div>
+              <h3 class="font-cinzel text-2xl font-bold text-white group-hover:text-gold-light transition">
+                Havenly
+              </h3>
+              <p class="text-xs font-mono text-gold-light/90 mt-0.5">Household Services Multirole Management Platform</p>
+            </div>
+
+            <p class="text-gray-300 text-sm leading-relaxed font-light">
+              Multirole household service application (Flask + Vue.js + Pinia) with Redis/Celery background task queuing for heavy operations and granular role-based authentication.
+            </p>
+
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Flask REST</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Vue.js + Pinia</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Redis</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Celery</span>
+            </div>
+
+          </div>
+
+          <div class="px-6 py-4 bg-white/[0.02] border-t border-white/5 flex items-center justify-between">
+            <span class="text-xs text-gray-400 font-mono">Distributed Workers</span>
+            <a href="https://github.com/agrimsri/Household-Application" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-gold hover:text-gold-light transition">
+              <span>View Code</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- View More on GitHub Callout -->
+      <div class="mt-10 p-6 rounded-2xl border border-dashed border-white/10 text-center bg-white/[0.01]">
+        <p class="text-sm text-gray-300">
+          Interested in more? Explore my other open-source tools, kernel investigations, and ML experiments on GitHub.
+        </p>
+        <a href="https://github.com/agrimsri?tab=repositories" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-3 text-xs font-mono font-semibold text-gold hover:text-gold-light">
+          <i data-lucide="folder-git-2" class="w-4 h-4"></i>
+          <span>View all 30+ repositories on GitHub &rarr;</span>
+        </a>
+      </div>
+
+    </section>
+
+    <!-- SECTION: EXPERIENCE & LEADERSHIP -->
+    <section id="experience" class="py-16 border-b border-white/5">
+      <div class="flex items-center gap-3 mb-10">
+        <span class="font-mono text-xs uppercase tracking-widest text-gold font-semibold">03 &bull; Chronicles</span>
+        <div class="h-px bg-white/10 flex-grow"></div>
+      </div>
+
+      <h2 class="font-cinzel text-3xl sm:text-4xl font-bold text-white mb-8">Professional Experience</h2>
+
+      <div class="relative pl-6 sm:pl-8 border-l border-gold/30 space-y-12">
+
+        <!-- EXPERIENCE 1: annam.ai -->
+        <div class="relative group">
+          <!-- Timeline Node Point -->
+          <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-[#0A0A0D] border-2 border-gold group-hover:scale-125 transition-transform duration-200">
+            <div class="w-1.5 h-1.5 rounded-full bg-gold mx-auto my-auto mt-0.5"></div>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+              <div>
+                <h3 class="font-cinzel text-xl font-bold text-white">Software Development Engineer Intern</h3>
+                <p class="text-gold-light text-sm font-semibold">annam.ai &bull; Remote</p>
+              </div>
+              <span class="inline-block px-2.5 py-1 rounded font-mono text-xs text-gray-400 bg-white/5 border border-white/5 self-start sm:self-auto">
+                Jan 2026 – Mar 2026
+              </span>
+            </div>
+
+            <ul class="space-y-2 text-sm text-gray-300 font-light list-disc list-inside">
+              <li>Hardened authentication and RBAC flows, eliminating critical security vulnerabilities in the production system.</li>
+              <li>Engineered a real-time question generation pipeline from live transcripts, enabling dynamic context-aware student interaction.</li>
+              <li>Architected and shipped production dashboards in <strong class="text-white font-normal">React</strong> (Vite, Zustand, React Query, TanStack Router), accelerating instructor workflows.</li>
+              <li>Contributed across the full backend stack (<strong class="text-white font-normal">Node.js, Express, MongoDB, Firebase Admin</strong>), delivering production features via disciplined Git workflows.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- EXPERIENCE 2: IIT Madras TA -->
+        <div class="relative group">
+          <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-[#0A0A0D] border-2 border-gold group-hover:scale-125 transition-transform duration-200">
+            <div class="w-1.5 h-1.5 rounded-full bg-gold mx-auto my-auto mt-0.5"></div>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+              <div>
+                <h3 class="font-cinzel text-xl font-bold text-white">Teaching Assistant — Probability & Statistics</h3>
+                <p class="text-gold-light text-sm font-semibold">Indian Institute of Technology Madras &bull; Chennai, India</p>
+              </div>
+              <span class="inline-block px-2.5 py-1 rounded font-mono text-xs text-gray-400 bg-white/5 border border-white/5 self-start sm:self-auto">
+                Oct 2025 – Apr 2026
+              </span>
+            </div>
+
+            <ul class="space-y-2 text-sm text-gray-300 font-light list-disc list-inside">
+              <li>Mentored undergraduate cohorts through weekly problem-solving labs, distilling complex probability and statistics concepts into approachable frameworks.</li>
+              <li>Triaged and resolved hundreds of student queries on Discourse at scale, measurably boosting conceptual clarity across the cohort.</li>
+              <li>Graded assignments and delivered structured, actionable feedback that guided student improvement.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: TECHNICAL SKILLS -->
+    <section id="skills" class="py-16 border-b border-white/5">
+      <div class="flex items-center gap-3 mb-10">
+        <span class="font-mono text-xs uppercase tracking-widest text-gold font-semibold">04 &bull; Capabilities</span>
+        <div class="h-px bg-white/10 flex-grow"></div>
+      </div>
+
+      <h2 class="font-cinzel text-3xl sm:text-4xl font-bold text-white mb-8">Technical Arsenal</h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Category 1: AI & ML Systems -->
+        <div class="glass-card p-6 rounded-2xl space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold">
+            <i data-lucide="brain-circuit" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-cinzel text-lg font-bold text-white">AI & ML Systems</h3>
+          <ul class="text-xs font-mono text-gray-300 space-y-1.5">
+            <li>&bull; Multi-Agent (LangGraph)</li>
+            <li>&bull; Multimodal RAG Pipelines</li>
+            <li>&bull; Gemini Vision & LLM APIs</li>
+            <li>&bull; ROS 2 Robotics (Humble)</li>
+            <li>&bull; 3D Bayesian Occupancy</li>
+            <li>&bull; Vector Search (MiniLM, pgvector)</li>
+          </ul>
+        </div>
+
+        <!-- Category 2: Backend & Systems -->
+        <div class="glass-card p-6 rounded-2xl space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold">
+            <i data-lucide="server" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-cinzel text-lg font-bold text-white">Backend & Core</h3>
+          <ul class="text-xs font-mono text-gray-300 space-y-1.5">
+            <li>&bull; FastAPI & Flask</li>
+            <li>&bull; Node.js & Express</li>
+            <li>&bull; WebSockets / Socket.IO</li>
+            <li>&bull; Python & JavaScript</li>
+            <li>&bull; Redis & Celery Workers</li>
+            <li>&bull; AST Security Guardrails</li>
+          </ul>
+        </div>
+
+        <!-- Category 3: Frontend & UI -->
+        <div class="glass-card p-6 rounded-2xl space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold">
+            <i data-lucide="layout" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-cinzel text-lg font-bold text-white">Frontend & UI</h3>
+          <ul class="text-xs font-mono text-gray-300 space-y-1.5">
+            <li>&bull; React (Vite, Zustand)</li>
+            <li>&bull; TanStack Router & Query</li>
+            <li>&bull; Vue.js & Pinia</li>
+            <li>&bull; Tailwind CSS</li>
+            <li>&bull; HTML5 Canvas / Modern Web</li>
+            <li>&bull; Responsive UX Design</li>
+          </ul>
+        </div>
+
+        <!-- Category 4: Data & Cloud -->
+        <div class="glass-card p-6 rounded-2xl space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold">
+            <i data-lucide="database" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-cinzel text-lg font-bold text-white">Data & DevOps</h3>
+          <ul class="text-xs font-mono text-gray-300 space-y-1.5">
+            <li>&bull; PostgreSQL & Supabase</li>
+            <li>&bull; MongoDB Atlas & SQLite</li>
+            <li>&bull; Docker & Containerization</li>
+            <li>&bull; Git & GitHub Actions CI</li>
+            <li>&bull; Linux / Bash Scripting</li>
+            <li>&bull; Firebase Admin & Stripe</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: CONTACT & CONNECT -->
+    <section id="contact" class="py-20">
+      <div class="glass-card p-8 sm:p-12 rounded-3xl relative overflow-hidden text-center max-w-4xl mx-auto border border-gold/30">
+        
+        <!-- Subtle background glow inside card -->
+        <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-80 h-80 bg-gold/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <span class="font-mono text-xs uppercase tracking-widest text-gold font-semibold">05 &bull; Inquiries</span>
+        <h2 class="font-cinzel text-3xl sm:text-5xl font-bold text-white mt-2 mb-4">
+          Let's Build Something Exceptional
+        </h2>
+        
+        <p class="text-gray-300 text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-light mb-8">
+          Whether you have an ambitious software project, an AI research collaboration, or an engineering role, my inbox is always open.
+        </p>
+
+        <!-- Direct Action Bar -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="mailto:agrimsri26@gmail.com" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-gold hover:bg-gold-light text-[#0A0A0D] font-bold text-sm transition-all duration-200 shadow-xl shadow-gold/20 hover:scale-[1.02]">
+            <i data-lucide="mail" class="w-4 h-4"></i>
+            <span>agrimsri26@gmail.com</span>
+          </a>
+
+          <button onclick="copyEmail()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-gold/40 text-gray-200 text-sm font-medium transition">
+            <i data-lucide="copy" class="w-4 h-4 text-gold-light"></i>
+            <span>Copy Address</span>
+          </button>
+        </div>
+
+        <!-- Social Badges Row -->
+        <div class="flex items-center justify-center gap-6 mt-10 pt-8 border-t border-white/10 text-xs font-mono text-gray-400">
+          <a href="https://github.com/agrimsri" target="_blank" rel="noopener noreferrer" class="hover:text-gold transition flex items-center gap-1.5">
+            <i data-lucide="github" class="w-4 h-4"></i>
+            <span>github.com/agrimsri</span>
+          </a>
+          <span>&bull;</span>
+          <a href="https://www.linkedin.com/in/agrim-srivastava-26l" target="_blank" rel="noopener noreferrer" class="hover:text-gold transition flex items-center gap-1.5">
+            <i data-lucide="linkedin" class="w-4 h-4"></i>
+            <span>linkedin.com/in/agrim-srivastava-26l</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/5 py-8 text-center text-xs font-mono text-gray-500 relative z-10">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-2 h-2 rounded-full bg-gold"></div>
+        <span>Crafted with precision &amp; discipline &bull; Agrim Srivastava</span>
+      </div>
+      <div>
+        <span>Hosted via GitHub Pages at <a href="https://agrimsri.github.io" class="text-gold-light hover:underline">agrimsri.github.io</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script: Lucide initialization, mobile menu, and clipboard helper -->
+  <script>
+    // Initialize icons
+    lucide.createIcons();
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    // Copy Email to clipboard with toast
+    function copyEmail() {
+      const email = 'agrimsri26@gmail.com';
+      navigator.clipboard.writeText(email).then(() => {
+        const toast = document.getElementById('toast');
+        toast.classList.remove('translate-y-24', 'opacity-0');
+        toast.classList.add('translate-y-0', 'opacity-100');
+
+        setTimeout(() => {
+          toast.classList.add('translate-y-24', 'opacity-0');
+          toast.classList.remove('translate-y-0', 'opacity-100');
+        }, 3000);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    }
+  </script>
+</body>
+</html>
