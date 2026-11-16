@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let mouseY = height / 2;
 
     const particles = [];
-    const particleCount = Math.min(Math.floor(width / 22), 65);
+    const particleCount = Math.min(Math.floor(width / 24), 60);
 
     class Particle {
       constructor() {
@@ -27,10 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
       reset() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.45;
-        this.vy = (Math.random() - 0.5) * 0.45;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
         this.radius = Math.random() * 1.5 + 0.8;
-        this.alpha = Math.random() * 0.4 + 0.15;
+        this.alpha = Math.random() * 0.35 + 0.15;
       }
       update() {
         this.x += this.vx;
@@ -40,9 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const dx = mouseX - this.x;
         const dy = mouseY - this.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 200 && dist > 10) {
-          this.vx += (dx / dist) * 0.015;
-          this.vy += (dy / dist) * 0.015;
+        if (dist < 180 && dist > 10) {
+          this.vx += (dx / dist) * 0.012;
+          this.vy += (dy / dist) * 0.012;
         }
 
         // Dampen velocity
@@ -77,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderAmbient() {
       ctx.clearRect(0, 0, width, height);
 
-      // Connect nearby particles
       for (let i = 0; i < particles.length; i++) {
         particles[i].update();
         particles[i].draw();
@@ -87,13 +86,13 @@ document.addEventListener('DOMContentLoaded', () => {
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 120) {
-            const opacity = (1 - dist / 120) * 0.12;
+          if (dist < 110) {
+            const opacity = (1 - dist / 110) * 0.12;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.strokeStyle = `rgba(229, 184, 105, ${opacity})`;
-            ctx.lineWidth = 0.75;
+            ctx.lineWidth = 0.7;
             ctx.stroke();
           }
         }
@@ -111,22 +110,60 @@ document.addEventListener('DOMContentLoaded', () => {
   const cursorDot = document.querySelector('.custom-cursor');
   const cursorFollower = document.querySelector('.cursor-follower');
   const cursorTelemetry = document.querySelector('.cursor-telemetry');
+  const isFinePointer = window.matchMedia('(pointer: fine) and (hover: hover)').matches;
 
-  let curX = 0, curY = 0;
-  let followerX = 0, followerY = 0;
+  let curX = -100, curY = -100;
+  let followerX = -100, followerY = -100;
+  let cursorActivated = false;
 
-  window.addEventListener('scroll', () => {
+  const chronicleContainer = document.querySelector('.chronicle-container');
+  const chronicleTrackFill = document.getElementById('chronicle-track-fill');
+
+  function updateChronicleProgress() {
+    if (!chronicleContainer || !chronicleTrackFill) return;
+    const rect = chronicleContainer.getBoundingClientRect();
+    const windowH = window.innerHeight;
+
+    // Active zone: from when container enters mid-screen to when it exits
+    const startY = windowH * 0.7;
+    const endY = windowH * 0.2;
+
+    if (rect.top <= startY && rect.bottom >= endY) {
+      const totalH = rect.height;
+      const current = startY - rect.top;
+      const pct = Math.min(Math.max((current / totalH) * 100, 0), 100);
+      chronicleTrackFill.style.height = `${pct}%`;
+    } else if (rect.top > startY) {
+      chronicleTrackFill.style.height = '0%';
+    } else if (rect.bottom < endY) {
+      chronicleTrackFill.style.height = '100%';
+    }
+  }
+
+  function updateScrollProgress() {
     const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
     if (totalScroll > 0 && scrollProgressBar) {
       const progress = (window.scrollY / totalScroll) * 100;
       scrollProgressBar.style.width = `${progress}%`;
     }
-  });
+    updateChronicleProgress();
+  }
 
-  if (cursorDot && cursorFollower) {
+  window.addEventListener('scroll', updateScrollProgress, { passive: true });
+  window.addEventListener('resize', updateScrollProgress, { passive: true });
+  updateScrollProgress();
+
+  if (isFinePointer && cursorDot && cursorFollower) {
     window.addEventListener('mousemove', (e) => {
       curX = e.clientX;
       curY = e.clientY;
+
+      if (!cursorActivated) {
+        cursorActivated = true;
+        document.body.classList.add('cursor-active');
+        followerX = curX;
+        followerY = curY;
+      }
 
       cursorDot.style.left = `${curX}px`;
       cursorDot.style.top = `${curY}px`;
@@ -140,18 +177,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Smooth follower lerp
     function animateCursor() {
-      followerX += (curX - followerX) * 0.18;
-      followerY += (curY - followerY) * 0.18;
+      if (cursorActivated) {
+        followerX += (curX - followerX) * 0.18;
+        followerY += (curY - followerY) * 0.18;
 
-      cursorFollower.style.left = `${followerX}px`;
-      cursorFollower.style.top = `${followerY}px`;
-
+        cursorFollower.style.left = `${followerX}px`;
+        cursorFollower.style.top = `${followerY}px`;
+      }
       requestAnimationFrame(animateCursor);
     }
     animateCursor();
 
     // Hover state expansion on interactive elements
-    const interactiveSelectors = 'a, button, .specimen-index-card, .filter-pill-btn, .skill-evidence-card, input, canvas';
+    const interactiveSelectors = 'a, button, .specimen-index-card, .filter-pill-btn, .skill-evidence-card, .preset-btn, input, canvas';
     document.querySelectorAll(interactiveSelectors).forEach((el) => {
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
       el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
@@ -159,7 +197,102 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* --------------------------------------------------------------------------
-     3. KINETIC TEXT SCRAMBLE / GLYPH DECODER ENGINE
+     3. SPOTLIGHT CARD CURSOR TRACKING (Non-standard luxury hover)
+     -------------------------------------------------------------------------- */
+  function setupSpotlightCards() {
+    document.querySelectorAll('.spotlight-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+  }
+  setupSpotlightCards();
+
+  /* --------------------------------------------------------------------------
+     4. SCROLL REVEAL OBSERVER & TELEMETRY COUNTER ANIMATION
+     -------------------------------------------------------------------------- */
+  const revealElements = document.querySelectorAll('.reveal-on-scroll');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        // If this contains telemetry counters, trigger them
+        const counters = entry.target.querySelectorAll('.counter');
+        counters.forEach(counter => runCounter(counter));
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  revealElements.forEach(el => revealObserver.observe(el));
+
+  function runCounter(counterEl) {
+    if (counterEl.dataset.started) return;
+    counterEl.dataset.started = 'true';
+
+    const target = parseFloat(counterEl.dataset.target);
+    const decimals = parseInt(counterEl.dataset.decimals || '0', 10);
+    const suffix = counterEl.dataset.suffix || '';
+    const duration = 1600;
+    const startTime = performance.now();
+
+    function update(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const currentVal = target * eased;
+
+      counterEl.textContent = currentVal.toFixed(decimals) + (progress === 1 ? suffix : '');
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
+        counterEl.textContent = target.toFixed(decimals) + suffix;
+      }
+    }
+    requestAnimationFrame(update);
+  }
+
+  /* --------------------------------------------------------------------------
+     5. EXPERIENCE TIMELINE LASER FILL PROGRESS LINE (Handled above in scroll)
+     -------------------------------------------------------------------------- */
+
+  /* --------------------------------------------------------------------------
+     6. ACTIVE NAVIGATION SPY
+     -------------------------------------------------------------------------- */
+  const navLinks = document.querySelectorAll('.nav-link');
+  const navSections = document.querySelectorAll('section[id]');
+
+  window.addEventListener('scroll', () => {
+    let currentId = '';
+    const scrollPos = window.scrollY + 160;
+
+    navSections.forEach(sec => {
+      const top = sec.offsetTop;
+      const height = sec.offsetHeight;
+      if (scrollPos >= top && scrollPos < top + height) {
+        currentId = sec.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${currentId}`) {
+        link.classList.add('active');
+      }
+    });
+  }, { passive: true });
+
+  /* --------------------------------------------------------------------------
+     7. KINETIC TEXT SCRAMBLE / GLYPH DECODER ENGINE
      -------------------------------------------------------------------------- */
   const glyphs = '01αβλ∇ΨΣΩ#@%&§¥';
   function scrambleText(element) {
@@ -169,13 +302,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let iteration = 0;
-    const maxIterations = originalText.length * 2.5;
+    const maxIterations = originalText.length * 2.2;
     const interval = setInterval(() => {
       element.innerText = originalText
         .split('')
         .map((char, index) => {
           if (char === ' ') return ' ';
-          if (index < iteration / 2.5) return originalText[index];
+          if (index < iteration / 2.2) return originalText[index];
           return glyphs[Math.floor(Math.random() * glyphs.length)];
         })
         .join('');
@@ -185,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
         element.innerText = originalText;
       }
       iteration += 1;
-    }, 28);
+    }, 25);
   }
 
   document.querySelectorAll('[data-scramble]').forEach((el) => {
@@ -193,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* --------------------------------------------------------------------------
-     4. THE ARCHITECTURAL SPECIMEN DECK (PROJECTS DATA & ENGINE)
+     8. THE ARCHITECTURAL SPECIMEN DECK (PROJECTS DATA & ENGINE)
      -------------------------------------------------------------------------- */
   const projectsData = [
     {
@@ -213,6 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
       stack: ['LangGraph', 'Gemini Vision', 'FastAPI', 'Supabase pgvector', 'Docker', 'Streamlit'],
       github: 'https://github.com/agrimsri/nutri_agent',
       live: null,
+      image: null,
       blueprint: [
         { num: '01', name: 'Vision Decomposition', detail: 'Gemini Multimodal extracts portion weights & ingredients' },
         { num: '02', name: 'Atwater Energy Guard', detail: 'Deterministic mathematical bounds on macronutrients' },
@@ -237,6 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
       stack: ['Flask REST APIs', 'MongoDB Atlas', 'Flask-SocketIO', 'Stripe Escrow', 'Eventlet', 'JWT RBAC'],
       github: 'https://github.com/agrimsri/tutorsolve-website',
       live: null,
+      image: null,
       blueprint: [
         { num: '01', name: 'Assignment Ingestion', detail: 'Geo-fenced request creation & subject-domain tagging' },
         { num: '02', name: 'Maker-Checker Gate', detail: 'Admin pricing audit before order publication' },
@@ -261,6 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
       stack: ['Cloudflare Workers', 'Durable Objects', 'SQLite Archives', 'Cloudflare Tunnels', 'FastAPI', 'OAuth'],
       github: 'https://github.com/sanand0/exam',
       live: 'https://tds.s-anand.net/',
+      image: null,
       blueprint: [
         { num: '01', name: 'Seed Randomization', detail: 'Dynamic question variation per student session' },
         { num: '02', name: 'Client Sandbox', detail: 'Restricted headless CLI execution environment' },
@@ -285,7 +421,13 @@ document.addEventListener('DOMContentLoaded', () => {
       stack: ['JavaScript Canvas', 'GMM Probability', 'Statistical Inference', 'Vercel'],
       github: 'https://github.com/agrimsri/EM-Algorithm-Visualizer',
       live: 'https://em-algorithm-visualizer.vercel.app',
-      isInteractiveSandbox: true
+      image: null,
+      blueprint: [
+        { num: '01', name: '2D Point Ingestion', detail: 'Inject sample coordinates from multimodal distributions' },
+        { num: '02', name: 'E-Step Responsibilities', detail: 'Compute soft posterior probability weights for each cluster' },
+        { num: '03', name: 'M-Step Update', detail: 'Re-estimate cluster means and positive-definite covariance matrices' },
+        { num: '04', name: 'Convergence Boundary', detail: 'Iterate until Frobenius norm difference ||Δμ|| drops below threshold' }
+      ]
     },
     {
       id: 'SYS-05',
@@ -304,6 +446,7 @@ document.addEventListener('DOMContentLoaded', () => {
       stack: ['FastAPI', 'Gemini Multimodal', 'Ollama', 'Python', 'Discourse API'],
       github: 'https://github.com/agrimsri/Teaching-Assistant-RAG-Implementation',
       live: null,
+      image: null,
       blueprint: [
         { num: '01', name: 'Discourse Scraper', detail: 'Cleans conversational forum threads into semantic docs' },
         { num: '02', name: 'Local Ollama Embed', detail: 'Low-latency vector generation without external API roundtrips' },
@@ -328,9 +471,10 @@ document.addEventListener('DOMContentLoaded', () => {
       stack: ['Flask REST', 'Vue.js 3', 'Pinia', 'Redis', 'Celery Workers', 'SQLite'],
       github: 'https://github.com/agrimsri/Household-Application',
       live: null,
+      image: './assets/havenly-preview.jpg',
       blueprint: [
         { num: '01', name: 'REST Gateway', detail: 'Fast non-blocking API endpoint routing with JWT token auth' },
-        { num: '02', name: 'Redis Broker', detail: 'Task queue buffering heavy analytical jobs' },
+        { num: '02', name: 'Redis Broker', detail: 'Task queue buffering heavy analytical export jobs' },
         { num: '03', name: 'Celery Beat', detail: 'Scheduled periodic report generation and email dispatch' },
         { num: '04', name: 'Reactive UI', detail: 'Pinia state stores driving instant interface reactions' }
       ]
@@ -351,6 +495,7 @@ document.addEventListener('DOMContentLoaded', () => {
       stack: ['Python', 'AST', 'Tree-Sitter Concepts', 'CLI Automation'],
       github: 'https://github.com/agrimsri/code-crawler',
       live: null,
+      image: null,
       blueprint: [
         { num: '01', name: 'Directory Walk', detail: 'High-speed ignore-aware recursive file discovery' },
         { num: '02', name: 'AST Extraction', detail: 'Parses functions, classes, and exported symbols' },
@@ -377,9 +522,15 @@ document.addEventListener('DOMContentLoaded', () => {
       ? projectsData 
       : projectsData.filter(p => p.category === currentFilter);
 
+    // Ensure activeProjectId is valid for the current filtered list
+    const hasActive = filtered.some(p => p.id === activeProjectId);
+    if (!hasActive && filtered.length > 0) {
+      activeProjectId = filtered[0].id;
+    }
+
     filtered.forEach((p) => {
       const card = document.createElement('article');
-      card.className = `specimen-index-card ${p.id === activeProjectId ? 'active' : ''}`;
+      card.className = `specimen-index-card spotlight-card ${p.id === activeProjectId ? 'active' : ''}`;
       card.setAttribute('data-id', p.id);
 
       card.innerHTML = `
@@ -401,10 +552,11 @@ document.addEventListener('DOMContentLoaded', () => {
       indexColumn.appendChild(card);
     });
 
-    // Make sure active project is rendered
+    setupSpotlightCards();
+
+    // Render active stage
     const currentActive = filtered.find(p => p.id === activeProjectId) || filtered[0];
     if (currentActive) {
-      activeProjectId = currentActive.id;
       renderActiveStage(currentActive);
     }
   }
@@ -415,7 +567,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let blueprintHTML = '';
     if (project.blueprint) {
       const nodes = project.blueprint.map((node, i) => `
-        <div class="flow-node-step">
+        <div class="flow-node-step spotlight-card" title="Phase ${node.num}: ${node.name}">
           <div class="step-number">PHASE ${node.num}</div>
           <div class="step-name">${node.name}</div>
           <div class="step-detail">${node.detail}</div>
@@ -434,16 +586,13 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         </div>
       `;
-    } else if (project.isInteractiveSandbox) {
-      blueprintHTML = `
-        <div class="stage-blueprint-box">
-          <div class="blueprint-header-bar">
-            <span>[ LIVE INTERACTIVE SIMULATION ]</span>
-            <span>CLICK TO ADD 2D POINTS · STEP EM</span>
-          </div>
-          <div class="blueprint-interactive-canvas-wrapper">
-            <canvas id="em-interactive-canvas"></canvas>
-          </div>
+    }
+
+    let imageHTML = '';
+    if (project.image) {
+      imageHTML = `
+        <div class="stage-preview-image-box">
+          <img src="${project.image}" alt="${project.title} Interface Preview" class="stage-preview-img" loading="lazy" />
         </div>
       `;
     }
@@ -484,6 +633,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <h3 class="stage-project-headline" data-scramble>${project.title}</h3>
       <p class="stage-project-description">${project.description}</p>
 
+      ${imageHTML}
       ${blueprintHTML}
 
       <div class="stage-metrics-grid">
@@ -495,15 +645,12 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `;
 
+    setupSpotlightCards();
+
     // Re-bind hover scramble
     stageChamber.querySelectorAll('[data-scramble]').forEach(el => {
       el.addEventListener('mouseenter', () => scrambleText(el));
     });
-
-    // If EM visualizer is rendered in stage, initialize its canvas
-    if (project.isInteractiveSandbox) {
-      initEMCanvas('em-interactive-canvas');
-    }
   }
 
   // Filter pill handlers
@@ -545,7 +692,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     filtered.forEach(p => {
       const card = document.createElement('div');
-      card.className = 'mosaic-project-card';
+      card.className = 'mosaic-project-card spotlight-card';
       card.innerHTML = `
         <div>
           <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
@@ -553,84 +700,144 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="card-status-badge">${p.categoryLabel}</span>
           </div>
           <h4 class="card-title" style="font-size:20px; margin-bottom:8px;">${p.title}</h4>
-          <p style="font-size:13.5px; color:#B0B0C2; line-height:1.55; margin-bottom:16px;">${p.description}</p>
+          <p style="font-size:13px; color:#B0B0C4; line-height:1.55; margin-bottom:16px;">${p.description}</p>
         </div>
         <div>
           <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px;">
             ${p.stack.slice(0, 4).map(s => `<span class="tech-tag-pill">${s}</span>`).join('')}
           </div>
           <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.06); padding-top:12px;">
-            <span style="font-family:var(--font-mono); font-size:11px; color:var(--accent-gold);">${p.status}</span>
+            <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--accent-gold);">${p.status}</span>
             <a href="${p.github || '#'}" target="_blank" rel="noopener noreferrer" style="font-family:var(--font-mono); font-size:11px; color:var(--text-primary); text-decoration:none;">View Repo ↗</a>
           </div>
         </div>
       `;
       mosaicGrid.appendChild(card);
     });
+    setupSpotlightCards();
   }
 
   // Initial render
   renderProjectIndex();
 
   /* --------------------------------------------------------------------------
-     5. DEDICATED EXPECTATION-MAXIMIZATION (EM) INTERACTIVE SANDBOX
+     9. DEDICATED EXPECTATION-MAXIMIZATION (EM) INTERACTIVE SANDBOX
      -------------------------------------------------------------------------- */
-  function initEMCanvas(canvasId) {
-    const canvas = document.getElementById(canvasId);
+  function initDedicatedEM() {
+    const canvas = document.getElementById('dedicated-em-canvas');
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
-    let rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width * window.devicePixelRatio;
-    canvas.height = rect.height * window.devicePixelRatio;
-    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    let width, height;
 
-    const w = rect.width;
-    const h = rect.height;
-
-    // 2D data points
-    let points = [];
-    const initialClusters = [
-      { cx: w * 0.3, cy: h * 0.4, r: 40, count: 25 },
-      { cx: w * 0.7, cy: h * 0.65, r: 45, count: 30 }
-    ];
-
-    initialClusters.forEach(c => {
-      for (let i = 0; i < c.count; i++) {
-        const u = Math.random() + Math.random();
-        const rad = u > 1 ? 2 - u : u;
-        const theta = Math.random() * Math.PI * 2;
-        points.push({
-          x: c.cx + Math.cos(theta) * rad * c.r,
-          y: c.cy + Math.sin(theta) * rad * c.r,
-          resp: [0.5, 0.5]
-        });
-      }
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      canvas.width = rect.width * (window.devicePixelRatio || 1);
+      canvas.height = rect.height * (window.devicePixelRatio || 1);
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+    }
+    resizeCanvas();
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      draw();
     });
 
-    // Gaussian components K = 2
+    let points = [];
     let K = 2;
-    let means = [
-      { x: w * 0.25, y: h * 0.3 },
-      { x: w * 0.75, y: h * 0.7 }
-    ];
-    let covariances = [
-      { sxx: 1600, syy: 1600 },
-      { sxx: 2000, syy: 2000 }
-    ];
-    let weights = [0.5, 0.5];
+    let means = [];
+    let covariances = [];
+    let weights = [];
     let iteration = 0;
+    let autoRunning = false;
+    let autoAnimId = null;
+
+    function loadPreset(presetName) {
+      points = [];
+      const w = width || 800;
+      const h = height || 420;
+
+      if (presetName === 'bimodal') {
+        K = 2;
+        const c1 = { cx: w * 0.32, cy: h * 0.42, r: 42, count: 28 };
+        const c2 = { cx: w * 0.68, cy: h * 0.62, r: 46, count: 32 };
+        [c1, c2].forEach(c => {
+          for (let i = 0; i < c.count; i++) {
+            const u = Math.random() + Math.random();
+            const rad = u > 1 ? 2 - u : u;
+            const theta = Math.random() * Math.PI * 2;
+            points.push({
+              x: c.cx + Math.cos(theta) * rad * c.r,
+              y: c.cy + Math.sin(theta) * rad * c.r,
+              resp: [0.5, 0.5]
+            });
+          }
+        });
+      } else if (presetName === 'triangular') {
+        K = 2;
+        const centers = [
+          { cx: w * 0.28, cy: h * 0.65, count: 22 },
+          { cx: w * 0.50, cy: h * 0.28, count: 24 },
+          { cx: w * 0.74, cy: h * 0.62, count: 26 }
+        ];
+        centers.forEach(c => {
+          for (let i = 0; i < c.count; i++) {
+            const rad = Math.random() * 38;
+            const theta = Math.random() * Math.PI * 2;
+            points.push({
+              x: c.cx + Math.cos(theta) * rad,
+              y: c.cy + Math.sin(theta) * rad,
+              resp: [0.5, 0.5]
+            });
+          }
+        });
+      } else if (presetName === 'ring') {
+        K = 2;
+        // Central dense cluster + surrounding arc
+        for (let i = 0; i < 25; i++) {
+          const rad = Math.random() * 26;
+          const theta = Math.random() * Math.PI * 2;
+          points.push({ x: w * 0.4 + Math.cos(theta) * rad, y: h * 0.5 + Math.sin(theta) * rad, resp: [0.5, 0.5] });
+        }
+        for (let i = 0; i < 35; i++) {
+          const rad = 70 + Math.random() * 25;
+          const theta = Math.random() * Math.PI * 2;
+          points.push({ x: w * 0.6 + Math.cos(theta) * rad, y: h * 0.5 + Math.sin(theta) * rad, resp: [0.5, 0.5] });
+        }
+      }
+
+      resetPriors();
+    }
+
+    function resetPriors() {
+      const w = width || 800;
+      const h = height || 420;
+      means = [
+        { x: w * (0.2 + Math.random() * 0.2), y: h * (0.25 + Math.random() * 0.3) },
+        { x: w * (0.6 + Math.random() * 0.2), y: h * (0.45 + Math.random() * 0.3) }
+      ];
+      covariances = [
+        { sxx: 2400, syy: 2400 },
+        { sxx: 2400, syy: 2400 }
+      ];
+      weights = [0.5, 0.5];
+      iteration = 0;
+      updateTelemetry();
+      draw();
+    }
 
     function gaussian2D(x, y, m, cov) {
       const dx = x - m.x;
       const dy = y - m.y;
-      const det = cov.sxx * cov.syy;
-      const exponent = -0.5 * ((dx * dx) / cov.sxx + (dy * dy) / cov.syy);
-      return (1 / (2 * Math.PI * Math.sqrt(det))) * Math.exp(exponent);
+      const det = Math.max(cov.sxx * cov.syy, 1e-4);
+      const exponent = -0.5 * ((dx * dx) / Math.max(cov.sxx, 100) + (dy * dy) / Math.max(cov.syy, 100));
+      return (1 / (2 * Math.PI * Math.sqrt(det))) * Math.exp(Math.max(exponent, -50));
     }
 
     function stepEM() {
-      if (points.length === 0) return;
+      if (points.length === 0) return 0;
 
       // E-Step
       points.forEach(p => {
@@ -647,6 +854,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       // M-Step
+      let maxMeanShift = 0;
       for (let k = 0; k < K; k++) {
         let Nk = 0;
         let sumX = 0, sumY = 0;
@@ -657,9 +865,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (Nk > 1e-4) {
-          weights[k] = Nk / points.length;
-          means[k].x = sumX / Nk;
-          means[k].y = sumY / Nk;
+          weights[k] = Math.max(Nk / points.length, 0.05);
+          const newX = sumX / Nk;
+          const newY = sumY / Nk;
+
+          const shift = Math.sqrt(Math.pow(newX - means[k].x, 2) + Math.pow(newY - means[k].y, 2));
+          if (shift > maxMeanShift) maxMeanShift = shift;
+
+          means[k].x = newX;
+          means[k].y = newY;
 
           let sumVarX = 0, sumVarY = 0;
           points.forEach(p => {
@@ -674,18 +888,36 @@ document.addEventListener('DOMContentLoaded', () => {
       iteration++;
       updateTelemetry();
       draw();
+      return maxMeanShift;
+    }
+
+    function calculateLogLikelihood() {
+      if (points.length === 0) return '-';
+      let totalLogL = 0;
+      points.forEach(p => {
+        let density = 0;
+        for (let k = 0; k < K; k++) {
+          density += weights[k] * gaussian2D(p.x, p.y, means[k], covariances[k]);
+        }
+        if (density > 1e-12) {
+          totalLogL += Math.log(density);
+        }
+      });
+      return totalLogL.toFixed(1);
     }
 
     function draw() {
+      const w = width;
+      const h = height;
       ctx.clearRect(0, 0, w, h);
 
-      // Draw background grid lines
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+      // Background grid lines
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.035)';
       ctx.lineWidth = 1;
-      for (let x = 0; x < w; x += 30) {
+      for (let x = 0; x < w; x += 32) {
         ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
       }
-      for (let y = 0; y < h; y += 30) {
+      for (let y = 0; y < h; y += 32) {
         ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
       }
 
@@ -696,25 +928,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const rx = Math.sqrt(covariances[k].sxx) * 1.8;
         const ry = Math.sqrt(covariances[k].syy) * 1.8;
 
-        // Outer glow
-        const grad = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, Math.max(rx, ry));
-        grad.addColorStop(0, colors[k] + '0.25)');
+        // Outer radial glow
+        const maxR = Math.max(rx, ry, 1);
+        const grad = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, maxR);
+        grad.addColorStop(0, colors[k] + '0.24)');
         grad.addColorStop(1, colors[k] + '0.0)');
         ctx.fillStyle = grad;
         ctx.beginPath();
         ctx.ellipse(m.x, m.y, rx, ry, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Stroke ring
-        ctx.strokeStyle = colors[k] + '0.7)';
+        // Stroke boundary
+        ctx.strokeStyle = colors[k] + '0.75)';
         ctx.lineWidth = 1.5;
         ctx.stroke();
 
         // Center crosshair
-        ctx.strokeStyle = colors[k] + '0.9)';
+        ctx.strokeStyle = colors[k] + '0.95)';
         ctx.beginPath();
-        ctx.moveTo(m.x - 8, m.y); ctx.lineTo(m.x + 8, m.y);
-        ctx.moveTo(m.x, m.y - 8); ctx.lineTo(m.x, m.y + 8);
+        ctx.moveTo(m.x - 7, m.y); ctx.lineTo(m.x + 7, m.y);
+        ctx.moveTo(m.x, m.y - 7); ctx.lineTo(m.x, m.y + 7);
         ctx.stroke();
       }
 
@@ -734,56 +967,113 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateTelemetry() {
       const readout = document.getElementById('em-telemetry-readout');
       if (readout) {
-        readout.textContent = `Iteration: ${iteration} | Points: ${points.length} | K = 2 Components`;
+        const logL = calculateLogLikelihood();
+        readout.innerHTML = `Iteration: ${iteration} &bull; Points: ${points.length} &bull; K = 2 Components &bull; Log-L: ${logL}`;
       }
     }
 
-    canvas.addEventListener('click', (e) => {
+    function addPointCluster(clientX, clientY) {
       const r = canvas.getBoundingClientRect();
-      const clickX = e.clientX - r.left;
-      const clickY = e.clientY - r.top;
-      // Add a small cluster of points around click
-      for (let i = 0; i < 5; i++) {
+      const clickX = clientX - r.left;
+      const clickY = clientY - r.top;
+      for (let i = 0; i < 4; i++) {
         points.push({
-          x: clickX + (Math.random() - 0.5) * 20,
-          y: clickY + (Math.random() - 0.5) * 20,
+          x: clickX + (Math.random() - 0.5) * 22,
+          y: clickY + (Math.random() - 0.5) * 22,
           resp: [0.5, 0.5]
         });
       }
       updateTelemetry();
       draw();
+    }
+
+    // Canvas click & drag to add points
+    let isDrawing = false;
+    canvas.addEventListener('mousedown', (e) => {
+      isDrawing = true;
+      addPointCluster(e.clientX, e.clientY);
+    });
+    window.addEventListener('mouseup', () => { isDrawing = false; });
+    canvas.addEventListener('mousemove', (e) => {
+      if (isDrawing) {
+        addPointCluster(e.clientX, e.clientY);
+      }
     });
 
+    // Touch support for mobile canvas
+    canvas.addEventListener('touchstart', (e) => {
+      if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        addPointCluster(touch.clientX, touch.clientY);
+      }
+    }, { passive: true });
+
+    // Step button
     const runBtn = document.getElementById('em-btn-step');
     if (runBtn) {
       runBtn.onclick = () => stepEM();
     }
 
-    const resetBtn = document.getElementById('em-btn-reset');
-    if (resetBtn) {
-      resetBtn.onclick = () => {
-        means = [
-          { x: w * (0.2 + Math.random() * 0.2), y: h * (0.2 + Math.random() * 0.3) },
-          { x: w * (0.6 + Math.random() * 0.2), y: h * (0.5 + Math.random() * 0.3) }
-        ];
-        covariances = [
-          { sxx: 1800, syy: 1800 },
-          { sxx: 1800, syy: 1800 }
-        ];
-        iteration = 0;
-        updateTelemetry();
-        draw();
+    // Auto converge play/pause
+    const autoBtn = document.getElementById('em-btn-auto');
+    function stopAuto() {
+      autoRunning = false;
+      if (autoAnimId) cancelAnimationFrame(autoAnimId);
+      if (autoBtn) autoBtn.textContent = 'Auto Converge ▶';
+    }
+
+    function startAuto() {
+      autoRunning = true;
+      if (autoBtn) autoBtn.textContent = 'Pause ❚❚';
+
+      function loop() {
+        if (!autoRunning) return;
+        const shift = stepEM();
+        if (shift < 0.2 || iteration > 100) {
+          stopAuto();
+          return;
+        }
+        autoAnimId = requestAnimationFrame(loop);
+      }
+      autoAnimId = requestAnimationFrame(loop);
+    }
+
+    if (autoBtn) {
+      autoBtn.onclick = () => {
+        if (autoRunning) stopAuto();
+        else startAuto();
       };
     }
 
-    updateTelemetry();
-    draw();
+    // Reset button
+    const resetBtn = document.getElementById('em-btn-reset');
+    if (resetBtn) {
+      resetBtn.onclick = () => {
+        stopAuto();
+        resetPriors();
+      };
+    }
+
+    // Preset buttons
+    const presetBtns = document.querySelectorAll('.preset-btn');
+    presetBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        presetBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        stopAuto();
+        const preset = btn.getAttribute('data-preset');
+        loadPreset(preset);
+      });
+    });
+
+    // Initial preset load
+    loadPreset('bimodal');
   }
 
-  initEMCanvas('dedicated-em-canvas');
+  initDedicatedEM();
 
   /* --------------------------------------------------------------------------
-     6. SKILL MATRIX FILTERING
+     10. SKILL MATRIX FILTERING
      -------------------------------------------------------------------------- */
   const skillFilters = document.querySelectorAll('.skill-tag-filter');
   const skillCards = document.querySelectorAll('.skill-evidence-card');
@@ -796,7 +1086,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       skillCards.forEach(card => {
         if (domain === 'all' || card.getAttribute('data-domain') === domain) {
-          card.style.display = 'block';
+          card.style.display = 'flex';
         } else {
           card.style.display = 'none';
         }
@@ -805,24 +1095,47 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* --------------------------------------------------------------------------
-     7. INTERACTIVE SYSTEMS TERMINAL CLI
+     11. INTERACTIVE SYSTEMS TERMINAL CLI
      -------------------------------------------------------------------------- */
   const terminalDrawer = document.getElementById('system-terminal-drawer');
   const terminalToggleBtn = document.getElementById('btn-terminal-toggle');
+  const terminalCloseBtn = document.getElementById('btn-terminal-close');
   const terminalInput = document.getElementById('terminal-cli-input');
   const terminalLogs = document.getElementById('terminal-logs-view');
+  const terminalChips = document.querySelectorAll('.terminal-chip');
+
+  function openTerminal() {
+    if (!terminalDrawer) return;
+    terminalDrawer.classList.add('active');
+    if (terminalInput) setTimeout(() => terminalInput.focus(), 150);
+  }
+
+  function closeTerminal() {
+    if (!terminalDrawer) return;
+    terminalDrawer.classList.remove('active');
+  }
 
   function toggleTerminal() {
     if (!terminalDrawer) return;
-    terminalDrawer.classList.toggle('active');
-    if (terminalDrawer.classList.contains('active') && terminalInput) {
-      setTimeout(() => terminalInput.focus(), 150);
-    }
+    if (terminalDrawer.classList.contains('active')) closeTerminal();
+    else openTerminal();
   }
 
   if (terminalToggleBtn) {
     terminalToggleBtn.addEventListener('click', toggleTerminal);
   }
+
+  if (terminalCloseBtn) {
+    terminalCloseBtn.addEventListener('click', closeTerminal);
+  }
+
+  // Quick chip execution
+  terminalChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const cmd = chip.getAttribute('data-cmd');
+      executeTerminalCommand(cmd);
+    });
+  });
 
   // Backtick keyboard shortcut
   window.addEventListener('keydown', (e) => {
@@ -856,35 +1169,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     switch (cmd) {
       case 'help':
-        appendTerminalLine('Available system commands:', 'system');
-        appendTerminalLine('  whoami     - Subject background, education & active TA roles');
+        appendTerminalLine('Available terminal commands:', 'system');
+        appendTerminalLine('  whoami     - Identity, education, CGPA & active commitments');
         appendTerminalLine('  skills     - Verified competency matrix from skill register');
-        appendTerminalLine('  projects   - Architectural dossiers & repository index');
-        appendTerminalLine('  anand      - TDS course leadership context & adversarial evals');
-        appendTerminalLine('  contact    - Direct email & verified contact endpoints');
-        appendTerminalLine('  clear      - Clear terminal telemetry logs');
-        appendTerminalLine('  exit       - Dismiss interactive terminal');
+        appendTerminalLine('  projects   - Engineered architecture dossiers & repos');
+        appendTerminalLine('  experience - Missions: TDS TA with S. Anand, annam.ai, IITM');
+        appendTerminalLine('  anand      - TDS course co-teaching context & adversarial evals');
+        appendTerminalLine('  contact    - Direct email & verified profiles');
+        appendTerminalLine('  secret     - Launch the interactive 3D face reconstruction lab');
+        appendTerminalLine('  clear      - Clear console logs');
+        appendTerminalLine('  exit       - Close terminal drawer');
         break;
 
       case 'whoami':
-        appendTerminalLine('SUBJECT: Agrim Srivastava', 'system');
-        appendTerminalLine('ACADEMICS: BS in Data Science & Applications @ IIT Madras');
+        appendTerminalLine('NAME: Agrim Srivastava', 'system');
+        appendTerminalLine('EDUCATION: BS in Data Science & Applications @ IIT Madras');
         appendTerminalLine('CGPA: 8.88 / 10.0 Academic | 8.5 / 10.0 Project (Verified)');
-        appendTerminalLine('ROLES:');
-        appendTerminalLine('  - Teaching Assistant & Exam Administrator, Tools in Data Science (TDS) under S. Anand');
-        appendTerminalLine('  - SDE Intern, annam.ai (RBAC, dynamic question generation, React dashboards)');
-        appendTerminalLine('  - Tech Intern, study-iitm Portal Architecture');
+        appendTerminalLine('ACTIVE COMMITMENT: Teaching Assistant & Exam Admin alongside S. Anand (TDS)');
         appendTerminalLine('LOCATION: Lucknow, India');
         break;
 
       case 'skills':
         appendTerminalLine('[ VERIFIED CAPABILITIES MATRIX ]', 'system');
-        appendTerminalLine('• Agent Protocols: Model Context Protocol (WebMCP), A2A delegation, tool guardrails');
-        appendTerminalLine('• Local LLMs: vLLM, llama.cpp, Ollama quantization & latency benchmarks');
-        appendTerminalLine('• Adversarial Evals: Seed-randomized questions, server-side validation (a-*.js)');
-        appendTerminalLine('• Edge Systems: Cloudflare Workers, Durable Objects, Tunnels');
-        appendTerminalLine('• Full-Stack: FastAPI, Flask, React (TanStack/Zustand), Vue.js (Pinia Grade S)');
-        appendTerminalLine('• Distributed Queues: Redis, Celery scheduled asynchronous task pipelines');
+        appendTerminalLine('• AI / Agents: Model Context Protocol (WebMCP), local vLLM/Ollama, prompt caching');
+        appendTerminalLine('• Adversarial Evals: Seed randomization, server validation (a-*.js), termlog forensics');
+        appendTerminalLine('• Systems & Edge: Cloudflare Workers, Durable Objects, Linux Shell (Grade S)');
+        appendTerminalLine('• Full-Stack: Python (uv/uvx), FastAPI, Flask (Grade S), Vue 3 Pinia (Grade S)');
+        appendTerminalLine('• Math & Data: Probability & Statistics (Grade S), Relational DBMS (Grade A)');
         break;
 
       case 'projects':
@@ -897,20 +1208,34 @@ document.addEventListener('DOMContentLoaded', () => {
         appendTerminalLine('6. code-crawler      - Polyglot repository parser & AST graph indexer');
         break;
 
+      case 'experience':
+        appendTerminalLine('[ VERIFIED MISSIONS ]', 'system');
+        appendTerminalLine('1. TDS Teaching Assistant & Exam Admin (May 2026 – Present, S. Anand)');
+        appendTerminalLine('2. SDE Intern @ annam.ai (Jan – Apr 2026): Transcript Q&A engine, RBAC hardening');
+        appendTerminalLine('3. Tech Intern @ IIT Madras: study-iitm official portal microsites');
+        appendTerminalLine('4. Teaching Assistant @ IIT Madras: Probability & Statistics labs (Grade S)');
+        break;
+
       case 'anand':
       case 'tds':
         appendTerminalLine('[ TDS CO-TEACHING CONTEXT ]', 'system');
-        appendTerminalLine('Lead Instructor: S. Anand (LLM Psychologist at Straive, Founder of Gramener)');
+        appendTerminalLine('Instructor: S. Anand (LLM Psychologist at Straive, Founder of Gramener)');
         appendTerminalLine('Course: Tools in Data Science (TDS), IIT Madras BS Degree');
-        appendTerminalLine('Focus: AI-native curriculum teaching students to direct LLMs as execution engines');
-        appendTerminalLine('Scope: 19+ term exams administered, adversarial question defense, WebMCP');
+        appendTerminalLine('Focus: LLMs as execution engines, WebMCP protocols, prompt caching');
+        appendTerminalLine('Execution: 19+ term exams administered, adversarial question defense');
         break;
 
       case 'contact':
         appendTerminalLine('EMAIL: agrimsri26@gmail.com', 'system');
-        appendTerminalLine('GITHUB: github.com/agrimsri');
+        appendTerminalLine('GITHUB: github.com/agrimsri (45 repos)');
         appendTerminalLine('LINKEDIN: linkedin.com/in/agrim-srivastava-26l');
-        appendTerminalLine('PHONE: +91 80810 37827');
+        appendTerminalLine('LOCATION: Lucknow, India');
+        break;
+
+      case 'secret':
+        appendTerminalLine('Revealing 3D Reconstruction Lab:', 'system');
+        appendTerminalLine('Opening face.html (Gal Gadot GLTF 3D Viewer)...');
+        setTimeout(() => { window.location.href = './face.html'; }, 600);
         break;
 
       case 'clear':
@@ -919,7 +1244,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       case 'exit':
       case 'quit':
-        if (terminalDrawer) terminalDrawer.classList.remove('active');
+        closeTerminal();
         break;
 
       case '':
@@ -931,16 +1256,40 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* --------------------------------------------------------------------------
-     8. CLIPBOARD COPY TOAST HELPER
+     12. CLIPBOARD COPY TOAST HELPER (With Bulletproof Fallback)
      -------------------------------------------------------------------------- */
-  window.copyEmailAddress = function () {
+  function copyEmailToClipboard() {
     const email = 'agrimsri26@gmail.com';
-    navigator.clipboard.writeText(email).then(() => {
+
+    function onSuccess() {
       showToast('Copied to clipboard: agrimsri26@gmail.com');
-    }).catch(err => {
-      console.error('Failed to copy: ', err);
-    });
-  };
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(email)
+        .then(onSuccess)
+        .catch(() => fallbackCopy(email, onSuccess));
+    } else {
+      fallbackCopy(email, onSuccess);
+    }
+  }
+
+  function fallbackCopy(text, cb) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-9999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      if (cb) cb();
+    } catch (err) {
+      showToast('Email: agrimsri26@gmail.com');
+    }
+    document.body.removeChild(textArea);
+  }
 
   function showToast(msg) {
     const toast = document.getElementById('system-toast');
@@ -955,8 +1304,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3200);
   }
 
+  const heroCopyBtn = document.getElementById('hero-btn-copy-email');
+  if (heroCopyBtn) heroCopyBtn.addEventListener('click', copyEmailToClipboard);
+
+  const contactCopyBtn = document.getElementById('contact-btn-copy');
+  if (contactCopyBtn) contactCopyBtn.addEventListener('click', copyEmailToClipboard);
+
   /* --------------------------------------------------------------------------
-     9. MOBILE NAVIGATION DRAWER
+     13. MOBILE NAVIGATION DRAWER
      -------------------------------------------------------------------------- */
   const hamburgerBtn = document.getElementById('btn-hamburger');
   const mobileDrawer = document.getElementById('mobile-nav-drawer');

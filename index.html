@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agrim Srivastava — Software & AI Systems Engineer</title>
+  <title>Agrim Srivastava — Software &amp; AI Systems Engineer</title>
   <meta name="description" content="Portfolio of Agrim Srivastava — Data Science student at IIT Madras, building multi-agent systems, adversarial evaluations, and distributed platforms." />
   <meta name="keywords" content="Agrim Srivastava, IIT Madras, Software Engineer, AI Systems, LangGraph, WebMCP, Cloudflare Workers, FastAPI, Full-Stack" />
   <meta name="author" content="Agrim Srivastava" />
@@ -11,7 +11,7 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://agrimsri.github.io/" />
-  <meta property="og:title" content="Agrim Srivastava — Software & AI Systems Engineer" />
+  <meta property="og:title" content="Agrim Srivastava — Software &amp; AI Systems Engineer" />
   <meta property="og:description" content="BS in Data Science at IIT Madras (CGPA 8.88). Engineering multi-agent systems, adversarial evaluation platforms, and deterministic software." />
   <meta property="og:image" content="https://agrimsri.github.io/assets/profile.jpg" />
 
@@ -29,45 +29,59 @@
 
 <body>
 
-  <!-- Ambient Fluid Canvas & Background Layers -->
+  <!-- Ambient Fluid Canvas & Atmospheric Overlays -->
   <canvas id="ambient-canvas"></canvas>
-  <div class="ambient-noise"></div>
-  <div class="ambient-grid"></div>
+  <div class="ambient-noise" aria-hidden="true"></div>
+  <div class="ambient-grid" aria-hidden="true"></div>
 
   <!-- Real-Time Top Scroll Progress Bar -->
-  <div id="scroll-telemetry">
+  <div id="scroll-telemetry" aria-hidden="true">
     <div id="scroll-progress-bar"></div>
   </div>
 
-  <!-- Custom Precision Reticle Cursor & Telemetry -->
-  <div class="custom-cursor"></div>
-  <div class="cursor-follower"></div>
-  <div class="cursor-telemetry">[X:0 Y:0]</div>
+  <!-- Custom Precision Reticle Cursor & Telemetry (Fine Pointer Only) -->
+  <div class="custom-cursor" aria-hidden="true"></div>
+  <div class="cursor-follower" aria-hidden="true"></div>
+  <div class="cursor-telemetry" aria-hidden="true">[X:0 Y:0]</div>
 
   <!-- Toast Notification Container -->
-  <div id="system-toast">
-    <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--accent-gold);"></span>
+  <div id="system-toast" role="status" aria-live="polite">
+    <span class="toast-dot"></span>
     <span id="toast-text">Address copied to clipboard</span>
   </div>
 
   <!-- Interactive Terminal CLI Drawer -->
-  <aside id="system-terminal-drawer" aria-label="System Terminal Console">
+  <aside id="system-terminal-drawer" aria-label="Interactive Systems Console">
     <div class="terminal-inner">
       <div class="terminal-header-bar">
         <div class="terminal-header-left">
           <span class="terminal-dot active"></span>
           <span class="terminal-dot"></span>
           <span class="terminal-dot"></span>
-          <span style="margin-left: 8px; color: var(--text-primary); font-weight: 600;">SYS-CONSOLE // AGRIM SRIVASTAVA REPL</span>
+          <span class="terminal-title">TERMINAL // AGRIM SRIVASTAVA REPL</span>
         </div>
-        <div>
-          <span>SHORTCUT: [`] BACKTICK</span>
+        <div class="terminal-header-right">
+          <span class="terminal-shortcut-hint">TOGGLE: [`] BACKTICK</span>
+          <button id="btn-terminal-close" class="terminal-close-btn" aria-label="Close terminal">&times;</button>
         </div>
       </div>
+
+      <!-- Quick Command Chips for Fast Access / Mobile -->
+      <div class="terminal-quick-chips">
+        <span class="chip-label">Quick Run:</span>
+        <button class="terminal-chip" data-cmd="whoami">whoami</button>
+        <button class="terminal-chip" data-cmd="skills">skills</button>
+        <button class="terminal-chip" data-cmd="projects">projects</button>
+        <button class="terminal-chip" data-cmd="experience">experience</button>
+        <button class="terminal-chip" data-cmd="contact">contact</button>
+        <button class="terminal-chip" data-cmd="help">help</button>
+      </div>
+
       <div class="terminal-logs" id="terminal-logs-view">
-        <div class="terminal-line system">Antigravity Shell v2.4 initialized. Connected to node: agrimsri.github.io.</div>
-        <div class="terminal-line system">Type 'help' to inspect system directives or 'whoami' for background telemetry.</div>
+        <div class="terminal-line system">Interactive Console initialized. Connected to node: agrimsri.github.io.</div>
+        <div class="terminal-line system">Type 'help' to inspect commands, click any quick chip above, or type 'whoami'.</div>
       </div>
+
       <div class="terminal-input-row">
         <span class="terminal-prompt-symbol">agrim@node:~$</span>
         <input type="text" id="terminal-cli-input" class="terminal-input" placeholder="type command (e.g. 'help', 'whoami', 'skills', 'projects', 'contact')..." autocomplete="off" spellcheck="false" />
@@ -95,24 +109,25 @@
       <nav class="nav-links-desktop" aria-label="Primary Navigation">
         <a href="#projects" class="nav-link" data-scramble>Projects</a>
         <a href="#experience" class="nav-link" data-scramble>Experience</a>
-        <a href="#skills" class="nav-link" data-scramble>Skill Register</a>
-        <a href="#sandbox" class="nav-link" data-scramble>EM Sandbox</a>
+        <a href="#skills" class="nav-link" data-scramble>Skills</a>
+        <a href="#sandbox" class="nav-link" data-scramble>EM Lab</a>
         <a href="#contact" class="nav-link" data-scramble>Contact</a>
       </nav>
 
       <!-- Action Buttons (Terminal Drawer Toggle & Resume) -->
       <div class="nav-action-group">
-        <button id="btn-terminal-toggle" class="btn-terminal-toggle" title="Toggle interactive system console">
-          <span style="font-size:10px;">[~]</span>
+        <button id="btn-terminal-toggle" class="btn-terminal-toggle" title="Toggle interactive terminal">
+          <span class="terminal-prompt-icon">[~]</span>
           <span>Terminal</span>
         </button>
 
         <a href="./assets/Agrim_Srivastava_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-resume">
-          <span>Resume ↗</span>
+          <span>Resume</span>
+          <svg class="external-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
         </a>
 
         <button id="btn-hamburger" class="btn-hamburger" aria-label="Toggle mobile menu">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
       </div>
 
@@ -123,10 +138,10 @@
       <div class="mobile-nav-links">
         <a href="#projects" class="mobile-nav-link">Projects</a>
         <a href="#experience" class="mobile-nav-link">Experience</a>
-        <a href="#skills" class="mobile-nav-link">Skill Register</a>
-        <a href="#sandbox" class="mobile-nav-link">EM Sandbox</a>
+        <a href="#skills" class="mobile-nav-link">Skills</a>
+        <a href="#sandbox" class="mobile-nav-link">EM Lab</a>
         <a href="#contact" class="mobile-nav-link">Contact</a>
-        <a href="./assets/Agrim_Srivastava_Resume.pdf" target="_blank" rel="noopener noreferrer" class="mobile-nav-link" style="color:var(--accent-gold);">Download Resume ↗</a>
+        <a href="./assets/Agrim_Srivastava_Resume.pdf" target="_blank" rel="noopener noreferrer" class="mobile-nav-link resume-highlight">Download Resume ↗</a>
       </div>
     </div>
   </header>
@@ -138,7 +153,7 @@
     <section id="hero" class="hero-grid">
       
       <!-- Narrative Left Column -->
-      <div class="hero-content-column">
+      <div class="hero-content-column reveal-on-scroll">
         
         <div class="hero-telemetry-badge">
           <span class="badge-icon"></span>
@@ -146,31 +161,32 @@
         </div>
 
         <h1 class="hero-headline">
-          Engineering reliable <span class="gold-gradient-text">AI systems</span>, adversarial evaluations, and distributed platforms.
+          I build <span class="gold-gradient-text">software &amp; AI systems</span> that hold when things get messy.
         </h1>
 
         <p class="hero-narrative">
-          I'm <strong>Agrim Srivastava</strong>. I design systems where correctness isn't an afterthought — from seed-randomized 
-          <span class="highlight-gold">adversarial exam architectures</span> on Cloudflare Workers co-taught alongside <strong>S. Anand</strong> at IIT Madras, 
-          to LangGraph <span class="highlight-gold">multi-agent pipelines</span> and real-time audio transcript generation at annam.ai. When constraints shift, my software holds.
+          Hey, I'm <strong>Agrim Srivastava</strong>. I'm a software engineer and AI practitioner at IIT Madras. 
+          I build systems where correctness isn't optional — from seed-randomized 
+          <span class="highlight-gold">adversarial exam architectures</span> on Cloudflare Workers co-taught alongside <strong>S. Anand</strong>, 
+          to LangGraph <span class="highlight-gold">multi-agent pipelines</span> that eliminate calorie estimation error, and real-time audio transcript generation at annam.ai.
         </p>
 
-        <!-- Fast Telemetry Metrics Grid -->
+        <!-- Dynamic Animated Telemetry Metrics Grid -->
         <div class="telemetry-metrics-grid">
-          <div class="telemetry-cell">
-            <div class="telemetry-value">8.88<span class="unit">/10</span></div>
+          <div class="telemetry-cell spotlight-card">
+            <div class="telemetry-value"><span class="counter" data-target="8.88" data-decimals="2">0.00</span><span class="unit">/10</span></div>
             <div class="telemetry-label">IIT Madras Academic CGPA</div>
           </div>
-          <div class="telemetry-cell">
-            <div class="telemetry-value">19+<span class="unit">Exams</span></div>
+          <div class="telemetry-cell spotlight-card">
+            <div class="telemetry-value"><span class="counter" data-target="19" data-suffix="+">0</span><span class="unit">Exams</span></div>
             <div class="telemetry-label">Dynamic TDS Edge Infra</div>
           </div>
-          <div class="telemetry-cell">
-            <div class="telemetry-value">254<span class="unit">/254</span></div>
+          <div class="telemetry-cell spotlight-card">
+            <div class="telemetry-value"><span class="counter" data-target="254">0</span><span class="unit">/254</span></div>
             <div class="telemetry-label">NutriAgent Pytests Passing</div>
           </div>
-          <div class="telemetry-cell">
-            <div class="telemetry-value">45<span class="unit">Repos</span></div>
+          <div class="telemetry-cell spotlight-card">
+            <div class="telemetry-value"><span class="counter" data-target="45">0</span><span class="unit">Repos</span></div>
             <div class="telemetry-label">Applied Systems on GitHub</div>
           </div>
         </div>
@@ -179,15 +195,15 @@
         <div class="hero-cta-group">
           <a href="#projects" class="btn-primary-action">
             <span>Explore Systems Deck</span>
-            <span>↓</span>
+            <span class="action-arrow">↓</span>
           </a>
 
-          <button onclick="copyEmailAddress()" class="btn-secondary-action">
+          <button id="hero-btn-copy-email" class="btn-secondary-action">
             <span>Copy Direct Email</span>
           </button>
 
           <div class="hero-social-links">
-            <a href="https://github.com/agrimsri" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="GitHub Profile">
+            <a href="https://github.com/agrimsri" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="GitHub Profile (@agrimsri)">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
             </a>
             <a href="https://www.linkedin.com/in/agrim-srivastava-26l" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="LinkedIn Profile">
@@ -199,10 +215,10 @@
       </div>
 
       <!-- Right Column: Interactive Portrait & Optical Chamber -->
-      <div class="hero-specimen-chamber">
+      <div class="hero-specimen-chamber reveal-on-scroll">
         <div class="specimen-frame-wrapper">
           <div class="specimen-ambient-glow"></div>
-          <div class="specimen-card-container">
+          <div class="specimen-card-container spotlight-card">
             
             <!-- Corner Reticle Indicators -->
             <div class="specimen-reticle tl"></div>
@@ -211,12 +227,12 @@
             <div class="specimen-reticle br"></div>
 
             <div class="specimen-media-view">
-              <img src="./assets/profile.jpg" alt="Agrim Srivastava portrait" class="specimen-image" />
+              <img src="./assets/profile.jpg" alt="Agrim Srivastava portrait" class="specimen-image" loading="eager" />
               
               <div class="specimen-overlay-telemetry">
-                <span class="specimen-role-tag">Core Operator</span>
+                <span class="specimen-role-tag">Software &amp; AI Systems Engineer</span>
                 <span class="specimen-subject-name">Agrim Srivastava</span>
-                <span class="specimen-subtext">Lucknow, India &bull; IIT Madras BS Degree</span>
+                <span class="specimen-subtext">Lucknow, India &bull; IIT Madras BS (CGPA 8.88)</span>
               </div>
             </div>
 
@@ -229,44 +245,44 @@
     <!-- ==================== SECTION: ARCHITECTURAL SPECIMEN DECK (PROJECTS) ==================== -->
     <section id="projects" class="section-block">
       
-      <div class="section-label-tape">01 &bull; ARCHITECTURAL SPECIMEN DECK</div>
+      <div class="section-label-tape">01 // FEATURED SYSTEMS &amp; ARCHITECTURE</div>
       
-      <div class="projects-header-row">
+      <div class="projects-header-row reveal-on-scroll">
         <div>
           <h2 class="section-title">Engineered Systems &amp; Artifacts</h2>
           <p class="section-subtitle">
-            Not a passive grid of screenshots. Inspect interactive architectural topologies, deterministic guardrail traces, and verified production metrics.
+            Not a passive grid of screenshots. Inspect live architectural topologies, deterministic guardrail traces, and verified production benchmarks.
           </p>
         </div>
 
         <!-- View Mode Switcher -->
         <div class="view-mode-bar">
-          <button class="view-mode-btn active" data-mode="deck">Specimen Chamber</button>
-          <button class="view-mode-btn" data-mode="mosaic">Catalog Grid</button>
+          <button class="view-mode-btn active" data-mode="deck" title="Interactive split deck with architecture topology">Specimen Chamber</button>
+          <button class="view-mode-btn" data-mode="mosaic" title="Full catalog grid of all systems">Catalog Grid</button>
         </div>
       </div>
 
       <!-- Category Filter Pills -->
-      <div class="category-filter-bar">
+      <div class="category-filter-bar reveal-on-scroll">
         <button class="filter-pill-btn active" data-filter="all">
           <span>All Systems</span>
-          <span class="pill-counter">7</span>
+          <span class="pill-counter" id="count-all">7</span>
         </button>
         <button class="filter-pill-btn" data-filter="agentic">
-          <span>Agentic AI &amp; LLMs</span>
-          <span class="pill-counter">3</span>
+          <span>Multi-Agent AI &amp; LLMs</span>
+          <span class="pill-counter" id="count-agentic">3</span>
         </button>
         <button class="filter-pill-btn" data-filter="distributed">
-          <span>Distributed Platforms</span>
-          <span class="pill-counter">2</span>
+          <span>Distributed &amp; Full-Stack</span>
+          <span class="pill-counter" id="count-distributed">2</span>
         </button>
         <button class="filter-pill-btn" data-filter="visualizer">
-          <span>Perception &amp; Math</span>
-          <span class="pill-counter">1</span>
+          <span>Math &amp; Simulations</span>
+          <span class="pill-counter" id="count-visualizer">1</span>
         </button>
         <button class="filter-pill-btn" data-filter="systems">
           <span>Compilers &amp; Tools</span>
-          <span class="pill-counter">1</span>
+          <span class="pill-counter" id="count-systems">1</span>
         </button>
       </div>
 
@@ -293,46 +309,56 @@
     <!-- ==================== SECTION: THE CHRONICLE (EXPERIENCE) ==================== -->
     <section id="experience" class="section-block">
       
-      <div class="section-label-tape">02 &bull; OPERATIONAL MISSION LOG</div>
+      <div class="section-label-tape">02 // OPERATIONAL CHRONICLE</div>
 
-      <h2 class="section-title">The Chronicle: Verified Engagements</h2>
-      <p class="section-subtitle" style="margin-bottom: 50px;">
-        High-responsibility technical roles across academic edge infrastructure, production startups, and pedagogy.
-      </p>
+      <div class="reveal-on-scroll">
+        <h2 class="section-title">Verified Engagements &amp; Missions</h2>
+        <p class="section-subtitle" style="margin-bottom: 50px;">
+          High-responsibility technical roles spanning academic edge platforms, production startups, and instructional leadership.
+        </p>
+      </div>
 
       <div class="chronicle-container">
+        <!-- Vertical Dynamic Laser Fill Progress Line -->
+        <div class="chronicle-track-line" aria-hidden="true">
+          <div class="chronicle-track-fill" id="chronicle-track-fill"></div>
+        </div>
 
         <!-- Role 1: TDS Teaching Assistant & Exam Administrator -->
-        <article class="chronicle-item">
-          <div class="chronicle-node-point"></div>
+        <article class="chronicle-item reveal-on-scroll">
+          <div class="chronicle-node-point active"></div>
           
-          <div class="chronicle-card">
+          <div class="chronicle-card spotlight-card">
             <div class="chronicle-top-bar">
               <div>
+                <div class="chronicle-status-indicator">
+                  <span class="status-pulse-dot"></span>
+                  <span class="status-text">ACTIVE ROSTER &bull; TERM 26T3</span>
+                </div>
                 <h3 class="chronicle-role-title">Teaching Assistant &amp; Exam Administrator</h3>
                 <div class="chronicle-organization">
                   <span>Tools in Data Science (TDS) &bull; Indian Institute of Technology Madras</span>
                 </div>
               </div>
-              <span class="chronicle-timeframe">May 2026 – Present &bull; Term 26T2 &amp; Term 26T3</span>
+              <span class="chronicle-timeframe">May 2026 – Present &bull; Terms 26T2 &amp; 26T3</span>
             </div>
 
             <div class="chronicle-lead-instructor">
-              Co-administered under <strong>S. Anand</strong> (LLM Psychologist at Straive, Founder of Gramener)
+              Co-administered alongside <strong>S. Anand</strong> (LLM Psychologist at Straive, Founder of Gramener)
             </div>
 
             <ul class="chronicle-bullet-list">
               <li>
-                <strong>Exam Platform Administration (`sanand0/exam`):</strong> Hardcoded privileged Exam Admin across 19+ term exams and graded assignments on <strong>Cloudflare Workers, Durable Objects, SQLite archives, and Cloudflare Tunnels</strong>.
+                <strong>Exam Platform Administration (`sanand0/exam`):</strong> Hardcoded privileged Exam Admin managing high-stakes assessments across 19+ exams and assignments on <strong>Cloudflare Workers, Durable Objects, SQLite archives, and Cloudflare Tunnels</strong>.
               </li>
               <li>
-                <strong>Adversarial Question Design &amp; Hardening:</strong> Engineered seed-randomized assessment questions and server-side evaluation logic (`a-*.js`) that dynamically defend high-stakes exams against automated heuristic LLM solvers via cryptographic check tokens.
+                <strong>Adversarial Question Design &amp; Hardening:</strong> Engineered seed-randomized assessment questions and server-side evaluation logic (`a-*.js`) that dynamically defend exams against automated heuristic LLM solvers using cryptographic check tokens.
               </li>
               <li>
-                <strong>Forensic Terminal Telemetry:</strong> Performed student terminal replay forensics via `termlog_review.py` to audit real-time keystrokes, execution workflows, and solve-time anomalies across thousands of candidates.
+                <strong>Forensic Terminal Telemetry:</strong> Performed real-time student terminal replay forensics via `termlog_review.py` to audit keystrokes, execution workflows, and solve-time anomalies across thousands of candidates.
               </li>
               <li>
-                <strong>Curriculum Co-Teaching:</strong> Mentored cohorts on bleeding-edge topics: Model Context Protocol (WebMCP), local LLM inference (vLLM, llama.cpp, Ollama quantization), prompt caching, and FastAPI container deployments.
+                <strong>AI Curriculum Co-Teaching:</strong> Mentored students on cutting-edge AI: Model Context Protocol (WebMCP), local LLM inference (vLLM, llama.cpp, Ollama quantization), prompt caching, and FastAPI container services.
               </li>
             </ul>
 
@@ -341,9 +367,9 @@
                 <span>Official TA Roster (tds.s-anand.net)</span> ↗
               </a>
               <a href="https://github.com/sanand0/exam" target="_blank" rel="noopener noreferrer" class="proof-link-pill">
-                <span>Exam Admin Repository (sanand0/exam)</span> ↗
+                <span>Exam Platform Repo (sanand0/exam)</span> ↗
               </a>
-              <span class="proof-link-pill" style="color:var(--accent-emerald);">
+              <span class="proof-link-pill verified-badge">
                 <span>Verified Active Term 26T3</span>
               </span>
             </div>
@@ -351,10 +377,10 @@
         </article>
 
         <!-- Role 2: SDE Intern annam.ai -->
-        <article class="chronicle-item">
+        <article class="chronicle-item reveal-on-scroll">
           <div class="chronicle-node-point"></div>
           
-          <div class="chronicle-card">
+          <div class="chronicle-card spotlight-card">
             <div class="chronicle-top-bar">
               <div>
                 <h3 class="chronicle-role-title">Software Development Engineer Intern</h3>
@@ -367,13 +393,13 @@
 
             <ul class="chronicle-bullet-list">
               <li>
-                <strong>Security &amp; RBAC Hardening:</strong> Eliminated critical room-termination and unauthorized state manipulation vulnerabilities by overhauling session authentication and role validation filters in production.
+                <strong>Security &amp; RBAC Hardening:</strong> Resolved critical room-termination and unauthorized state manipulation vulnerabilities by overhauling session authentication and role validation filters in production.
               </li>
               <li>
                 <strong>Live Transcript Question Pipeline:</strong> Engineered a real-time interval question generation engine from live meeting audio transcripts, enabling dynamic interactive polling during student sessions.
               </li>
               <li>
-                <strong>Production React Dashboards:</strong> Architected instructor command cockpit using <strong>React</strong> (Vite, Zustand, TanStack Router, TanStack Query), replacing sluggish legacy interfaces with sub-100ms transitions.
+                <strong>Production React Dashboards:</strong> Architected instructor command cockpit using <strong>React</strong> (Vite, Zustand, TanStack Router, TanStack Query), replacing legacy interfaces with sub-100ms transitions.
               </li>
               <li>
                 <strong>Full-Stack Backend Integration:</strong> Authored backend services across <strong>Node.js, Express, MongoDB, and Firebase Admin</strong> with strict Git-flow discipline and automated linting.
@@ -392,10 +418,10 @@
         </article>
 
         <!-- Role 3: Tech Intern study-iitm Portal -->
-        <article class="chronicle-item">
+        <article class="chronicle-item reveal-on-scroll">
           <div class="chronicle-node-point"></div>
           
-          <div class="chronicle-card">
+          <div class="chronicle-card spotlight-card">
             <div class="chronicle-top-bar">
               <div>
                 <h3 class="chronicle-role-title">Tech Intern — Portal Architecture</h3>
@@ -411,7 +437,7 @@
                 Contributed to the modern portal architecture and microsites for the official IIT Madras BS student ecosystem (`study-iitm`).
               </li>
               <li>
-                Cleaned semantic markup, improved responsiveness across mobile viewports, and integrated consistent navigation layouts.
+                Refined semantic markup, improved responsiveness across mobile viewports, and integrated consistent navigation layouts.
               </li>
             </ul>
 
@@ -424,10 +450,10 @@
         </article>
 
         <!-- Role 4: Teaching Assistant — Probability & Statistics -->
-        <article class="chronicle-item">
+        <article class="chronicle-item reveal-on-scroll">
           <div class="chronicle-node-point"></div>
           
-          <div class="chronicle-card">
+          <div class="chronicle-card spotlight-card">
             <div class="chronicle-top-bar">
               <div>
                 <h3 class="chronicle-role-title">Teaching Assistant — Probability &amp; Statistics</h3>
@@ -462,17 +488,17 @@
     <!-- ==================== SECTION: SKILL REGISTER & EVIDENCE MATRIX ==================== -->
     <section id="skills" class="section-block">
       
-      <div class="section-label-tape">03 &bull; EVIDENCE-BACKED SKILL MATRIX</div>
+      <div class="section-label-tape">03 // EVIDENCE-BACKED SKILL REGISTER</div>
 
-      <div class="skills-matrix-intro">
+      <div class="skills-matrix-intro reveal-on-scroll">
         <h2 class="section-title">Demonstrated Capabilities</h2>
         <p class="section-subtitle">
-          Directly backed by verified coursework grades, production deployments, and course leadership.
+          Directly referenced from the verified skill register, backed by official IIT Madras course grades, course leadership, and production deployments.
         </p>
       </div>
 
       <!-- Domain Filters -->
-      <div class="skills-filter-tags">
+      <div class="skills-filter-tags reveal-on-scroll">
         <button class="skill-tag-filter active" data-domain="all">All Disciplines</button>
         <button class="skill-tag-filter" data-domain="ai">AI &amp; Agent Protocols</button>
         <button class="skill-tag-filter" data-domain="systems">Systems &amp; Evals</button>
@@ -484,9 +510,9 @@
       <div class="skills-cards-grid">
         
         <!-- Skill 1 -->
-        <div class="skill-evidence-card" data-domain="ai">
+        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="ai">
           <div class="skill-card-top">
-            <span class="skill-name">Agent Protocols &amp; WebMCP</span>
+            <h4 class="skill-name">Agent Protocols &amp; WebMCP</h4>
             <span class="skill-status-tag demonstrated">Demonstrated</span>
           </div>
           <p class="skill-evidence-text">
@@ -498,13 +524,13 @@
         </div>
 
         <!-- Skill 2 -->
-        <div class="skill-evidence-card" data-domain="ai">
+        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="ai">
           <div class="skill-card-top">
-            <span class="skill-name">Local LLMs &amp; Serving</span>
+            <h4 class="skill-name">Local LLMs &amp; Model Serving</h4>
             <span class="skill-status-tag demonstrated">Demonstrated</span>
           </div>
           <p class="skill-evidence-text">
-            Quantization (GGUF/AWQ), latency benchmarks, and local model serving on vLLM, llama.cpp, and Ollama.
+            Quantization (GGUF/AWQ), latency benchmarks, and local model serving on vLLM, llama.cpp, LM Studio, and Ollama.
           </p>
           <div class="skill-course-badge">
             <span>Proof: TDS TA Week 2 curriculum co-teaching</span>
@@ -512,9 +538,23 @@
         </div>
 
         <!-- Skill 3 -->
-        <div class="skill-evidence-card" data-domain="systems">
+        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="ai">
           <div class="skill-card-top">
-            <span class="skill-name">Adversarial Evals &amp; Forensics</span>
+            <h4 class="skill-name">Prompt &amp; Context Engineering</h4>
+            <span class="skill-status-tag demonstrated">Demonstrated</span>
+          </div>
+          <p class="skill-evidence-text">
+            Reliable reasoning harnesses, structured JSON/Pydantic schemas, prompt caching, and context window optimization.
+          </p>
+          <div class="skill-course-badge">
+            <span>Proof: TDS TA Week 3 &amp; Discourse QA RAG Assistant</span>
+          </div>
+        </div>
+
+        <!-- Skill 4 -->
+        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="systems">
+          <div class="skill-card-top">
+            <h4 class="skill-name">Adversarial Evals &amp; Forensics</h4>
             <span class="skill-status-tag strong-evidence">Strong Evidence</span>
           </div>
           <p class="skill-evidence-text">
@@ -525,38 +565,52 @@
           </div>
         </div>
 
-        <!-- Skill 4 -->
-        <div class="skill-evidence-card" data-domain="systems">
+        <!-- Skill 5 -->
+        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="systems">
           <div class="skill-card-top">
-            <span class="skill-name">Edge Compute &amp; Serverless</span>
+            <h4 class="skill-name">Edge Compute &amp; Serverless</h4>
             <span class="skill-status-tag demonstrated">Demonstrated</span>
           </div>
           <p class="skill-evidence-text">
-            Cloudflare Workers, Durable Objects, zero-trust Cloudflare Tunnels, and distributed SQLite archives.
+            Cloudflare Workers, Durable Objects, zero-trust Cloudflare Tunnels, OAuth integration, and distributed SQLite archives.
           </p>
           <div class="skill-course-badge">
             <span>Proof: TDS Exam Platform (`sanand0/exam`)</span>
           </div>
         </div>
 
-        <!-- Skill 5 -->
-        <div class="skill-evidence-card" data-domain="web">
+        <!-- Skill 6 -->
+        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="systems">
           <div class="skill-card-top">
-            <span class="skill-name">Python &amp; Modern CLI Tooling</span>
+            <h4 class="skill-name">Linux Systems &amp; Shell Automation</h4>
             <span class="skill-status-tag strong-evidence">Strong Evidence</span>
           </div>
           <p class="skill-evidence-text">
-            Fast packaging with `uv`/`uvx`, PEP 723 single-file metadata, and 45+ open repositories.
+            Shell automation, headless server management, security permissions, CLI tools, and kernel diagnostic utilities.
+          </p>
+          <div class="skill-course-badge">
+            <span>Proof: System Commands (Grade S - Top 1% Distinction)</span>
+          </div>
+        </div>
+
+        <!-- Skill 7 -->
+        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="web">
+          <div class="skill-card-top">
+            <h4 class="skill-name">Python &amp; Modern CLI Tooling</h4>
+            <span class="skill-status-tag strong-evidence">Strong Evidence</span>
+          </div>
+          <p class="skill-evidence-text">
+            Fast packaging with `uv`/`uvx`, PEP 723 single-file metadata, and 45+ open-source repositories.
           </p>
           <div class="skill-course-badge">
             <span>Proof: Programming in Python (Grade S), PDSA (Grade A)</span>
           </div>
         </div>
 
-        <!-- Skill 6 -->
-        <div class="skill-evidence-card" data-domain="web">
+        <!-- Skill 8 -->
+        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="web">
           <div class="skill-card-top">
-            <span class="skill-name">Vue.js &amp; Reactive Frontend</span>
+            <h4 class="skill-name">Vue.js &amp; Reactive Frontend</h4>
             <span class="skill-status-tag strong-evidence">Strong Evidence</span>
           </div>
           <p class="skill-evidence-text">
@@ -567,24 +621,38 @@
           </div>
         </div>
 
-        <!-- Skill 7 -->
-        <div class="skill-evidence-card" data-domain="web">
+        <!-- Skill 9 -->
+        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="web">
           <div class="skill-card-top">
-            <span class="skill-name">Celery &amp; Redis Queues</span>
-            <span class="skill-status-tag demonstrated">Demonstrated</span>
+            <h4 class="skill-name">Flask REST APIs &amp; Full-Stack</h4>
+            <span class="skill-status-tag strong-evidence">Strong Evidence</span>
           </div>
           <p class="skill-evidence-text">
-            Periodic beat schedules, asynchronous background CSV exports, caching, and worker failover handling.
+            Multi-tier transaction platforms, JWT authentication, isolated Socket.IO channels, and Stripe escrow integration.
           </p>
           <div class="skill-course-badge">
-            <span>Proof: Household-Application &amp; MAD I Project (Grade S)</span>
+            <span>Proof: MAD I Capstone (Grade S) &amp; TutorSolve Deployed</span>
           </div>
         </div>
 
-        <!-- Skill 8 -->
-        <div class="skill-evidence-card" data-domain="data">
+        <!-- Skill 10 -->
+        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="web">
           <div class="skill-card-top">
-            <span class="skill-name">Probability &amp; Mathematical Stats</span>
+            <h4 class="skill-name">Celery &amp; Redis Queues</h4>
+            <span class="skill-status-tag demonstrated">Demonstrated</span>
+          </div>
+          <p class="skill-evidence-text">
+            Periodic beat schedules, asynchronous background CSV exports, query caching, and worker failover handling.
+          </p>
+          <div class="skill-course-badge">
+            <span>Proof: Household-Application Capstone (Grade S)</span>
+          </div>
+        </div>
+
+        <!-- Skill 11 -->
+        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="data">
+          <div class="skill-card-top">
+            <h4 class="skill-name">Probability &amp; Mathematical Stats</h4>
             <span class="skill-status-tag strong-evidence">Strong Evidence</span>
           </div>
           <p class="skill-evidence-text">
@@ -595,17 +663,17 @@
           </div>
         </div>
 
-        <!-- Skill 9 -->
-        <div class="skill-evidence-card" data-domain="systems">
+        <!-- Skill 12 -->
+        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="data">
           <div class="skill-card-top">
-            <span class="skill-name">Linux Systems &amp; Shell</span>
+            <h4 class="skill-name">DBMS &amp; Relational SQL</h4>
             <span class="skill-status-tag strong-evidence">Strong Evidence</span>
           </div>
           <p class="skill-evidence-text">
-            Shell automation, headless server maintenance, permissions security, and kernel panic diagnostic utilities.
+            Relational schemas, indexing strategies, complex joins, AST-validated query parsing, and production maintenance at annam.ai.
           </p>
           <div class="skill-course-badge">
-            <span>Proof: System Commands (Grade S - Highest Academic Distinction)</span>
+            <span>Proof: DBMS (Grade A), BDM (Grade A), NutriAgent AST SQL</span>
           </div>
         </div>
 
@@ -616,28 +684,58 @@
     <!-- ==================== SECTION: INTERACTIVE EXPECTATION-MAXIMIZATION SANDBOX ==================== -->
     <section id="sandbox" class="section-block">
       
-      <div class="section-label-tape">04 &bull; LIVE MATHEMATICAL SIMULATION</div>
+      <div class="section-label-tape">04 // LIVE MATHEMATICAL SIMULATION</div>
 
-      <h2 class="section-title">Expectation-Maximization Sandbox</h2>
-      <p class="section-subtitle" style="margin-bottom: 30px;">
-        Click anywhere on the canvas to inject 2D sample points, then step through Gaussian Mixture Model (GMM) iterations to observe covariance contours adaptively converge.
-      </p>
+      <div class="reveal-on-scroll">
+        <h2 class="section-title">Expectation-Maximization Sandbox</h2>
+        <p class="section-subtitle" style="margin-bottom: 24px;">
+          Live Gaussian Mixture Model (GMM) simulation running on HTML5 Canvas. Click anywhere to inject 2D sample points, or hit <strong>Auto Converge</strong> to observe covariance contours adaptively adapt and rotate in real time.
+        </p>
+      </div>
 
-      <div class="sandbox-card">
+      <div class="sandbox-card spotlight-card reveal-on-scroll">
+        
         <div class="sandbox-controls-row">
           <div class="sandbox-btn-group">
-            <button class="sandbox-btn btn-run" id="em-btn-step">Run EM Step Iteration →</button>
+            <button class="sandbox-btn btn-run" id="em-btn-step">Step EM Once →</button>
+            <button class="sandbox-btn btn-auto" id="em-btn-auto">Auto Converge ▶</button>
             <button class="sandbox-btn btn-reset" id="em-btn-reset">Re-randomize Priors</button>
           </div>
+
+          <!-- Presets -->
+          <div class="sandbox-presets-group">
+            <span class="preset-label">Presets:</span>
+            <button class="preset-btn active" data-preset="bimodal">Bimodal</button>
+            <button class="preset-btn" data-preset="triangular">3-Cluster</button>
+            <button class="preset-btn" data-preset="ring">Donut + Core</button>
+            <button class="preset-btn" data-preset="clear">Clear All</button>
+          </div>
+
           <div class="sandbox-telemetry-readout" id="em-telemetry-readout">
-            Iteration: 0 | Points: 55 | K = 2 Components
+            Iteration: 0 &bull; Points: 55 &bull; K = 2 Components &bull; Log-L: -
           </div>
         </div>
 
         <div class="canvas-container-outer">
           <canvas id="dedicated-em-canvas"></canvas>
-          <div class="sandbox-canvas-hint">Click on canvas to add 2D data points</div>
+          <div class="sandbox-canvas-hint">Click or drag on the canvas to add 2D data points</div>
         </div>
+
+        <div class="sandbox-footer-legend">
+          <div class="legend-item">
+            <span class="legend-color-dot comp1"></span>
+            <span>Gaussian Component A (Gold Prior)</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color-dot comp2"></span>
+            <span>Gaussian Component B (Cyan Prior)</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color-dot blend"></span>
+            <span>Soft Responsibility Blended Samples (E-Step)</span>
+          </div>
+        </div>
+
       </div>
 
     </section>
@@ -645,14 +743,14 @@
     <!-- ==================== SECTION: CONTACT & CONNECT ==================== -->
     <section id="contact" class="section-block" style="border-bottom:none;">
       
-      <div class="contact-manifesto-box">
-        <div class="section-label-tape" style="justify-content:center; margin-bottom:12px;">05 &bull; INQUIRIES &amp; DIALOGUE</div>
+      <div class="contact-manifesto-box spotlight-card reveal-on-scroll">
+        <div class="section-label-tape" style="justify-content:center; margin-bottom:12px;">05 // INQUIRIES &amp; DIALOGUE</div>
         
-        <h2 class="contact-title">Let's discuss systems that matter.</h2>
+        <h2 class="contact-title">Let's build systems that matter.</h2>
         
         <p class="contact-text">
           I'm open to Software Engineering (SWE), Applied AI / Agent Systems, and high-impact infrastructure roles. 
-          If you are building products where correctness, resilience, and architectural discipline are valued, my inbox is open.
+          If you are building products where correctness, resilience, and architectural discipline are valued, my inbox is always open.
         </p>
 
         <div class="contact-actions-row">
@@ -660,7 +758,7 @@
             <span>agrimsri26@gmail.com</span>
           </a>
 
-          <button onclick="copyEmailAddress()" class="btn-copy-address">
+          <button id="contact-btn-copy" class="btn-copy-address">
             <span>Copy Address</span>
           </button>
         </div>
@@ -672,6 +770,10 @@
           <span>&bull;</span>
           <a href="https://www.linkedin.com/in/agrim-srivastava-26l" target="_blank" rel="noopener noreferrer" class="contact-direct-link">
             <span>linkedin.com/in/agrim-srivastava-26l</span> ↗
+          </a>
+          <span>&bull;</span>
+          <a href="./face.html" class="contact-direct-link" title="Interactive 3D Face Model Viewer">
+            <span>3D Model Lab</span> ↗
           </a>
           <span>&bull;</span>
           <span>Lucknow, India</span>
@@ -690,8 +792,8 @@
         <span class="footer-bullet"></span>
         <span>Agrim Srivastava &bull; Indian Institute of Technology Madras</span>
       </div>
-      <div>
-        <span>Refactored with architectural craft &bull; Hosted via GitHub Pages</span>
+      <div class="footer-right">
+        <span>Obsidian Editorial Systems Design &bull; Hosted via GitHub Pages</span>
       </div>
     </div>
   </footer>
