@@ -1,917 +1,702 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agrim Srivastava | Software & AI Systems Engineer</title>
-  <meta name="description" content="Portfolio of Agrim Srivastava — Data Science student at IIT Madras, building multi-agent systems, robotics perception pipelines, and full-stack software." />
-  <meta name="keywords" content="Agrim Srivastava, IIT Madras, Portfolio, Software Engineer, AI Engineer, LangGraph, ROS 2, RAG, Machine Learning, Full-Stack" />
+  <title>Agrim Srivastava — Software & AI Systems Engineer</title>
+  <meta name="description" content="Portfolio of Agrim Srivastava — Data Science student at IIT Madras, building multi-agent systems, adversarial evaluations, and distributed platforms." />
+  <meta name="keywords" content="Agrim Srivastava, IIT Madras, Software Engineer, AI Systems, LangGraph, WebMCP, Cloudflare Workers, FastAPI, Full-Stack" />
   <meta name="author" content="Agrim Srivastava" />
 
-  <!-- Open Graph / Social Media -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://agrimsri.github.io/" />
   <meta property="og:title" content="Agrim Srivastava — Software & AI Systems Engineer" />
-  <meta property="og:description" content="BS in Data Science at IIT Madras (GPA 9.1). Building multi-agent systems, robotics perception pipelines, and robust full-stack platforms." />
+  <meta property="og:description" content="BS in Data Science at IIT Madras (CGPA 8.88). Engineering multi-agent systems, adversarial evaluation platforms, and deterministic software." />
   <meta property="og:image" content="https://agrimsri.github.io/assets/profile.jpg" />
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Agrim Srivastava — Software & AI Systems Engineer" />
-  <meta name="twitter:description" content="Portfolio of Agrim Srivastava — Data Science student at IIT Madras." />
-  <meta name="twitter:image" content="https://agrimsri.github.io/assets/profile.jpg" />
-
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%230F0F12'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' font-family='serif' font-weight='bold' font-size='50' fill='%23B08D57'>AS</text></svg>" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23070709'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' font-family='monospace' font-weight='700' font-size='48' fill='%23E5B869'>AS</text></svg>" />
 
-  <!-- Google Fonts: Cinzel & Plus Jakarta Sans & JetBrains Mono -->
+  <!-- Typography: Syne, Plus Jakarta Sans, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            gold: {
-              DEFAULT: '#B08D57',
-              light: '#E5C17C',
-              dark: '#8C6C38',
-              muted: '#B08D5740',
-            },
-            crimson: '#8B2E2E',
-            obsidian: {
-              50: '#18181C',
-              100: '#131317',
-              DEFAULT: '#0D0D10',
-              900: '#070709',
-            },
-            alabaster: {
-              DEFAULT: '#F8F6F0',
-              card: '#FFFFFF',
-              muted: '#EDE9E1',
-            }
-          },
-          fontFamily: {
-            cinzel: ['Cinzel', 'serif'],
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
-          },
-          animation: {
-            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            'float': 'float 6s ease-in-out infinite',
-          },
-          keyframes: {
-            float: {
-              '0%, 100%': { transform: 'translateY(0px)' },
-              '50%': { transform: 'translateY(-10px)' },
-            }
-          }
-        }
-      }
-    }
-  </script>
-
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
-  <style>
-    /* Custom refined styling */
-    .glass {
-      background: rgba(18, 18, 22, 0.7);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .dark .glass-card {
-      background: linear-gradient(135deg, rgba(25, 25, 32, 0.65) 0%, rgba(15, 15, 20, 0.45) 100%);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(176, 141, 87, 0.18);
-    }
-    .glass-card {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(176, 141, 87, 0.25);
-    }
-    .dark .glass-card:hover {
-      border-color: rgba(176, 141, 87, 0.45);
-      box-shadow: 0 10px 30px -10px rgba(176, 141, 87, 0.15);
-    }
-    .glass-card:hover {
-      border-color: rgba(176, 141, 87, 0.6);
-      box-shadow: 0 10px 25px -10px rgba(176, 141, 87, 0.2);
-    }
-    .text-glow {
-      text-shadow: 0 0 25px rgba(229, 193, 124, 0.35);
-    }
-    .gold-gradient-text {
-      background: linear-gradient(135deg, #FFF8E7 0%, #E5C17C 50%, #B08D57 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .light .gold-gradient-text {
-      background: linear-gradient(135deg, #1A1A24 0%, #8C6C38 60%, #B08D57 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    /* Ambient backdrop grid */
-    .bg-grid-pattern {
-      background-size: 40px 40px;
-      background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    }
-    .light .bg-grid-pattern {
-      background-image: 
-        linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
-    }
-  </style>
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
 
-<body class="bg-[#0A0A0D] text-[#E8E8ED] font-sans antialiased selection:bg-gold selection:text-black transition-colors duration-300">
+<body>
 
-  <!-- Ambient Golden Glow Background Orbs -->
-  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-    <div class="absolute -top-40 -left-40 w-96 h-96 bg-gold/10 rounded-full blur-3xl animate-pulse-slow"></div>
-    <div class="absolute top-1/3 -right-40 w-[500px] h-[500px] bg-gold/5 rounded-full blur-[140px]"></div>
-    <div class="absolute -bottom-40 left-1/3 w-[600px] h-[600px] bg-crimson/5 rounded-full blur-[160px]"></div>
-    <div class="absolute inset-0 bg-grid-pattern opacity-60"></div>
+  <!-- Ambient Fluid Canvas & Background Layers -->
+  <canvas id="ambient-canvas"></canvas>
+  <div class="ambient-noise"></div>
+  <div class="ambient-grid"></div>
+
+  <!-- Real-Time Top Scroll Progress Bar -->
+  <div id="scroll-telemetry">
+    <div id="scroll-progress-bar"></div>
   </div>
 
-  <!-- Toast Notification Container for Email Copy -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 flex items-center gap-3 px-5 py-3.5 rounded-xl bg-obsidian-50 border border-gold/40 text-gold-light shadow-2xl">
-    <i data-lucide="check-circle" class="w-5 h-5 text-gold-light"></i>
-    <span class="text-sm font-medium" id="toast-message">Email copied to clipboard!</span>
+  <!-- Custom Precision Reticle Cursor & Telemetry -->
+  <div class="custom-cursor"></div>
+  <div class="cursor-follower"></div>
+  <div class="cursor-telemetry">[X:0 Y:0]</div>
+
+  <!-- Toast Notification Container -->
+  <div id="system-toast">
+    <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--accent-gold);"></span>
+    <span id="toast-text">Address copied to clipboard</span>
   </div>
 
-  <!-- Navigation Bar -->
-  <nav class="sticky top-0 z-40 w-full backdrop-blur-xl bg-[#0A0A0D]/80 border-b border-white/5 dark:border-white/5 transition-colors duration-200">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      
-      <!-- Logo / Monogram -->
-      <a href="#hero" class="group flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl border border-gold/40 flex items-center justify-center font-cinzel font-bold text-lg text-gold bg-gold/5 group-hover:border-gold group-hover:scale-105 transition-all duration-200 shadow-sm">
-          AS
+  <!-- Interactive Terminal CLI Drawer -->
+  <aside id="system-terminal-drawer" aria-label="System Terminal Console">
+    <div class="terminal-inner">
+      <div class="terminal-header-bar">
+        <div class="terminal-header-left">
+          <span class="terminal-dot active"></span>
+          <span class="terminal-dot"></span>
+          <span class="terminal-dot"></span>
+          <span style="margin-left: 8px; color: var(--text-primary); font-weight: 600;">SYS-CONSOLE // AGRIM SRIVASTAVA REPL</span>
         </div>
-        <div class="flex flex-col">
-          <span class="font-cinzel tracking-wider text-sm font-bold text-[#F5F5F7] group-hover:text-gold transition">AGRIM SRIVASTAVA</span>
-          <span class="font-mono text-[10px] text-gray-400 tracking-tight">AI & SYSTEMS ENGINEER</span>
+        <div>
+          <span>SHORTCUT: [`] BACKTICK</span>
+        </div>
+      </div>
+      <div class="terminal-logs" id="terminal-logs-view">
+        <div class="terminal-line system">Antigravity Shell v2.4 initialized. Connected to node: agrimsri.github.io.</div>
+        <div class="terminal-line system">Type 'help' to inspect system directives or 'whoami' for background telemetry.</div>
+      </div>
+      <div class="terminal-input-row">
+        <span class="terminal-prompt-symbol">agrim@node:~$</span>
+        <input type="text" id="terminal-cli-input" class="terminal-input" placeholder="type command (e.g. 'help', 'whoami', 'skills', 'projects', 'contact')..." autocomplete="off" spellcheck="false" />
+      </div>
+    </div>
+  </aside>
+
+  <!-- Site Navigation Header -->
+  <header class="site-header">
+    <div class="site-nav-container">
+      
+      <!-- Brand Emblem -->
+      <a href="#hero" class="brand-emblem" aria-label="Agrim Srivastava Home">
+        <div class="brand-monogram">AS</div>
+        <div class="brand-meta">
+          <span class="brand-name">Agrim Srivastava</span>
+          <span class="brand-status">
+            <span class="status-pulse-dot"></span>
+            <span>IIT MADRAS &bull; SDE &amp; AI SYSTEMS</span>
+          </span>
         </div>
       </a>
 
-      <!-- Desktop Nav Links -->
-      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
-        <a href="#about" class="hover:text-gold transition-colors duration-150">About</a>
-        <a href="#projects" class="hover:text-gold transition-colors duration-150">Projects</a>
-        <a href="#experience" class="hover:text-gold transition-colors duration-150">Experience</a>
-        <a href="#skills" class="hover:text-gold transition-colors duration-150">Skills</a>
-        <a href="#contact" class="hover:text-gold transition-colors duration-150">Contact</a>
-      </div>
+      <!-- Desktop Navigation Links -->
+      <nav class="nav-links-desktop" aria-label="Primary Navigation">
+        <a href="#projects" class="nav-link" data-scramble>Projects</a>
+        <a href="#experience" class="nav-link" data-scramble>Experience</a>
+        <a href="#skills" class="nav-link" data-scramble>Skill Register</a>
+        <a href="#sandbox" class="nav-link" data-scramble>EM Sandbox</a>
+        <a href="#contact" class="nav-link" data-scramble>Contact</a>
+      </nav>
 
-      <!-- Action Buttons (Resume & Dark/Light Toggle) -->
-      <div class="flex items-center gap-3">
-        <a href="./assets/Agrim_Srivastava_Resume.pdf" target="_blank" rel="noopener noreferrer"
-           class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider bg-gold/10 hover:bg-gold/20 text-gold-light border border-gold/30 hover:border-gold transition-all duration-200 shadow-sm hover:shadow-gold/10">
-          <i data-lucide="file-text" class="w-4 h-4"></i>
-          <span>Resume</span>
+      <!-- Action Buttons (Terminal Drawer Toggle & Resume) -->
+      <div class="nav-action-group">
+        <button id="btn-terminal-toggle" class="btn-terminal-toggle" title="Toggle interactive system console">
+          <span style="font-size:10px;">[~]</span>
+          <span>Terminal</span>
+        </button>
+
+        <a href="./assets/Agrim_Srivastava_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-resume">
+          <span>Resume ↗</span>
         </a>
 
-        <!-- Mobile Menu Toggle Button -->
-        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-gray-400 hover:text-white border border-white/10" aria-label="Toggle menu">
-          <i data-lucide="menu" class="w-5 h-5"></i>
+        <button id="btn-hamburger" class="btn-hamburger" aria-label="Toggle mobile menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
       </div>
 
     </div>
 
-    <!-- Mobile Dropdown Menu -->
-    <div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-6 space-y-3 bg-[#0D0D11] border-b border-white/10 text-sm">
-      <a href="#about" class="block py-2 text-gray-300 hover:text-gold mobile-nav-link">About</a>
-      <a href="#projects" class="block py-2 text-gray-300 hover:text-gold mobile-nav-link">Projects</a>
-      <a href="#experience" class="block py-2 text-gray-300 hover:text-gold mobile-nav-link">Experience</a>
-      <a href="#skills" class="block py-2 text-gray-300 hover:text-gold mobile-nav-link">Skills</a>
-      <a href="#contact" class="block py-2 text-gray-300 hover:text-gold mobile-nav-link">Contact</a>
+    <!-- Mobile Dropdown Drawer -->
+    <div id="mobile-nav-drawer" class="mobile-nav-drawer">
+      <div class="mobile-nav-links">
+        <a href="#projects" class="mobile-nav-link">Projects</a>
+        <a href="#experience" class="mobile-nav-link">Experience</a>
+        <a href="#skills" class="mobile-nav-link">Skill Register</a>
+        <a href="#sandbox" class="mobile-nav-link">EM Sandbox</a>
+        <a href="#contact" class="mobile-nav-link">Contact</a>
+        <a href="./assets/Agrim_Srivastava_Resume.pdf" target="_blank" rel="noopener noreferrer" class="mobile-nav-link" style="color:var(--accent-gold);">Download Resume ↗</a>
+      </div>
     </div>
-  </nav>
+  </header>
 
-  <!-- Main Container -->
-  <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-24">
+  <!-- Main Content Container -->
+  <main class="main-wrapper">
 
-    <!-- HERO SECTION -->
-    <section id="hero" class="py-12 md:py-24 border-b border-white/5">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    <!-- ==================== HERO SECTION ==================== -->
+    <section id="hero" class="hero-grid">
+      
+      <!-- Narrative Left Column -->
+      <div class="hero-content-column">
         
-        <!-- Left: Intro & Bio -->
-        <div class="lg:col-span-8 space-y-6">
-          
-          <!-- Availability Badge -->
-          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-gray-300">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            <span class="w-2 h-2 rounded-full bg-emerald-500 -ml-4.5"></span>
-            <span>Open to SWE & AI/ML Opportunities</span>
-          </div>
-
-          <!-- Main Headline -->
-          <div class="space-y-2">
-            <h1 class="font-cinzel text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white">
-              Agrim <span class="gold-gradient-text text-glow">Srivastava</span>
-            </h1>
-            <p class="font-cinzel text-lg sm:text-2xl text-gold-light/90 tracking-wide font-medium">
-              Software Engineer & AI Systems Researcher
-            </p>
-          </div>
-
-          <!-- Narrative Pitch -->
-          <p class="text-base sm:text-lg text-gray-300 max-w-2xl leading-relaxed font-light">
-            BS in Data Science & Applications at <span class="text-white font-medium">IIT Madras</span> (GPA 9.1 / 10). 
-            Architecting <span class="text-gold-light font-medium">multi-agent AI systems</span>, 
-            <span class="text-gold-light font-medium">robotics perception pipelines</span>, and 
-            <span class="text-gold-light font-medium">deterministic high-reliability web platforms</span>. 
-            Passionate about transforming cutting-edge algorithms into dependable production software.
-          </p>
-
-          <!-- Key Metrics Pills -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-            <div class="px-3.5 py-2.5 rounded-xl bg-white/[0.03] border border-white/5">
-              <span class="font-mono text-xl font-bold text-gold-light">9.1<span class="text-xs text-gray-400">/10</span></span>
-              <p class="text-[11px] text-gray-400 uppercase tracking-wider mt-0.5">IIT Madras GPA</p>
-            </div>
-            <div class="px-3.5 py-2.5 rounded-xl bg-white/[0.03] border border-white/5">
-              <span class="font-mono text-xl font-bold text-gold-light">254<span class="text-xs text-emerald-400 font-semibold">/254</span></span>
-              <p class="text-[11px] text-gray-400 uppercase tracking-wider mt-0.5">NutriAgent Tests</p>
-            </div>
-            <div class="px-3.5 py-2.5 rounded-xl bg-white/[0.03] border border-white/5">
-              <span class="font-mono text-xl font-bold text-gold-light">ROS 2</span>
-              <p class="text-[11px] text-gray-400 uppercase tracking-wider mt-0.5">Robotics Perception</p>
-            </div>
-            <div class="px-3.5 py-2.5 rounded-xl bg-white/[0.03] border border-white/5">
-              <span class="font-mono text-xl font-bold text-gold-light">30+</span>
-              <p class="text-[11px] text-gray-400 uppercase tracking-wider mt-0.5">Public Repositories</p>
-            </div>
-          </div>
-
-          <!-- CTAs & Social Links -->
-          <div class="flex flex-wrap items-center gap-4 pt-4">
-            <a href="#projects" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gold hover:bg-gold-light text-[#0A0A0D] font-semibold text-sm transition-all duration-200 shadow-lg shadow-gold/20 hover:scale-[1.02]">
-              <span>Explore Projects</span>
-              <i data-lucide="arrow-down-right" class="w-4 h-4"></i>
-            </a>
-
-            <button onclick="copyEmail()" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-gold/40 text-gray-200 text-sm font-medium transition-all duration-200">
-              <i data-lucide="mail" class="w-4 h-4 text-gold-light"></i>
-              <span>Copy Email</span>
-            </button>
-
-            <!-- Social Icons -->
-            <div class="flex items-center gap-2 ml-auto sm:ml-2">
-              <a href="https://github.com/agrimsri" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-white/5 hover:bg-gold/10 border border-white/10 hover:border-gold/30 text-gray-300 hover:text-gold transition" aria-label="GitHub">
-                <i data-lucide="github" class="w-5 h-5"></i>
-              </a>
-              <a href="https://www.linkedin.com/in/agrim-srivastava-26l" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-white/5 hover:bg-gold/10 border border-white/10 hover:border-gold/30 text-gray-300 hover:text-gold transition" aria-label="LinkedIn">
-                <i data-lucide="linkedin" class="w-5 h-5"></i>
-              </a>
-            </div>
-
-          </div>
-
+        <div class="hero-telemetry-badge">
+          <span class="badge-icon"></span>
+          <span>IIT MADRAS &bull; BS DATA SCIENCE &bull; ACTIVE TA ROSTER</span>
         </div>
 
-        <!-- Right: Profile Portrait Artwork -->
-        <div class="lg:col-span-4 flex justify-center">
-          <div class="relative group">
-            <!-- Ambient Golden Aura -->
-            <div class="absolute -inset-3 bg-gradient-to-tr from-gold/30 via-gold/10 to-transparent rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition duration-500"></div>
+        <h1 class="hero-headline">
+          Engineering reliable <span class="gold-gradient-text">AI systems</span>, adversarial evaluations, and distributed platforms.
+        </h1>
+
+        <p class="hero-narrative">
+          I'm <strong>Agrim Srivastava</strong>. I design systems where correctness isn't an afterthought — from seed-randomized 
+          <span class="highlight-gold">adversarial exam architectures</span> on Cloudflare Workers co-taught alongside <strong>S. Anand</strong> at IIT Madras, 
+          to LangGraph <span class="highlight-gold">multi-agent pipelines</span> and real-time audio transcript generation at annam.ai. When constraints shift, my software holds.
+        </p>
+
+        <!-- Fast Telemetry Metrics Grid -->
+        <div class="telemetry-metrics-grid">
+          <div class="telemetry-cell">
+            <div class="telemetry-value">8.88<span class="unit">/10</span></div>
+            <div class="telemetry-label">IIT Madras Academic CGPA</div>
+          </div>
+          <div class="telemetry-cell">
+            <div class="telemetry-value">19+<span class="unit">Exams</span></div>
+            <div class="telemetry-label">Dynamic TDS Edge Infra</div>
+          </div>
+          <div class="telemetry-cell">
+            <div class="telemetry-value">254<span class="unit">/254</span></div>
+            <div class="telemetry-label">NutriAgent Pytests Passing</div>
+          </div>
+          <div class="telemetry-cell">
+            <div class="telemetry-value">45<span class="unit">Repos</span></div>
+            <div class="telemetry-label">Applied Systems on GitHub</div>
+          </div>
+        </div>
+
+        <!-- Hero Actions -->
+        <div class="hero-cta-group">
+          <a href="#projects" class="btn-primary-action">
+            <span>Explore Systems Deck</span>
+            <span>↓</span>
+          </a>
+
+          <button onclick="copyEmailAddress()" class="btn-secondary-action">
+            <span>Copy Direct Email</span>
+          </button>
+
+          <div class="hero-social-links">
+            <a href="https://github.com/agrimsri" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="GitHub Profile">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/agrim-srivastava-26l" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="LinkedIn Profile">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 6a2 2 0 1 1-2-2 2 2 0 0 1 2 2z"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Interactive Portrait & Optical Chamber -->
+      <div class="hero-specimen-chamber">
+        <div class="specimen-frame-wrapper">
+          <div class="specimen-ambient-glow"></div>
+          <div class="specimen-card-container">
             
-            <!-- Frame Container -->
-            <div class="relative rounded-2xl overflow-hidden p-1.5 bg-gradient-to-b from-gold/40 via-white/10 to-gold/20 border border-gold/30 shadow-2xl">
-              <div class="relative w-64 h-80 sm:w-72 sm:h-96 rounded-xl overflow-hidden bg-obsidian-100">
-                <img src="./assets/profile.jpg" alt="Agrim Srivastava" class="w-full h-full object-cover object-top filter contrast-[1.03] group-hover:scale-105 transition-transform duration-500" />
-                
-                <!-- Bottom Glass Overlay Tag -->
-                <div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/90 via-black/60 to-transparent flex flex-col">
-                  <span class="font-cinzel text-xs tracking-widest text-gold-light uppercase font-semibold">Agrim Srivastava</span>
-                  <span class="text-[11px] text-gray-300 font-mono">Lucknow, India &bull; IIT Madras</span>
+            <!-- Corner Reticle Indicators -->
+            <div class="specimen-reticle tl"></div>
+            <div class="specimen-reticle tr"></div>
+            <div class="specimen-reticle bl"></div>
+            <div class="specimen-reticle br"></div>
+
+            <div class="specimen-media-view">
+              <img src="./assets/profile.jpg" alt="Agrim Srivastava portrait" class="specimen-image" />
+              
+              <div class="specimen-overlay-telemetry">
+                <span class="specimen-role-tag">Core Operator</span>
+                <span class="specimen-subject-name">Agrim Srivastava</span>
+                <span class="specimen-subtext">Lucknow, India &bull; IIT Madras BS Degree</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==================== SECTION: ARCHITECTURAL SPECIMEN DECK (PROJECTS) ==================== -->
+    <section id="projects" class="section-block">
+      
+      <div class="section-label-tape">01 &bull; ARCHITECTURAL SPECIMEN DECK</div>
+      
+      <div class="projects-header-row">
+        <div>
+          <h2 class="section-title">Engineered Systems &amp; Artifacts</h2>
+          <p class="section-subtitle">
+            Not a passive grid of screenshots. Inspect interactive architectural topologies, deterministic guardrail traces, and verified production metrics.
+          </p>
+        </div>
+
+        <!-- View Mode Switcher -->
+        <div class="view-mode-bar">
+          <button class="view-mode-btn active" data-mode="deck">Specimen Chamber</button>
+          <button class="view-mode-btn" data-mode="mosaic">Catalog Grid</button>
+        </div>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="category-filter-bar">
+        <button class="filter-pill-btn active" data-filter="all">
+          <span>All Systems</span>
+          <span class="pill-counter">7</span>
+        </button>
+        <button class="filter-pill-btn" data-filter="agentic">
+          <span>Agentic AI &amp; LLMs</span>
+          <span class="pill-counter">3</span>
+        </button>
+        <button class="filter-pill-btn" data-filter="distributed">
+          <span>Distributed Platforms</span>
+          <span class="pill-counter">2</span>
+        </button>
+        <button class="filter-pill-btn" data-filter="visualizer">
+          <span>Perception &amp; Math</span>
+          <span class="pill-counter">1</span>
+        </button>
+        <button class="filter-pill-btn" data-filter="systems">
+          <span>Compilers &amp; Tools</span>
+          <span class="pill-counter">1</span>
+        </button>
+      </div>
+
+      <!-- Split Specimen Deck Container -->
+      <div class="specimen-deck-container" id="specimen-deck-container">
+        <!-- Left: Index Column -->
+        <div class="specimen-index-column" id="specimen-index-column">
+          <!-- Injected dynamically via JS -->
+        </div>
+
+        <!-- Right: Active Specimen Stage -->
+        <div class="specimen-stage-chamber" id="specimen-stage-chamber">
+          <!-- Injected dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- Alternative Full Mosaic Grid View -->
+      <div class="projects-mosaic-grid" id="projects-mosaic-grid">
+        <!-- Injected dynamically via JS when 'Catalog Grid' is toggled -->
+      </div>
+
+    </section>
+
+    <!-- ==================== SECTION: THE CHRONICLE (EXPERIENCE) ==================== -->
+    <section id="experience" class="section-block">
+      
+      <div class="section-label-tape">02 &bull; OPERATIONAL MISSION LOG</div>
+
+      <h2 class="section-title">The Chronicle: Verified Engagements</h2>
+      <p class="section-subtitle" style="margin-bottom: 50px;">
+        High-responsibility technical roles across academic edge infrastructure, production startups, and pedagogy.
+      </p>
+
+      <div class="chronicle-container">
+
+        <!-- Role 1: TDS Teaching Assistant & Exam Administrator -->
+        <article class="chronicle-item">
+          <div class="chronicle-node-point"></div>
+          
+          <div class="chronicle-card">
+            <div class="chronicle-top-bar">
+              <div>
+                <h3 class="chronicle-role-title">Teaching Assistant &amp; Exam Administrator</h3>
+                <div class="chronicle-organization">
+                  <span>Tools in Data Science (TDS) &bull; Indian Institute of Technology Madras</span>
                 </div>
               </div>
+              <span class="chronicle-timeframe">May 2026 – Present &bull; Term 26T2 &amp; Term 26T3</span>
             </div>
 
-            <!-- Decorative corner brackets -->
-            <div class="absolute -top-2 -left-2 w-5 h-5 border-t-2 border-l-2 border-gold pointer-events-none"></div>
-            <div class="absolute -bottom-2 -right-2 w-5 h-5 border-b-2 border-r-2 border-gold pointer-events-none"></div>
+            <div class="chronicle-lead-instructor">
+              Co-administered under <strong>S. Anand</strong> (LLM Psychologist at Straive, Founder of Gramener)
+            </div>
+
+            <ul class="chronicle-bullet-list">
+              <li>
+                <strong>Exam Platform Administration (`sanand0/exam`):</strong> Hardcoded privileged Exam Admin across 19+ term exams and graded assignments on <strong>Cloudflare Workers, Durable Objects, SQLite archives, and Cloudflare Tunnels</strong>.
+              </li>
+              <li>
+                <strong>Adversarial Question Design &amp; Hardening:</strong> Engineered seed-randomized assessment questions and server-side evaluation logic (`a-*.js`) that dynamically defend high-stakes exams against automated heuristic LLM solvers via cryptographic check tokens.
+              </li>
+              <li>
+                <strong>Forensic Terminal Telemetry:</strong> Performed student terminal replay forensics via `termlog_review.py` to audit real-time keystrokes, execution workflows, and solve-time anomalies across thousands of candidates.
+              </li>
+              <li>
+                <strong>Curriculum Co-Teaching:</strong> Mentored cohorts on bleeding-edge topics: Model Context Protocol (WebMCP), local LLM inference (vLLM, llama.cpp, Ollama quantization), prompt caching, and FastAPI container deployments.
+              </li>
+            </ul>
+
+            <div class="chronicle-proof-row">
+              <a href="https://tds.s-anand.net/" target="_blank" rel="noopener noreferrer" class="proof-link-pill">
+                <span>Official TA Roster (tds.s-anand.net)</span> ↗
+              </a>
+              <a href="https://github.com/sanand0/exam" target="_blank" rel="noopener noreferrer" class="proof-link-pill">
+                <span>Exam Admin Repository (sanand0/exam)</span> ↗
+              </a>
+              <span class="proof-link-pill" style="color:var(--accent-emerald);">
+                <span>Verified Active Term 26T3</span>
+              </span>
+            </div>
           </div>
-        </div>
+        </article>
 
-      </div>
-    </section>
-
-    <!-- SECTION: ABOUT & EDUCATION -->
-    <section id="about" class="py-16 border-b border-white/5">
-      <div class="flex items-center gap-3 mb-8">
-        <span class="font-mono text-xs uppercase tracking-widest text-gold font-semibold">01 &bull; Profile</span>
-        <div class="h-px bg-white/10 flex-grow"></div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-        <div class="md:col-span-5 space-y-4">
-          <h2 class="font-cinzel text-3xl sm:text-4xl font-bold text-white">Engineering With Precision</h2>
-          <p class="text-gray-300 leading-relaxed font-light text-sm sm:text-base">
-            I am driven by complex systems engineering — whether coordinating autonomous multi-agent teams with LangGraph, fusing LiDAR and camera streams under ROS 2 for off-road navigation, or crafting deterministic full-stack web platforms.
-          </p>
-          <p class="text-gray-400 leading-relaxed text-sm">
-            Currently pursuing my Bachelor of Science in Data Science and Applications at the prestigious <strong class="text-gray-200">Indian Institute of Technology Madras</strong> while building open-source projects, contributing to production systems, and teaching Probability & Statistics.
-          </p>
-        </div>
-
-        <div class="md:col-span-7 space-y-4">
-          <!-- Education Card -->
-          <div class="glass-card p-6 rounded-2xl relative overflow-hidden">
-            <div class="flex items-start justify-between gap-4">
+        <!-- Role 2: SDE Intern annam.ai -->
+        <article class="chronicle-item">
+          <div class="chronicle-node-point"></div>
+          
+          <div class="chronicle-card">
+            <div class="chronicle-top-bar">
               <div>
-                <span class="inline-block px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-gold/10 text-gold-light border border-gold/20 mb-2">
-                  Sept 2023 – Sept 2027
-                </span>
-                <h3 class="font-cinzel text-xl font-bold text-white">Indian Institute of Technology Madras</h3>
-                <p class="text-gold-light text-sm font-medium mt-0.5">BS in Data Science and Applications</p>
+                <h3 class="chronicle-role-title">Software Development Engineer Intern</h3>
+                <div class="chronicle-organization">
+                  <span>annam.ai &bull; Remote</span>
+                </div>
               </div>
-              <div class="text-right">
-                <span class="font-mono text-2xl font-bold text-white">9.1</span>
-                <span class="block text-[11px] font-mono text-gray-400">/ 10.0 GPA</span>
-              </div>
+              <span class="chronicle-timeframe">Jan 2026 – Apr 2026</span>
             </div>
 
-            <div class="mt-4 pt-4 border-t border-white/5 space-y-2 text-xs text-gray-300">
-              <p><strong class="text-gold-light font-mono">Core Coursework:</strong> Modern Application Development, Machine Learning, Data Structures & Algorithms, Database Management Systems (DBMS), Linux Systems & Shell Commands.</p>
-              <p><strong class="text-gold-light font-mono">Academic Service:</strong> Appointed Teaching Assistant for undergraduate Probability & Statistics cohort.</p>
+            <ul class="chronicle-bullet-list">
+              <li>
+                <strong>Security &amp; RBAC Hardening:</strong> Eliminated critical room-termination and unauthorized state manipulation vulnerabilities by overhauling session authentication and role validation filters in production.
+              </li>
+              <li>
+                <strong>Live Transcript Question Pipeline:</strong> Engineered a real-time interval question generation engine from live meeting audio transcripts, enabling dynamic interactive polling during student sessions.
+              </li>
+              <li>
+                <strong>Production React Dashboards:</strong> Architected instructor command cockpit using <strong>React</strong> (Vite, Zustand, TanStack Router, TanStack Query), replacing sluggish legacy interfaces with sub-100ms transitions.
+              </li>
+              <li>
+                <strong>Full-Stack Backend Integration:</strong> Authored backend services across <strong>Node.js, Express, MongoDB, and Firebase Admin</strong> with strict Git-flow discipline and automated linting.
+              </li>
+            </ul>
+
+            <div class="chronicle-proof-row">
+              <span class="proof-link-pill">
+                <span>Production Experience Verified</span>
+              </span>
+              <span class="proof-link-pill">
+                <span>Feature: Dynamic Transcript Polling</span>
+              </span>
             </div>
           </div>
-        </div>
+        </article>
+
+        <!-- Role 3: Tech Intern study-iitm Portal -->
+        <article class="chronicle-item">
+          <div class="chronicle-node-point"></div>
+          
+          <div class="chronicle-card">
+            <div class="chronicle-top-bar">
+              <div>
+                <h3 class="chronicle-role-title">Tech Intern — Portal Architecture</h3>
+                <div class="chronicle-organization">
+                  <span>Indian Institute of Technology Madras &bull; Chennai, India</span>
+                </div>
+              </div>
+              <span class="chronicle-timeframe">2026</span>
+            </div>
+
+            <ul class="chronicle-bullet-list">
+              <li>
+                Contributed to the modern portal architecture and microsites for the official IIT Madras BS student ecosystem (`study-iitm`).
+              </li>
+              <li>
+                Cleaned semantic markup, improved responsiveness across mobile viewports, and integrated consistent navigation layouts.
+              </li>
+            </ul>
+
+            <div class="chronicle-proof-row">
+              <span class="proof-link-pill">
+                <span>IIT Madras Official Microsite Team</span>
+              </span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Role 4: Teaching Assistant — Probability & Statistics -->
+        <article class="chronicle-item">
+          <div class="chronicle-node-point"></div>
+          
+          <div class="chronicle-card">
+            <div class="chronicle-top-bar">
+              <div>
+                <h3 class="chronicle-role-title">Teaching Assistant — Probability &amp; Statistics</h3>
+                <div class="chronicle-organization">
+                  <span>Indian Institute of Technology Madras &bull; Chennai, India</span>
+                </div>
+              </div>
+              <span class="chronicle-timeframe">Oct 2025 – Apr 2026</span>
+            </div>
+
+            <ul class="chronicle-bullet-list">
+              <li>
+                Mentored undergraduate cohorts through weekly problem-solving labs, breaking down random variables, expectation bounds, and hypothesis testing.
+              </li>
+              <li>
+                Triaged hundreds of Discourse queries at scale, delivering structured conceptual explanations and resolving edge-case grading disputes.
+              </li>
+            </ul>
+
+            <div class="chronicle-proof-row">
+              <span class="proof-link-pill" style="color:var(--accent-gold);">
+                <span>Academic Record: Stats II Grade S</span>
+              </span>
+            </div>
+          </div>
+        </article>
+
       </div>
+
     </section>
 
-    <!-- SECTION: FEATURED PROJECTS -->
-    <section id="projects" class="py-16 border-b border-white/5">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
-        <div>
-          <span class="font-mono text-xs uppercase tracking-widest text-gold font-semibold">02 &bull; Engineering Odyssey</span>
-          <h2 class="font-cinzel text-3xl sm:text-4xl font-bold text-white mt-1">Featured Projects</h2>
-        </div>
-        <p class="text-xs text-gray-400 font-mono">Curated selection from 30+ repositories</p>
-      </div>
+    <!-- ==================== SECTION: SKILL REGISTER & EVIDENCE MATRIX ==================== -->
+    <section id="skills" class="section-block">
+      
+      <div class="section-label-tape">03 &bull; EVIDENCE-BACKED SKILL MATRIX</div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-        <!-- PROJECT 1: NUTRIAGENT -->
-        <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group transition-all duration-300">
-          <div class="p-6 sm:p-7 space-y-4">
-            
-            <div class="flex items-center justify-between gap-2">
-              <span class="px-2.5 py-1 rounded-md text-[10px] font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                100% Deterministic &bull; ₹0 API Cost
-              </span>
-              <a href="https://github.com/agrimsri/nutri_agent" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-white/5 hover:bg-gold/20 text-gray-300 hover:text-gold transition">
-                <i data-lucide="github" class="w-4 h-4"></i>
-              </a>
-            </div>
-
-            <div>
-              <h3 class="font-cinzel text-2xl font-bold text-white group-hover:text-gold-light transition">
-                NutriAgent
-              </h3>
-              <p class="text-xs font-mono text-gold-light/90 mt-0.5">Multi-Agent RAG Nutrition Coach & Vision Pipeline</p>
-            </div>
-
-            <p class="text-gray-300 text-sm leading-relaxed font-light">
-              Production-grade multimodal nutrition tracking system combining LangGraph multi-agent orchestration, Gemini Vision dish decomposition, and pgvector semantic retrieval over 570+ verified ICMR-NIN/USDA food records.
-            </p>
-
-            <!-- Metrics Highlight -->
-            <div class="p-3 rounded-xl bg-black/40 border border-white/5 space-y-1.5 text-xs font-mono text-gray-300">
-              <div class="flex items-center gap-2 text-emerald-400">
-                <i data-lucide="check" class="w-3.5 h-3.5"></i>
-                <span>Calorie MAPE Error: Reduced 32.3% &rarr; 0.0%</span>
-              </div>
-              <div class="flex items-center gap-2 text-gray-300">
-                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-gold"></i>
-                <span>AST-validated read-only SQL safety guards</span>
-              </div>
-              <div class="flex items-center gap-2 text-gray-300">
-                <i data-lucide="cpu" class="w-3.5 h-3.5 text-gold"></i>
-                <span>254 / 254 test suite passing (100% coverage)</span>
-              </div>
-            </div>
-
-            <!-- Tech Badges -->
-            <div class="flex flex-wrap gap-1.5 pt-1">
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">LangGraph</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Gemini Vision</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Supabase pgvector</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">FastAPI</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Docker</span>
-            </div>
-
-          </div>
-
-          <div class="px-6 py-4 bg-white/[0.02] border-t border-white/5 flex items-center justify-between">
-            <span class="text-xs text-gray-400 font-mono">Python / Multi-Agent</span>
-            <a href="https://github.com/agrimsri/nutri_agent" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-gold hover:text-gold-light transition">
-              <span>View Repository</span>
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- PROJECT 2: TERRASEM -->
-        <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group transition-all duration-300">
-          <div class="p-6 sm:p-7 space-y-4">
-            
-            <div class="flex items-center justify-between gap-2">
-              <span class="px-2.5 py-1 rounded-md text-[10px] font-mono font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                ROS 2 Humble &bull; Live HuggingFace Demo
-              </span>
-              <div class="flex items-center gap-1.5">
-                <a href="https://huggingface.co/spaces/agrimsri/terrasem" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-white/5 hover:bg-gold/20 text-gray-300 hover:text-gold transition" title="Live Demo">
-                  <i data-lucide="external-link" class="w-4 h-4"></i>
-                </a>
-                <a href="https://github.com/agrimsri/TerraSem" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-white/5 hover:bg-gold/20 text-gray-300 hover:text-gold transition" title="GitHub">
-                  <i data-lucide="github" class="w-4 h-4"></i>
-                </a>
-              </div>
-            </div>
-
-            <!-- Preview Image -->
-            <div class="rounded-xl overflow-hidden border border-white/10 max-h-44 relative bg-black">
-              <img src="./assets/terrasem-preview.png" alt="TerraSem Traversability Mapping" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-            </div>
-
-            <div>
-              <h3 class="font-cinzel text-2xl font-bold text-white group-hover:text-gold-light transition">
-                TerraSem
-              </h3>
-              <p class="text-xs font-mono text-gold-light/90 mt-0.5">Uncertainty-Aware Semantic Occupancy Mapping</p>
-            </div>
-
-            <p class="text-gray-300 text-sm leading-relaxed font-light">
-              Fuses camera imagery and 3D LiDAR into an intelligent 3D Bayesian Voxel Grid. Calculates epistemic uncertainty so off-road robots safely inflate danger when traversing fog, rain, or deceptive vegetation.
-            </p>
-
-            <!-- Tech Badges -->
-            <div class="flex flex-wrap gap-1.5 pt-1">
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">ROS 2 Humble</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">3D LiDAR + Camera</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Bayesian Voxels</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Docker GHCR</span>
-            </div>
-
-          </div>
-
-          <div class="px-6 py-4 bg-white/[0.02] border-t border-white/5 flex items-center justify-between">
-            <span class="text-xs text-gray-400 font-mono">Robotics Perception</span>
-            <div class="flex items-center gap-3">
-              <a href="https://huggingface.co/spaces/agrimsri/terrasem" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-gold hover:text-gold-light transition">
-                <span>Try Web Demo</span>
-                <i data-lucide="play" class="w-3.5 h-3.5"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- PROJECT 3: TUTORSOLVE -->
-        <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group transition-all duration-300">
-          <div class="p-6 sm:p-7 space-y-4">
-            
-            <div class="flex items-center justify-between gap-2">
-              <span class="px-2.5 py-1 rounded-md text-[10px] font-mono font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20">
-                Full-Stack Marketplace Platform
-              </span>
-              <a href="https://github.com/agrimsri/tutorsolve-website" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-white/5 hover:bg-gold/20 text-gray-300 hover:text-gold transition">
-                <i data-lucide="github" class="w-4 h-4"></i>
-              </a>
-            </div>
-
-            <div>
-              <h3 class="font-cinzel text-2xl font-bold text-white group-hover:text-gold-light transition">
-                TutorSolve
-              </h3>
-              <p class="text-xs font-mono text-gold-light/90 mt-0.5">4-Role Assignment Marketplace & Real-Time Chat</p>
-            </div>
-
-            <p class="text-gray-300 text-sm leading-relaxed font-light">
-              High-concurrency marketplace with isolated Socket.IO chat rooms, multi-phase order lifecycle (Maker-Checker price approval, Stripe escrow split-payments, 25% preview lock until payment), and KYC verification.
-            </p>
-
-            <div class="flex flex-wrap gap-1.5 pt-1">
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Flask REST APIs</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Flask-SocketIO</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">MongoDB Atlas</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Stripe Escrow</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">JWT RBAC</span>
-            </div>
-
-          </div>
-
-          <div class="px-6 py-4 bg-white/[0.02] border-t border-white/5 flex items-center justify-between">
-            <span class="text-xs text-gray-400 font-mono">Full-Stack / WebSockets</span>
-            <a href="https://github.com/agrimsri/tutorsolve-website" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-gold hover:text-gold-light transition">
-              <span>View Code</span>
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- PROJECT 4: EM-ALGORITHM VISUALIZER -->
-        <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group transition-all duration-300">
-          <div class="p-6 sm:p-7 space-y-4">
-            
-            <div class="flex items-center justify-between gap-2">
-              <span class="px-2.5 py-1 rounded-md text-[10px] font-mono font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">
-                Interactive Vercel Deployment
-              </span>
-              <div class="flex items-center gap-1.5">
-                <a href="https://em-algorithm-visualizer.vercel.app" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-white/5 hover:bg-gold/20 text-gray-300 hover:text-gold transition" title="Live Site">
-                  <i data-lucide="external-link" class="w-4 h-4"></i>
-                </a>
-                <a href="https://github.com/agrimsri/EM-Algorithm-Visualizer" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-white/5 hover:bg-gold/20 text-gray-300 hover:text-gold transition" title="GitHub">
-                  <i data-lucide="github" class="w-4 h-4"></i>
-                </a>
-              </div>
-            </div>
-
-            <div>
-              <h3 class="font-cinzel text-2xl font-bold text-white group-hover:text-gold-light transition">
-                EM Algorithm Visualizer
-              </h3>
-              <p class="text-xs font-mono text-gold-light/90 mt-0.5">Expectation-Maximization Mathematical Visualizer</p>
-            </div>
-
-            <p class="text-gray-300 text-sm leading-relaxed font-light">
-              Interactive browser tool to simulate and visualize Gaussian Mixture Models (GMM) and Expectation-Maximization step iterations dynamically on custom 2D data distributions.
-            </p>
-
-            <div class="flex flex-wrap gap-1.5 pt-1">
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">JavaScript Canvas</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">GMM & Probability</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Vercel</span>
-            </div>
-
-          </div>
-
-          <div class="px-6 py-4 bg-white/[0.02] border-t border-white/5 flex items-center justify-between">
-            <span class="text-xs text-gray-400 font-mono">Data Science & Math</span>
-            <a href="https://em-algorithm-visualizer.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-gold hover:text-gold-light transition">
-              <span>Launch Visualizer</span>
-              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- PROJECT 5: RAG COURSE TA -->
-        <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group transition-all duration-300">
-          <div class="p-6 sm:p-7 space-y-4">
-            
-            <div class="flex items-center justify-between gap-2">
-              <span class="px-2.5 py-1 rounded-md text-[10px] font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                Multimodal RAG &bull; IIT Madras
-              </span>
-              <a href="https://github.com/agrimsri/Teaching-Assistant-RAG-Implementation" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-white/5 hover:bg-gold/20 text-gray-300 hover:text-gold transition">
-                <i data-lucide="github" class="w-4 h-4"></i>
-              </a>
-            </div>
-
-            <div>
-              <h3 class="font-cinzel text-2xl font-bold text-white group-hover:text-gold-light transition">
-                Course TA RAG Implementation
-              </h3>
-              <p class="text-xs font-mono text-gold-light/90 mt-0.5">Intelligent Forum Question Answering Assistant</p>
-            </div>
-
-            <p class="text-gray-300 text-sm leading-relaxed font-light">
-              End-to-end multimodal RAG system trained on IIT Madras academic discourse. Integrates FastAPI with local Ollama embeddings and Gemini for multimodal question resolution with compressed cosine indexing.
-            </p>
-
-            <div class="flex flex-wrap gap-1.5 pt-1">
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">FastAPI</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Gemini Multimodal</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Ollama</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Web Scraping</span>
-            </div>
-
-          </div>
-
-          <div class="px-6 py-4 bg-white/[0.02] border-t border-white/5 flex items-center justify-between">
-            <span class="text-xs text-gray-400 font-mono">NLP / RAG Systems</span>
-            <a href="https://github.com/agrimsri/Teaching-Assistant-RAG-Implementation" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-gold hover:text-gold-light transition">
-              <span>View Code</span>
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- PROJECT 6: HAVENLY -->
-        <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group transition-all duration-300">
-          <div class="p-6 sm:p-7 space-y-4">
-            
-            <div class="flex items-center justify-between gap-2">
-              <span class="px-2.5 py-1 rounded-md text-[10px] font-mono font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">
-                Service Marketplace Architecture
-              </span>
-              <a href="https://github.com/agrimsri/Household-Application" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-white/5 hover:bg-gold/20 text-gray-300 hover:text-gold transition">
-                <i data-lucide="github" class="w-4 h-4"></i>
-              </a>
-            </div>
-
-            <!-- Preview Image -->
-            <div class="rounded-xl overflow-hidden border border-white/10 max-h-44 relative bg-black">
-              <img src="./assets/havenly-preview.jpg" alt="Havenly Household Services" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-            </div>
-
-            <div>
-              <h3 class="font-cinzel text-2xl font-bold text-white group-hover:text-gold-light transition">
-                Havenly
-              </h3>
-              <p class="text-xs font-mono text-gold-light/90 mt-0.5">Household Services Multirole Management Platform</p>
-            </div>
-
-            <p class="text-gray-300 text-sm leading-relaxed font-light">
-              Multirole household service application (Flask + Vue.js + Pinia) with Redis/Celery background task queuing for heavy operations and granular role-based authentication.
-            </p>
-
-            <div class="flex flex-wrap gap-1.5 pt-1">
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Flask REST</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Vue.js + Pinia</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Redis</span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-gray-300 border border-white/5">Celery</span>
-            </div>
-
-          </div>
-
-          <div class="px-6 py-4 bg-white/[0.02] border-t border-white/5 flex items-center justify-between">
-            <span class="text-xs text-gray-400 font-mono">Distributed Workers</span>
-            <a href="https://github.com/agrimsri/Household-Application" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-gold hover:text-gold-light transition">
-              <span>View Code</span>
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </a>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- View More on GitHub Callout -->
-      <div class="mt-10 p-6 rounded-2xl border border-dashed border-white/10 text-center bg-white/[0.01]">
-        <p class="text-sm text-gray-300">
-          Interested in more? Explore my other open-source tools, kernel investigations, and ML experiments on GitHub.
+      <div class="skills-matrix-intro">
+        <h2 class="section-title">Demonstrated Capabilities</h2>
+        <p class="section-subtitle">
+          Directly backed by verified coursework grades, production deployments, and course leadership.
         </p>
-        <a href="https://github.com/agrimsri?tab=repositories" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-3 text-xs font-mono font-semibold text-gold hover:text-gold-light">
-          <i data-lucide="folder-git-2" class="w-4 h-4"></i>
-          <span>View all 30+ repositories on GitHub &rarr;</span>
-        </a>
       </div>
 
-    </section>
-
-    <!-- SECTION: EXPERIENCE & LEADERSHIP -->
-    <section id="experience" class="py-16 border-b border-white/5">
-      <div class="flex items-center gap-3 mb-10">
-        <span class="font-mono text-xs uppercase tracking-widest text-gold font-semibold">03 &bull; Chronicles</span>
-        <div class="h-px bg-white/10 flex-grow"></div>
+      <!-- Domain Filters -->
+      <div class="skills-filter-tags">
+        <button class="skill-tag-filter active" data-domain="all">All Disciplines</button>
+        <button class="skill-tag-filter" data-domain="ai">AI &amp; Agent Protocols</button>
+        <button class="skill-tag-filter" data-domain="systems">Systems &amp; Evals</button>
+        <button class="skill-tag-filter" data-domain="web">Full-Stack &amp; Distributed</button>
+        <button class="skill-tag-filter" data-domain="data">Math &amp; Data Engineering</button>
       </div>
 
-      <h2 class="font-cinzel text-3xl sm:text-4xl font-bold text-white mb-8">Professional Experience</h2>
-
-      <div class="relative pl-6 sm:pl-8 border-l border-gold/30 space-y-12">
-
-        <!-- EXPERIENCE 1: annam.ai -->
-        <div class="relative group">
-          <!-- Timeline Node Point -->
-          <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-[#0A0A0D] border-2 border-gold group-hover:scale-125 transition-transform duration-200">
-            <div class="w-1.5 h-1.5 rounded-full bg-gold mx-auto my-auto mt-0.5"></div>
-          </div>
-
-          <div class="glass-card p-6 rounded-2xl space-y-3">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-              <div>
-                <h3 class="font-cinzel text-xl font-bold text-white">Software Development Engineer Intern</h3>
-                <p class="text-gold-light text-sm font-semibold">annam.ai &bull; Remote</p>
-              </div>
-              <span class="inline-block px-2.5 py-1 rounded font-mono text-xs text-gray-400 bg-white/5 border border-white/5 self-start sm:self-auto">
-                Jan 2026 – Mar 2026
-              </span>
-            </div>
-
-            <ul class="space-y-2 text-sm text-gray-300 font-light list-disc list-inside">
-              <li>Hardened authentication and RBAC flows, eliminating critical security vulnerabilities in the production system.</li>
-              <li>Engineered a real-time question generation pipeline from live transcripts, enabling dynamic context-aware student interaction.</li>
-              <li>Architected and shipped production dashboards in <strong class="text-white font-normal">React</strong> (Vite, Zustand, React Query, TanStack Router), accelerating instructor workflows.</li>
-              <li>Contributed across the full backend stack (<strong class="text-white font-normal">Node.js, Express, MongoDB, Firebase Admin</strong>), delivering production features via disciplined Git workflows.</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- EXPERIENCE 2: IIT Madras TA -->
-        <div class="relative group">
-          <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-[#0A0A0D] border-2 border-gold group-hover:scale-125 transition-transform duration-200">
-            <div class="w-1.5 h-1.5 rounded-full bg-gold mx-auto my-auto mt-0.5"></div>
-          </div>
-
-          <div class="glass-card p-6 rounded-2xl space-y-3">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-              <div>
-                <h3 class="font-cinzel text-xl font-bold text-white">Teaching Assistant — Probability & Statistics</h3>
-                <p class="text-gold-light text-sm font-semibold">Indian Institute of Technology Madras &bull; Chennai, India</p>
-              </div>
-              <span class="inline-block px-2.5 py-1 rounded font-mono text-xs text-gray-400 bg-white/5 border border-white/5 self-start sm:self-auto">
-                Oct 2025 – Apr 2026
-              </span>
-            </div>
-
-            <ul class="space-y-2 text-sm text-gray-300 font-light list-disc list-inside">
-              <li>Mentored undergraduate cohorts through weekly problem-solving labs, distilling complex probability and statistics concepts into approachable frameworks.</li>
-              <li>Triaged and resolved hundreds of student queries on Discourse at scale, measurably boosting conceptual clarity across the cohort.</li>
-              <li>Graded assignments and delivered structured, actionable feedback that guided student improvement.</li>
-            </ul>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECTION: TECHNICAL SKILLS -->
-    <section id="skills" class="py-16 border-b border-white/5">
-      <div class="flex items-center gap-3 mb-10">
-        <span class="font-mono text-xs uppercase tracking-widest text-gold font-semibold">04 &bull; Capabilities</span>
-        <div class="h-px bg-white/10 flex-grow"></div>
-      </div>
-
-      <h2 class="font-cinzel text-3xl sm:text-4xl font-bold text-white mb-8">Technical Arsenal</h2>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-        <!-- Category 1: AI & ML Systems -->
-        <div class="glass-card p-6 rounded-2xl space-y-3">
-          <div class="w-10 h-10 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold">
-            <i data-lucide="brain-circuit" class="w-5 h-5"></i>
-          </div>
-          <h3 class="font-cinzel text-lg font-bold text-white">AI & ML Systems</h3>
-          <ul class="text-xs font-mono text-gray-300 space-y-1.5">
-            <li>&bull; Multi-Agent (LangGraph)</li>
-            <li>&bull; Multimodal RAG Pipelines</li>
-            <li>&bull; Gemini Vision & LLM APIs</li>
-            <li>&bull; ROS 2 Robotics (Humble)</li>
-            <li>&bull; 3D Bayesian Occupancy</li>
-            <li>&bull; Vector Search (MiniLM, pgvector)</li>
-          </ul>
-        </div>
-
-        <!-- Category 2: Backend & Systems -->
-        <div class="glass-card p-6 rounded-2xl space-y-3">
-          <div class="w-10 h-10 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold">
-            <i data-lucide="server" class="w-5 h-5"></i>
-          </div>
-          <h3 class="font-cinzel text-lg font-bold text-white">Backend & Core</h3>
-          <ul class="text-xs font-mono text-gray-300 space-y-1.5">
-            <li>&bull; FastAPI & Flask</li>
-            <li>&bull; Node.js & Express</li>
-            <li>&bull; WebSockets / Socket.IO</li>
-            <li>&bull; Python & JavaScript</li>
-            <li>&bull; Redis & Celery Workers</li>
-            <li>&bull; AST Security Guardrails</li>
-          </ul>
-        </div>
-
-        <!-- Category 3: Frontend & UI -->
-        <div class="glass-card p-6 rounded-2xl space-y-3">
-          <div class="w-10 h-10 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold">
-            <i data-lucide="layout" class="w-5 h-5"></i>
-          </div>
-          <h3 class="font-cinzel text-lg font-bold text-white">Frontend & UI</h3>
-          <ul class="text-xs font-mono text-gray-300 space-y-1.5">
-            <li>&bull; React (Vite, Zustand)</li>
-            <li>&bull; TanStack Router & Query</li>
-            <li>&bull; Vue.js & Pinia</li>
-            <li>&bull; Tailwind CSS</li>
-            <li>&bull; HTML5 Canvas / Modern Web</li>
-            <li>&bull; Responsive UX Design</li>
-          </ul>
-        </div>
-
-        <!-- Category 4: Data & Cloud -->
-        <div class="glass-card p-6 rounded-2xl space-y-3">
-          <div class="w-10 h-10 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold">
-            <i data-lucide="database" class="w-5 h-5"></i>
-          </div>
-          <h3 class="font-cinzel text-lg font-bold text-white">Data & DevOps</h3>
-          <ul class="text-xs font-mono text-gray-300 space-y-1.5">
-            <li>&bull; PostgreSQL & Supabase</li>
-            <li>&bull; MongoDB Atlas & SQLite</li>
-            <li>&bull; Docker & Containerization</li>
-            <li>&bull; Git & GitHub Actions CI</li>
-            <li>&bull; Linux / Bash Scripting</li>
-            <li>&bull; Firebase Admin & Stripe</li>
-          </ul>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECTION: CONTACT & CONNECT -->
-    <section id="contact" class="py-20">
-      <div class="glass-card p-8 sm:p-12 rounded-3xl relative overflow-hidden text-center max-w-4xl mx-auto border border-gold/30">
+      <!-- Cards Grid -->
+      <div class="skills-cards-grid">
         
-        <!-- Subtle background glow inside card -->
-        <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-80 h-80 bg-gold/15 rounded-full blur-3xl pointer-events-none"></div>
+        <!-- Skill 1 -->
+        <div class="skill-evidence-card" data-domain="ai">
+          <div class="skill-card-top">
+            <span class="skill-name">Agent Protocols &amp; WebMCP</span>
+            <span class="skill-status-tag demonstrated">Demonstrated</span>
+          </div>
+          <p class="skill-evidence-text">
+            Model Context Protocol (WebMCP), agent-to-agent durable delegation, budget loops, and execution tool guardrails.
+          </p>
+          <div class="skill-course-badge">
+            <span>Proof: TDS TA &amp; NutriAgent multi-agent routing</span>
+          </div>
+        </div>
 
-        <span class="font-mono text-xs uppercase tracking-widest text-gold font-semibold">05 &bull; Inquiries</span>
-        <h2 class="font-cinzel text-3xl sm:text-5xl font-bold text-white mt-2 mb-4">
-          Let's Build Something Exceptional
-        </h2>
+        <!-- Skill 2 -->
+        <div class="skill-evidence-card" data-domain="ai">
+          <div class="skill-card-top">
+            <span class="skill-name">Local LLMs &amp; Serving</span>
+            <span class="skill-status-tag demonstrated">Demonstrated</span>
+          </div>
+          <p class="skill-evidence-text">
+            Quantization (GGUF/AWQ), latency benchmarks, and local model serving on vLLM, llama.cpp, and Ollama.
+          </p>
+          <div class="skill-course-badge">
+            <span>Proof: TDS TA Week 2 curriculum co-teaching</span>
+          </div>
+        </div>
+
+        <!-- Skill 3 -->
+        <div class="skill-evidence-card" data-domain="systems">
+          <div class="skill-card-top">
+            <span class="skill-name">Adversarial Evals &amp; Forensics</span>
+            <span class="skill-status-tag strong-evidence">Strong Evidence</span>
+          </div>
+          <p class="skill-evidence-text">
+            Defending high-stakes exams against heuristic LLM solvers, seed randomization, and terminal replay forensics (`termlog_review.py`).
+          </p>
+          <div class="skill-course-badge">
+            <span>Proof: TDS Exam Admin (19+ exams) &amp; Software Testing Grade A</span>
+          </div>
+        </div>
+
+        <!-- Skill 4 -->
+        <div class="skill-evidence-card" data-domain="systems">
+          <div class="skill-card-top">
+            <span class="skill-name">Edge Compute &amp; Serverless</span>
+            <span class="skill-status-tag demonstrated">Demonstrated</span>
+          </div>
+          <p class="skill-evidence-text">
+            Cloudflare Workers, Durable Objects, zero-trust Cloudflare Tunnels, and distributed SQLite archives.
+          </p>
+          <div class="skill-course-badge">
+            <span>Proof: TDS Exam Platform (`sanand0/exam`)</span>
+          </div>
+        </div>
+
+        <!-- Skill 5 -->
+        <div class="skill-evidence-card" data-domain="web">
+          <div class="skill-card-top">
+            <span class="skill-name">Python &amp; Modern CLI Tooling</span>
+            <span class="skill-status-tag strong-evidence">Strong Evidence</span>
+          </div>
+          <p class="skill-evidence-text">
+            Fast packaging with `uv`/`uvx`, PEP 723 single-file metadata, and 45+ open repositories.
+          </p>
+          <div class="skill-course-badge">
+            <span>Proof: Programming in Python (Grade S), PDSA (Grade A)</span>
+          </div>
+        </div>
+
+        <!-- Skill 6 -->
+        <div class="skill-evidence-card" data-domain="web">
+          <div class="skill-card-top">
+            <span class="skill-name">Vue.js &amp; Reactive Frontend</span>
+            <span class="skill-status-tag strong-evidence">Strong Evidence</span>
+          </div>
+          <p class="skill-evidence-text">
+            Reactive SPAs, Pinia store architecture, role-based route guards, and component design systems.
+          </p>
+          <div class="skill-course-badge">
+            <span>Proof: MAD II Capstone Project (Grade S - 10/10)</span>
+          </div>
+        </div>
+
+        <!-- Skill 7 -->
+        <div class="skill-evidence-card" data-domain="web">
+          <div class="skill-card-top">
+            <span class="skill-name">Celery &amp; Redis Queues</span>
+            <span class="skill-status-tag demonstrated">Demonstrated</span>
+          </div>
+          <p class="skill-evidence-text">
+            Periodic beat schedules, asynchronous background CSV exports, caching, and worker failover handling.
+          </p>
+          <div class="skill-course-badge">
+            <span>Proof: Household-Application &amp; MAD I Project (Grade S)</span>
+          </div>
+        </div>
+
+        <!-- Skill 8 -->
+        <div class="skill-evidence-card" data-domain="data">
+          <div class="skill-card-top">
+            <span class="skill-name">Probability &amp; Mathematical Stats</span>
+            <span class="skill-status-tag strong-evidence">Strong Evidence</span>
+          </div>
+          <p class="skill-evidence-text">
+            Hypothesis testing, regression bounds, Bayesian parameter estimation, and cohort lab leadership.
+          </p>
+          <div class="skill-course-badge">
+            <span>Proof: Stats I (Grade A), Stats II (Grade S), IITM TA Role</span>
+          </div>
+        </div>
+
+        <!-- Skill 9 -->
+        <div class="skill-evidence-card" data-domain="systems">
+          <div class="skill-card-top">
+            <span class="skill-name">Linux Systems &amp; Shell</span>
+            <span class="skill-status-tag strong-evidence">Strong Evidence</span>
+          </div>
+          <p class="skill-evidence-text">
+            Shell automation, headless server maintenance, permissions security, and kernel panic diagnostic utilities.
+          </p>
+          <div class="skill-course-badge">
+            <span>Proof: System Commands (Grade S - Highest Academic Distinction)</span>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ==================== SECTION: INTERACTIVE EXPECTATION-MAXIMIZATION SANDBOX ==================== -->
+    <section id="sandbox" class="section-block">
+      
+      <div class="section-label-tape">04 &bull; LIVE MATHEMATICAL SIMULATION</div>
+
+      <h2 class="section-title">Expectation-Maximization Sandbox</h2>
+      <p class="section-subtitle" style="margin-bottom: 30px;">
+        Click anywhere on the canvas to inject 2D sample points, then step through Gaussian Mixture Model (GMM) iterations to observe covariance contours adaptively converge.
+      </p>
+
+      <div class="sandbox-card">
+        <div class="sandbox-controls-row">
+          <div class="sandbox-btn-group">
+            <button class="sandbox-btn btn-run" id="em-btn-step">Run EM Step Iteration →</button>
+            <button class="sandbox-btn btn-reset" id="em-btn-reset">Re-randomize Priors</button>
+          </div>
+          <div class="sandbox-telemetry-readout" id="em-telemetry-readout">
+            Iteration: 0 | Points: 55 | K = 2 Components
+          </div>
+        </div>
+
+        <div class="canvas-container-outer">
+          <canvas id="dedicated-em-canvas"></canvas>
+          <div class="sandbox-canvas-hint">Click on canvas to add 2D data points</div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==================== SECTION: CONTACT & CONNECT ==================== -->
+    <section id="contact" class="section-block" style="border-bottom:none;">
+      
+      <div class="contact-manifesto-box">
+        <div class="section-label-tape" style="justify-content:center; margin-bottom:12px;">05 &bull; INQUIRIES &amp; DIALOGUE</div>
         
-        <p class="text-gray-300 text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-light mb-8">
-          Whether you have an ambitious software project, an AI research collaboration, or an engineering role, my inbox is always open.
+        <h2 class="contact-title">Let's discuss systems that matter.</h2>
+        
+        <p class="contact-text">
+          I'm open to Software Engineering (SWE), Applied AI / Agent Systems, and high-impact infrastructure roles. 
+          If you are building products where correctness, resilience, and architectural discipline are valued, my inbox is open.
         </p>
 
-        <!-- Direct Action Bar -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="mailto:agrimsri26@gmail.com" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-gold hover:bg-gold-light text-[#0A0A0D] font-bold text-sm transition-all duration-200 shadow-xl shadow-gold/20 hover:scale-[1.02]">
-            <i data-lucide="mail" class="w-4 h-4"></i>
+        <div class="contact-actions-row">
+          <a href="mailto:agrimsri26@gmail.com" class="btn-email-primary">
             <span>agrimsri26@gmail.com</span>
           </a>
 
-          <button onclick="copyEmail()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-gold/40 text-gray-200 text-sm font-medium transition">
-            <i data-lucide="copy" class="w-4 h-4 text-gold-light"></i>
+          <button onclick="copyEmailAddress()" class="btn-copy-address">
             <span>Copy Address</span>
           </button>
         </div>
 
-        <!-- Social Badges Row -->
-        <div class="flex items-center justify-center gap-6 mt-10 pt-8 border-t border-white/10 text-xs font-mono text-gray-400">
-          <a href="https://github.com/agrimsri" target="_blank" rel="noopener noreferrer" class="hover:text-gold transition flex items-center gap-1.5">
-            <i data-lucide="github" class="w-4 h-4"></i>
-            <span>github.com/agrimsri</span>
+        <div class="contact-direct-links">
+          <a href="https://github.com/agrimsri" target="_blank" rel="noopener noreferrer" class="contact-direct-link">
+            <span>github.com/agrimsri</span> ↗
           </a>
           <span>&bull;</span>
-          <a href="https://www.linkedin.com/in/agrim-srivastava-26l" target="_blank" rel="noopener noreferrer" class="hover:text-gold transition flex items-center gap-1.5">
-            <i data-lucide="linkedin" class="w-4 h-4"></i>
-            <span>linkedin.com/in/agrim-srivastava-26l</span>
+          <a href="https://www.linkedin.com/in/agrim-srivastava-26l" target="_blank" rel="noopener noreferrer" class="contact-direct-link">
+            <span>linkedin.com/in/agrim-srivastava-26l</span> ↗
           </a>
+          <span>&bull;</span>
+          <span>Lucknow, India</span>
         </div>
 
       </div>
+
     </section>
 
   </main>
 
-  <!-- Footer -->
-  <footer class="border-t border-white/5 py-8 text-center text-xs font-mono text-gray-500 relative z-10">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-2">
-        <div class="w-2 h-2 rounded-full bg-gold"></div>
-        <span>Crafted with precision &amp; discipline &bull; Agrim Srivastava</span>
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <span class="footer-bullet"></span>
+        <span>Agrim Srivastava &bull; Indian Institute of Technology Madras</span>
       </div>
       <div>
-        <span>Hosted via GitHub Pages at <a href="https://agrimsri.github.io" class="text-gold-light hover:underline">agrimsri.github.io</a></span>
+        <span>Refactored with architectural craft &bull; Hosted via GitHub Pages</span>
       </div>
     </div>
   </footer>
 
-  <!-- Script: Lucide initialization, mobile menu, and clipboard helper -->
-  <script>
-    // Initialize icons
-    lucide.createIcons();
-
-    // Mobile menu toggle
-    const menuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-
-    // Close mobile menu on link click
-    document.querySelectorAll('.mobile-nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-      });
-    });
-
-    // Copy Email to clipboard with toast
-    function copyEmail() {
-      const email = 'agrimsri26@gmail.com';
-      navigator.clipboard.writeText(email).then(() => {
-        const toast = document.getElementById('toast');
-        toast.classList.remove('translate-y-24', 'opacity-0');
-        toast.classList.add('translate-y-0', 'opacity-100');
-
-        setTimeout(() => {
-          toast.classList.add('translate-y-24', 'opacity-0');
-          toast.classList.remove('translate-y-0', 'opacity-100');
-        }, 3000);
-      }).catch(err => {
-        console.error('Failed to copy: ', err);
-      });
-    }
-  </script>
+  <!-- Main JavaScript Engine -->
+  <script src="./js/main.js"></script>
 </body>
 </html>
