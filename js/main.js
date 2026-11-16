@@ -3,7 +3,7 @@
    Interactive Specimen Deck, Ambient Mesh, EM Sandbox, Terminal & Telemetry
    ========================================================================== */
 
-document.addEventListener('DOMContentLoaded', () => {
+function initPortfolio() {
 
   /* --------------------------------------------------------------------------
      1. AMBIENT BACKGROUND CANVAS (Fluid Particle Constellation)
@@ -1328,4 +1328,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initPortfolio);
+} else {
+  initPortfolio();
+}
