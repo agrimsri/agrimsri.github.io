@@ -52,9 +52,29 @@
     @media(max-width:370px){.compass{transform:translateX(-50%) scale(.91);transform-origin:center bottom}.project-slide{width:87vw;min-height:430px;padding:.9rem}.slide-copy h3{font-size:2.1rem}}
     @media(prefers-reduced-motion:reduce){.projects-stage{position:sticky}.project-track{will-change:auto}.project-slide,.project-buttons button{transition:none!important}}
     html:not(.js) .projects-section{height:auto}html:not(.js) .projects-stage{position:relative;height:auto;overflow:visible;padding-block:5rem}html:not(.js) .projects-window{overflow-x:auto}html:not(.js) .project-track{transform:none!important}html:not(.js) .project-slide{height:auto;min-height:480px}html:not(.js) .project-buttons{display:none}
+  
+    .welcome-overlay{position:fixed;inset:0;z-index:9999;background:radial-gradient(ellipse at 50% 50%,rgba(135,139,195,.08),transparent 65%),#090b14;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;pointer-events:none;opacity:1;visibility:visible;transition:opacity .85s cubic-bezier(.16,1,.3,1),visibility .85s}
+    .welcome-overlay.is-ready{opacity:0;visibility:hidden}
+    .welcome-mark{position:relative;display:flex;align-items:center;justify-content:center;width:200px;height:48px}
+    .welcome-star{width:26px;height:26px;filter:drop-shadow(0 0 14px rgba(212,194,161,.65));animation:starBreathe 2.4s ease-in-out infinite}
+    .welcome-horizon{position:absolute;left:50%;top:50%;height:1px;width:0;transform:translate(-50%,-50%);background:linear-gradient(90deg,transparent,rgba(212,194,161,.6) 50%,transparent);transition:width .9s cubic-bezier(.16,1,.3,1),opacity .75s ease}
+    .welcome-mark.is-drawn .welcome-horizon{width:160px}
+    .welcome-label{margin:0;font-size:.68rem;letter-spacing:.26em;color:var(--soft);opacity:0;transform:translateY(6px);transition:opacity .65s ease,transform .65s var(--ease)}
+    .welcome-label.is-visible{opacity:.85;transform:translateY(0)}
+    @keyframes starBreathe{0%,100%{transform:scale(.92);opacity:.75}50%{transform:scale(1.12);opacity:1;filter:drop-shadow(0 0 20px rgba(212,194,161,.95))}}
+    @media(prefers-reduced-motion:reduce){.welcome-star{animation:none}.welcome-overlay{transition-duration:.3s}}
   </style>
 </head>
 <body>
+  <div id="welcome-overlay" class="welcome-overlay" aria-hidden="true">
+    <div class="welcome-mark">
+      <svg class="welcome-star" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 2 23 16 38 20 23 23 20 38 17 23 2 20 17 16Z" fill="#d4c2a1"/>
+      </svg>
+      <div class="welcome-horizon"></div>
+    </div>
+    <p class="welcome-label mono">Agrim Srivastava</p>
+  </div>
   <a class="skip" href="#main">Skip to content</a>
   <div class="world" aria-hidden="true"><canvas id="stars"></canvas><span class="world-orb"></span></div>
   <nav class="compass" aria-label="Page sections">
@@ -179,6 +199,50 @@
       function resize(){dpr=Math.min(devicePixelRatio||1,1.5);width=innerWidth;height=innerHeight;canvas.width=width*dpr;canvas.height=height*dpr;canvas.style.width=width+'px';canvas.style.height=height+'px';ctx.setTransform(dpr,0,0,dpr,0,0)}
       function draw(){if(document.hidden||prefersReducedMotion){frame=requestAnimationFrame(draw);return}ctx.clearRect(0,0,width,height);const t=performance.now()*.001;for(const star of icons){star.y-=star.s;if(star.y<0)star.y=1;const twinkle=.65+.35*Math.sin(t*.45+star.p);ctx.beginPath();ctx.arc(star.x*width,star.y*height,star.r,0,Math.PI*2);ctx.fillStyle=`rgba(210,214,232,${star.a*twinkle})`;ctx.fill()}frame=requestAnimationFrame(draw)}
       resize();addEventListener('resize',resize,{passive:true});if(!prefersReducedMotion)draw();
+      
+            const welcomeOverlay = document.querySelector("#welcome-overlay");
+      if (welcomeOverlay) {
+        const welcomeMark = welcomeOverlay.querySelector(".welcome-mark");
+        const welcomeLabel = welcomeOverlay.querySelector(".welcome-label");
+        requestAnimationFrame(() => {
+          if (welcomeMark) welcomeMark.classList.add("is-drawn");
+          setTimeout(() => { if (welcomeLabel) welcomeLabel.classList.add("is-visible"); }, 220);
+        });
+
+        const hasVisited = sessionStorage.getItem("agrim-visited");
+        const minHold = prefersReducedMotion ? 150 : (hasVisited ? 400 : 750);
+        const maxHold = 3000;
+        const welcomeStart = performance.now();
+
+        function dismissOverlay() {
+          if (!welcomeOverlay || welcomeOverlay.classList.contains("is-ready")) return;
+          welcomeOverlay.classList.add("is-ready");
+          sessionStorage.setItem("agrim-visited", "1");
+          setTimeout(() => {
+            try { welcomeOverlay.remove(); } catch (_) {}
+          }, 900);
+        }
+
+        const waitList = [];
+        if (portraitImage && !portraitImage.complete) {
+          waitList.push(new Promise(res => {
+            portraitImage.addEventListener("load", res, { once: true });
+            portraitImage.addEventListener("error", res, { once: true });
+          }));
+        }
+        if (document.fonts && document.fonts.ready) {
+          waitList.push(document.fonts.ready.catch(() => {}));
+        }
+
+        Promise.all(waitList).then(() => {
+          const elapsed = performance.now() - welcomeStart;
+          const waitTime = Math.max(0, minHold - elapsed);
+          setTimeout(dismissOverlay, waitTime);
+        });
+
+        setTimeout(dismissOverlay, maxHold);
+      }
+
       document.addEventListener('keydown',event=>{if(event.altKey||event.ctrlKey||event.metaKey||/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName))return;const keys={'1':'#experience','2':'#about','3':'#projects','4':'#education','5':'#contact','0':'#home'};if(keys[event.key])document.querySelector(keys[event.key]).scrollIntoView({behavior:prefersReducedMotion?'auto':'smooth'})});
     })();
   </script>
