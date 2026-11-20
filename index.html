@@ -1,804 +1,194 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="dusk" data-calm="false">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agrim Srivastava — Software &amp; AI Systems Engineer</title>
-  <meta name="description" content="Portfolio of Agrim Srivastava — Data Science student at IIT Madras, building multi-agent systems, adversarial evaluations, and distributed platforms." />
-  <meta name="keywords" content="Agrim Srivastava, IIT Madras, Software Engineer, AI Systems, LangGraph, WebMCP, Cloudflare Workers, FastAPI, Full-Stack" />
-  <meta name="author" content="Agrim Srivastava" />
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://agrimsri.github.io/" />
-  <meta property="og:title" content="Agrim Srivastava — Software &amp; AI Systems Engineer" />
-  <meta property="og:description" content="BS in Data Science at IIT Madras (CGPA 8.88). Engineering multi-agent systems, adversarial evaluation platforms, and deterministic software." />
-  <meta property="og:image" content="https://agrimsri.github.io/assets/profile.jpg" />
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23070709'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' font-family='monospace' font-weight='700' font-size='48' fill='%23E5B869'>AS</text></svg>" />
-
-  <!-- Typography: Syne, Plus Jakarta Sans, JetBrains Mono -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
-
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="./css/style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b14">
+  <meta name="description" content="Agrim Srivastava is a software engineer and IIT Madras student building thoughtful AI systems, developer tools, and full-stack products.">
+  <meta property="og:title" content="Agrim Srivastava — Systems with a human pulse">
+  <meta property="og:description" content="A quiet tour through the things I build, teach, and keep learning.">
+  <meta property="og:type" content="website">
+  <title>Agrim Srivastava — Systems with a human pulse</title>
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 2 23 16 38 20 23 23 20 38 17 23 2 20 17 16Z' fill='%23d4c2a1'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <style>
+    html,body{background:#090b14;color:#ece9e1}
+    :root{color-scheme:dark;--ink:#ece9e1;--soft:#bdbbb4;--faint:#a5a39d;--line:rgba(236,233,225,.12);--surface:rgba(255,255,255,.035);--bg0:#090b14;--bg1:#111923;--glow:#b7bceb;--accent:#d4c2a1;--serif:"Instrument Serif",Georgia,serif;--sans:"DM Sans",Arial,sans-serif;--mono:"DM Mono",monospace;--ease:cubic-bezier(.16,1,.3,1);--gutter:clamp(1.25rem,6vw,6.5rem);--max:1240px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:8vh}body{margin:0;min-width:320px;font-family:var(--sans);font-size:16px;line-height:1.65;letter-spacing:-.01em;overflow-x:clip;transition:color .7s ease,background-color .9s ease}body:before{position:fixed;inset:0;z-index:-2;content:"";pointer-events:none;background:radial-gradient(ellipse at 74% 8%,rgba(135,139,195,.1),transparent 42%),linear-gradient(155deg,var(--bg0),var(--bg1) 54%,var(--bg0));transition:background 1.2s ease}body:after{position:fixed;inset:-50%;z-index:10;content:"";pointer-events:none;opacity:.17;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.17'/%3E%3C/svg%3E");animation:grain 8s steps(8) infinite}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit}button:focus-visible,a:focus-visible{outline:2px solid var(--glow);outline-offset:5px}::selection{background:rgba(183,188,235,.35);color:var(--ink)}img{display:block;max-width:100%}.skip{position:fixed;z-index:30;top:1rem;left:1rem;padding:.7rem 1rem;background:var(--ink);color:#111;border-radius:99px;transform:translateY(-160%)}.skip:focus{transform:none}.mono,.eyebrow,.meta,.nav-label{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase}.muted{color:var(--soft)}.faint{color:var(--faint)}
+    @keyframes grain{0%,100%{transform:translate(0,0)}20%{transform:translate(-2%,1%)}40%{transform:translate(1%,-2%)}60%{transform:translate(2%,1%)}80%{transform:translate(-1%,2%)}}@keyframes orbit{to{transform:rotate(1turn)}}@keyframes pulse{0%,100%{opacity:.45;transform:scale(.92)}50%{opacity:1;transform:scale(1.06)}}@keyframes mote{0%{transform:translateY(10px);opacity:0}20%,80%{opacity:.8}100%{transform:translateY(-22px);opacity:0}}
+    .world{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}.world canvas{width:100%;height:100%;opacity:.8}.world-orb{position:absolute;width:min(48vw,640px);aspect-ratio:1;top:4vh;right:-15vw;border-radius:50%;border:1px solid rgba(221,227,241,.09);box-shadow:inset 0 0 80px rgba(183,188,235,.035),0 0 100px rgba(183,188,235,.025)}.world-orb:before,.world-orb:after{content:"";position:absolute;border:1px solid rgba(221,227,241,.07);border-radius:50%;inset:11%}.world-orb:after{inset:25%}.page{position:relative;z-index:1}.wrap{width:min(100% - 2*var(--gutter),var(--max));margin-inline:auto}.section{position:relative;padding:clamp(8rem,17vh,14rem) 0;isolation:isolate}.section:before{position:absolute;z-index:-1;inset:0;content:"";opacity:0;transition:opacity 1.2s ease;background:radial-gradient(ellipse at 72% 40%,color-mix(in srgb,var(--glow) 9%,transparent),transparent 62%)}.section.is-active:before{opacity:1}.section-head{display:grid;grid-template-columns:1fr 2fr;gap:2rem;align-items:start;margin-bottom:clamp(3rem,8vw,7rem)}.section-index{padding-top:.7rem;color:var(--accent)}.section h2{max-width:850px;margin:0;font:400 clamp(2.6rem,6vw,5.5rem)/1.02 var(--serif);letter-spacing:-.035em;text-wrap:balance}.section h2 em{font-weight:400}.section-intro{max-width:470px;grid-column:2;margin:1.25rem 0 0;color:var(--soft);font-size:1rem}.rule{height:1px;background:var(--line)}
+    .compass{position:fixed;z-index:20;top:50%;left:1.2rem;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:.42rem;padding:.55rem .42rem;border:1px solid var(--line);border-radius:999px;background:rgba(13,16,27,.66);backdrop-filter:blur(14px);box-shadow:0 16px 54px rgba(0,0,0,.17)}.compass a,.compass button{width:42px;height:42px;display:grid;place-items:center;border:0;border-radius:50%;background:transparent;color:var(--soft);opacity:.65;transition:background .35s ease,color .35s ease,opacity .35s ease,transform .5s var(--ease)}.compass a:hover,.compass button:hover,.compass [aria-current="location"]{opacity:1;color:var(--accent);background:rgba(255,255,255,.075);transform:scale(1.05)}.compass svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round}.compass .tools{border-top:1px solid var(--line);padding-top:.4rem;margin-top:.15rem}.compass button{width:38px;height:38px}.tooltip{position:absolute;left:calc(100% + 12px);top:50%;transform:translate(-4px,-50%);padding:.35rem .65rem;border:1px solid var(--line);border-radius:5px;background:#141722;color:var(--ink);font:11px var(--mono);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}.compass a:hover .tooltip,.compass button:hover .tooltip{opacity:1;transform:translate(0,-50%)}
+    .hero{position:relative;min-height:100svh;display:grid;align-items:center;padding:5rem var(--gutter) 7rem}.hero-inner{position:relative;width:min(100%,var(--max));margin:auto;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.8fr);align-items:center;gap:clamp(2rem,7vw,8rem);padding-left:4vw}.hero-copy{position:relative;z-index:2;padding-block:4rem}.hero-kicker{display:flex;align-items:center;gap:.8rem;color:var(--soft);margin:0 0 2.2rem;animation:arrive 1s var(--ease) both}.hero-kicker:before{content:"";width:34px;height:1px;background:var(--accent)}.hero h1{margin:0;max-width:800px;font:250 clamp(4rem,10vw,9rem)/.86 var(--serif);letter-spacing:-.055em;text-wrap:balance;text-shadow:0 14px 40px rgba(0,0,0,.18);animation:arrive 1.25s .08s var(--ease) both}.hero h1 span{display:block;color:#c6c5d9;font-style:italic;font-weight:260}.hero-lede{max-width:440px;margin:2.4rem 0 2.1rem;color:var(--soft);font-size:clamp(1rem,1.4vw,1.12rem);animation:arrive 1.15s .2s var(--ease) both}.hero-links{display:flex;gap:1.65rem;align-items:center;animation:arrive 1s .3s var(--ease) both}.text-link{position:relative;display:inline-flex;align-items:center;gap:.55rem;padding:.28rem 0;color:var(--ink);font-size:.9rem}.text-link:after{position:absolute;bottom:0;left:0;width:100%;height:1px;content:"";background:var(--accent);transform:scaleX(.32);transform-origin:left;transition:transform .45s var(--ease)}.text-link:hover:after,.text-link:focus-visible:after{transform:scaleX(1)}.text-link span{color:var(--accent);transition:transform .3s}.text-link:hover span{transform:translate(3px,-3px)}.portrait-stage{position:absolute;z-index:0;right:-1.5%;top:50%;width:min(64vw,760px);height:auto;aspect-ratio:1;min-height:0;display:grid;place-items:center;pointer-events:auto;transform:translateY(-50%);opacity:.94}.portrait-stage canvas{width:100%;height:100%;display:block;opacity:.94}.portrait-static{display:none;}.scroll-cue{position:absolute;bottom:2.5rem;left:50%;display:grid;justify-items:center;gap:.6rem;transform:translateX(-50%);color:var(--faint);font:10px var(--mono);letter-spacing:.14em;text-transform:uppercase}.scroll-cue i{height:38px;width:1px;background:linear-gradient(var(--glow),transparent);animation:mote 2.5s 0.5s infinite}
+    @keyframes arrive{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}@keyframes portraitBreath{from{opacity:.86}to{opacity:1}}
+    .about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(3rem,10vw,10rem);align-items:start}.pull-quote{margin:0;font:300 clamp(2rem,4.4vw,4.15rem)/1.11 var(--serif);letter-spacing:-.035em;text-wrap:balance}.pull-quote em{color:#c7d9e7}.about-prose{padding-top:1rem;max-width:490px;color:var(--soft)}.about-prose p:first-child{margin-top:0;color:var(--ink);font-size:1.11rem}.about-prose p{margin:0 0 1.4rem}.values{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:2.5rem}.value{padding:.48rem .78rem;border:1px solid var(--line);border-radius:99px;color:var(--soft);font:10px var(--mono);letter-spacing:.06em}
+    .project-list{display:grid;gap:1.25rem}.project{--mx:70%;--my:20%;position:relative;display:grid;grid-template-columns:.48fr 1fr;gap:clamp(1.5rem,5vw,5rem);min-height:270px;padding:clamp(1.6rem,4.3vw,3.4rem);overflow:hidden;border:1px solid var(--line);border-radius:28px;background:radial-gradient(400px circle at var(--mx) var(--my),rgba(240,137,74,.105),transparent 54%),linear-gradient(135deg,rgba(255,255,255,.045),rgba(255,255,255,.015));box-shadow:inset 0 1px rgba(255,255,255,.035);transition:border-color .5s ease,transform .6s var(--ease),background-color .6s}.project:nth-child(even){grid-template-columns:1fr .48fr}.project:nth-child(even) .project-mark{order:2}.project:hover{transform:translateY(-4px);border-color:rgba(240,137,74,.35)}.project-mark{position:relative;min-height:190px;display:grid;place-items:center;overflow:hidden;border-radius:18px;background:radial-gradient(ellipse at 50% 56%,rgba(240,137,74,.22),transparent 63%),linear-gradient(145deg,rgba(8,10,16,.28),rgba(8,10,16,.7))}.project-mark:before,.project-mark:after{position:absolute;content:"";width:160px;aspect-ratio:1;border:1px solid rgba(244,193,107,.23);border-radius:50%;transform:rotate(-23deg) scaleX(1.32)}.project-mark:after{width:205px;transform:rotate(52deg) scaleX(1.15);border-color:rgba(240,137,74,.17)}.project-mark b{position:relative;z-index:1;color:rgba(244,193,107,.92);font:italic 300 clamp(3.8rem,7vw,6.2rem)/1 var(--serif);letter-spacing:-.08em}.project:nth-child(2) .project-mark{background:radial-gradient(ellipse at 50% 50%,rgba(110,194,190,.19),transparent 62%),linear-gradient(145deg,rgba(8,10,16,.28),rgba(8,10,16,.7))}.project:nth-child(2) .project-mark b{color:#a3d4d0}.project:nth-child(3) .project-mark{background:radial-gradient(ellipse at 50% 50%,rgba(183,188,235,.19),transparent 62%),linear-gradient(145deg,rgba(8,10,16,.28),rgba(8,10,16,.7))}.project:nth-child(3) .project-mark b{color:#c6c5d9}.project-copy{align-self:center;max-width:490px}.project-copy h3{margin:.55rem 0 .7rem;font:350 clamp(1.65rem,3vw,2.45rem)/1.05 var(--serif);letter-spacing:-.025em}.project-copy p{max-width:48ch;margin:0;color:var(--soft);font-size:.94rem}.project-meta{display:flex;justify-content:space-between;gap:1rem;align-items:center;color:var(--faint)}.project-meta .mono{font-size:.63rem}.project-tools{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.25rem}.project-tools span{padding:.34rem .58rem;border:1px solid var(--line);border-radius:99px;color:var(--soft);font:10px var(--mono)}.project-actions{display:flex;gap:1.2rem;margin-top:1.4rem}.project-actions a{color:#f4c16b;font-size:.84rem}.project-actions a:hover{text-decoration:underline;text-underline-offset:4px}.work-note{max-width:540px;margin:2.5rem 0 0 auto;color:var(--faint);font-size:.83rem;text-align:right}
+    .river{position:relative;display:grid;gap:1.4rem}.river:before{position:absolute;left:50%;top:0;bottom:0;width:1px;content:"";background:linear-gradient(transparent,rgba(110,194,190,.48) 8%,rgba(110,194,190,.25) 90%,transparent)}.role{position:relative;width:calc(50% - 3.3rem);padding:1.6rem 1.7rem 1.7rem;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.012));transition:transform .5s var(--ease),border-color .4s}.role:nth-child(even){margin-left:auto}.role:hover{transform:translateY(-3px);border-color:rgba(110,194,190,.35)}.role:before{position:absolute;top:1.9rem;right:-3.78rem;width:10px;height:10px;content:"";border:2px solid #0c1a1e;border-radius:50%;background:var(--accent);box-shadow:0 0 17px color-mix(in srgb,var(--accent) 55%,transparent)}.role:nth-child(even):before{right:auto;left:-3.78rem}.role h3{margin:.35rem 0 .55rem;font:350 clamp(1.4rem,2.4vw,1.95rem)/1.12 var(--serif)}.role p{margin:0;color:var(--soft);font-size:.9rem}.role .meta{color:#9bcac6;font-size:.64rem}.role + .role{margin-top:2.1rem}.role:nth-child(even)+.role{margin-top:0}
+    .ground-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,9vw,9rem)}.study-card{position:relative;padding:clamp(1.5rem,4vw,2.6rem);border:1px solid var(--line);border-radius:24px;background:linear-gradient(140deg,rgba(255,255,255,.045),rgba(255,255,255,.012));overflow:hidden}.study-card:after{position:absolute;right:-55px;bottom:-55px;width:220px;height:220px;content:"";border:1px solid rgba(201,184,143,.2);border-radius:50%;box-shadow:0 0 0 15px rgba(201,184,143,.035),0 0 0 32px rgba(201,184,143,.025)}.study-card .eyebrow{color:#b2ad92}.study-card h3{position:relative;z-index:1;margin:.7rem 0 .4rem;font:350 clamp(1.6rem,3vw,2.4rem)/1.1 var(--serif)}.study-card p{position:relative;z-index:1;max-width:43ch;margin:.7rem 0 0;color:var(--soft);font-size:.92rem}.study-line{display:flex;gap:.8rem;align-items:center;margin-top:1.4rem;color:var(--soft);font-size:.82rem}.study-line:before{width:7px;height:7px;content:"";border-radius:50%;background:#8da16a;box-shadow:0 0 12px rgba(141,161,106,.5)}.soil{display:flex;flex-direction:column;gap:0}.soil-row{display:grid;grid-template-columns:104px 1fr;gap:1.2rem;padding:1.12rem 0;border-bottom:1px solid var(--line)}.soil-row:first-child{border-top:1px solid var(--line)}.soil-row dt{padding-top:.18rem;color:#a9a28a;font:10px var(--mono);letter-spacing:.09em;text-transform:uppercase}.soil-row dd{margin:0;color:var(--soft);font-size:.9rem}.principle{display:grid;grid-template-columns:28px 1fr;gap:.7rem;margin-top:1.5rem;color:var(--ink);font:italic 1.12rem var(--serif)}.principle span{color:#9daa7e;font:11px var(--mono);padding-top:.25rem}
+    .contact{padding-bottom:4rem}.contact-stage{position:relative;min-height:72vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(2rem,8vw,6rem);overflow:hidden;border:1px solid var(--line);border-radius:36px;background:radial-gradient(ellipse at 76% 42%,rgba(183,188,235,.12),transparent 48%),linear-gradient(155deg,rgba(255,255,255,.035),rgba(255,255,255,.005))}.contact-stars{position:absolute;inset:0;pointer-events:none}.contact-stars i{position:absolute;width:3px;height:3px;border-radius:50%;background:#e1e3f0;box-shadow:0 0 10px 2px rgba(183,188,235,.38);animation:pulse 4.2s var(--phase,0s) ease-in-out infinite}.contact-stage .eyebrow{position:relative;color:var(--accent)}.contact h2{position:relative;max-width:810px;margin:1.7rem 0;font:250 clamp(3.4rem,9vw,8rem)/.9 var(--serif);letter-spacing:-.06em}.contact h2 em{color:#c6c5d9;font-weight:260}.contact-text{position:relative;max-width:440px;color:var(--soft)}.contact-links{position:relative;display:flex;gap:1.1rem 2rem;flex-wrap:wrap;margin-top:1.6rem}.contact-links a{font-size:.92rem}.contact-links a:hover{color:var(--accent)}.footer{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.7rem .2rem 0;color:var(--faint);font:10px var(--mono);letter-spacing:.08em}.back-top{color:var(--soft)}.back-top:hover{color:var(--accent)}
+    .js [data-reveal]{opacity:0;transform:translateY(18px);filter:blur(3px);transition:opacity .9s var(--ease),transform .9s var(--ease),filter .9s var(--ease)}.js [data-reveal].seen{opacity:1;transform:none;filter:none}.calm *,.calm *:before,.calm *:after{animation-play-state:paused!important;scroll-behavior:auto!important}.calm body:after{opacity:.07}.calm [data-reveal]{filter:none;transition-duration:.25s}.calm .world canvas{opacity:.2}
+    html[data-theme="dawn"]{color-scheme:light;--ink:#1d1e24;--soft:#41434b;--faint:#64656c;--line:rgba(29,30,36,.13);--surface:rgba(255,255,255,.5);--bg0:#f3f2f9;--bg1:#e9e8f4;--glow:#777cae;--accent:#777cae}html[data-theme="dawn"] body{background:#f3f2f9}html[data-theme="dawn"] body:before{background:radial-gradient(ellipse at 74% 8%,rgba(119,124,174,.14),transparent 42%),linear-gradient(155deg,var(--bg0),var(--bg1) 54%,var(--bg0))}html[data-theme="dawn"] .compass{background:rgba(244,243,250,.76);box-shadow:0 16px 54px rgba(20,20,35,.08)}html[data-theme="dawn"] .tooltip{background:#f7f6fb;color:#1d1e24}html[data-theme="dawn"] .hero h1 span,html[data-theme="dawn"] .pull-quote em,html[data-theme="dawn"] .contact h2 em{color:#777cae}html[data-theme="dawn"] .project,html[data-theme="dawn"] .role,html[data-theme="dawn"] .study-card,html[data-theme="dawn"] .contact-stage{background-color:rgba(255,255,255,.35)}html[data-theme="dawn"] .project-mark{background-color:#e8e3d7}html[data-theme="dawn"] .project-mark b{color:#9a542e}html[data-theme="dawn"] .contact-stage{background-image:radial-gradient(ellipse at 76% 42%,rgba(119,124,174,.13),transparent 48%),linear-gradient(155deg,rgba(255,255,255,.55),rgba(255,255,255,.15))}html[data-theme="dawn"] .compass a,html[data-theme="dawn"] .compass button{color:#43444c}
+    @media(max-width:1000px){.compass{top:auto;bottom:max(1rem,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);flex-direction:row;padding:.42rem .62rem;gap:.25rem}.compass .tools{display:flex;gap:.1rem;border-top:0;border-left:1px solid var(--line);padding:0 0 0 .35rem;margin:0 0 0 .18rem}.compass a,.compass button{width:40px;height:40px}.tooltip{top:auto;left:50%;bottom:calc(100% + 8px);transform:translate(-50%,4px)}.compass a:hover .tooltip,.compass button:hover .tooltip{transform:translate(-50%,0)}body{padding-bottom:env(safe-area-inset-bottom)}.hero-inner{padding-left:1rem;grid-template-columns:1fr minmax(240px,.72fr);gap:2rem}}
+    @media(max-width:700px){:root{--gutter:1.25rem}.section{padding:7.5rem 0}.hero{min-height:100svh;min-height:100dvh;padding:5rem var(--gutter) 8rem}.hero-inner{position:relative;grid-template-columns:1fr;gap:1rem;padding:0}.hero-copy{padding:2.8rem .25rem 0}.hero h1{font-size:clamp(4.25rem,17vw,7rem)}.hero-kicker{margin-bottom:1.45rem}.hero-lede{margin:1.6rem 0}.portrait-stage{position:relative;right:auto;top:auto;width:min(94vw,450px);height:auto;aspect-ratio:1;min-height:0;margin:-1.3rem auto 0;opacity:.9;transform:none;z-index:1}.portrait-stage canvas{display:none}.portrait-stage .portrait-static{width:100%;height:100%;display:block;object-fit:contain;animation:portraitBreath 3.2s ease-in-out infinite alternate}.hero-kicker,.hero h1,.hero-lede,.hero-links{animation:none;opacity:1}.section-head{grid-template-columns:1fr;gap:1rem;margin-bottom:3rem}.section-intro{grid-column:1;margin-top:0}.section h2{font-size:clamp(2.5rem,12vw,4.4rem)}.about-grid,.ground-grid{grid-template-columns:1fr;gap:2.5rem}.pull-quote{font-size:clamp(2.2rem,9vw,3.6rem)}.project,.project:nth-child(even){grid-template-columns:1fr;gap:1.5rem;min-height:0;padding:1.1rem;border-radius:22px}.project:nth-child(even) .project-mark{order:0}.project-mark{min-height:180px}.project-copy{padding:.2rem .4rem .5rem}.project-meta{font-size:.62rem}.work-note{text-align:left}.river:before{left:6px}.role,.role:nth-child(even){width:auto;margin-left:2rem!important}.role:before,.role:nth-child(even):before{left:-2.48rem;right:auto}.role+.role{margin-top:0}.study-card{padding:1.5rem}.soil-row{grid-template-columns:82px 1fr;gap:.75rem}.contact-stage{min-height:68svh;padding:2rem 1.35rem;border-radius:26px}.contact h2{font-size:clamp(3.5rem,17vw,6rem)}.footer{padding-bottom:5rem;align-items:flex-start;flex-direction:column}.scroll-cue{bottom:6rem}.world-orb{width:78vw;right:-34vw;top:7vh}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.portrait-stage{animation:none}.portrait-stage canvas{opacity:.7}.portrait-stage .portrait-static{animation:none;opacity:.9}}
+    @media(max-height:700px) and (min-width:701px){.hero{min-height:760px}.hero h1{font-size:clamp(4rem,8vw,7.5rem)}.portrait-stage{width:min(40vw,480px)}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.js [data-reveal]{opacity:1;transform:none;filter:none}.world canvas{display:none}}
+    @media print{body{background:#fff;color:#111}body:before,body:after,.world,.compass,.scroll-cue{display:none!important}.section{padding:2rem 0;break-inside:avoid}.hero{min-height:0}.project,.role,.study-card,.contact-stage{background:#fff;border-color:#ccc}.muted,.faint,.section-intro,.project-copy p,.role p,.study-card p{color:#333}}
+  </style>
+  <style>
+    .compass a,.compass button{width:44px;height:44px}.compass .tools button{width:44px;height:44px}.compass a:focus-visible .tooltip,.compass button:focus-visible .tooltip{opacity:1;transform:translate(0,-50%)}
+    .experience-list{display:grid;gap:1.2rem}.experience .role{width:auto;margin:0!important;padding:clamp(1.35rem,3.3vw,2.35rem);border:1px solid var(--line);border-radius:24px;background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.014));box-shadow:inset 0 1px rgba(255,255,255,.035)}.experience .role:before{display:none}.role-top{display:flex;justify-content:space-between;align-items:center;gap:1rem}.role-mark{color:var(--accent);font:italic 1.35rem var(--serif)}.experience .role h3{margin:.8rem 0 .45rem;font:400 clamp(1.6rem,3vw,2.25rem)/1.05 var(--serif);letter-spacing:-.025em}.role-lede{margin:0 0 1rem!important;color:var(--ink)!important;font-weight:600}.experience .role>p:not(.role-lede),.role-details p,.role-points{max-width:78ch;color:var(--soft);font-size:.98rem;line-height:1.65}.role-details{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:1.8rem;padding-top:1.5rem;border-top:1px solid var(--line)}.role-details h4{margin:0 0 .45rem;color:#a4d5d0;font:500 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase}.role-details p{margin:0}.role-points{padding-left:1.1rem;margin:.85rem 0 0}.role-points li{padding-left:.25rem;margin:.35rem 0}.experience .role:not(.role-featured){padding-block:1.8rem}
+    .projects-section{position:relative;height:800vh;height:800svh;isolation:isolate;--glow:#f7a265;--accent:#f4c16b}.projects-section:before{position:absolute;z-index:-1;inset:0;content:"";background:radial-gradient(ellipse at 78% 46%,rgba(240,137,74,.085),transparent 62%)}.projects-stage{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;justify-content:center;gap:clamp(.65rem,1.5vh,1rem);overflow:hidden;padding:clamp(3rem,6vh,4rem) 0 clamp(3rem,6vh,4rem)}.projects-heading{display:flex;align-items:end;justify-content:space-between;gap:2rem}.projects-heading .section-index{margin:0 0 .7rem;color:var(--accent)}.projects-heading h2{max-width:620px;margin:0;font:400 clamp(2.5rem,5vw,4.6rem)/.92 var(--serif);letter-spacing:-.035em}.projects-heading h2 em{font-weight:400}.projects-window{width:min(100% - 2*var(--gutter),var(--max));margin-inline:auto;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}.project-track{display:flex;align-items:center;gap:clamp(1rem,2vw,1.75rem);width:max-content;padding:0;will-change:transform}.project-slide{position:relative;display:flex;flex-direction:column;justify-content:space-between;width:min(78vw,1060px);height:clamp(460px,54svh,560px);padding:clamp(1.4rem,3vw,2.5rem);overflow:visible;border:1px solid rgba(var(--card-rgb),.28);border-radius:30px;background:radial-gradient(520px circle at 9% 45%,rgba(var(--card-rgb),.13),transparent 56%),linear-gradient(142deg,rgba(255,255,255,.045),rgba(255,255,255,.012));box-shadow:inset 0 1px rgba(255,255,255,.055),0 28px 84px rgba(0,0,0,.17);transition:border-color .35s ease,background-color .35s ease}.project-slide:hover{border-color:rgba(var(--card-rgb),.6)}.project-slide:hover .art-caption{opacity:.08;transition:opacity .2s ease}.slide-meta{display:flex;justify-content:space-between;gap:1rem;color:var(--soft);font:10px var(--mono);letter-spacing:.08em;text-transform:uppercase}.slide-main{display:grid;grid-template-columns:minmax(210px,.7fr) minmax(0,1fr);align-items:center;gap:clamp(1.7rem,4vw,4.5rem);flex:1}.slide-art{position:relative;aspect-ratio:1/.95;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(1.2rem,2.5vw,2rem);overflow:hidden;border:1px solid rgba(var(--card-rgb),.2);border-radius:22px;background:radial-gradient(ellipse at 50% 46%,rgba(var(--card-rgb),.18),transparent 63%),linear-gradient(145deg,rgba(7,9,15,.22),rgba(7,9,15,.53))}.slide-art:before,.slide-art:after{position:absolute;content:"";width:62%;aspect-ratio:1;left:19%;top:17%;border:1px solid rgba(var(--card-rgb),.26);border-radius:50%;transform:scaleX(1.26) rotate(-25deg)}.slide-art:after{width:83%;left:8%;top:8%;opacity:.6;transform:scaleX(.74) rotate(35deg)}.art-number{position:relative;z-index:1;color:var(--card);font:italic 400 clamp(5.5rem,12vw,10rem)/.72 var(--serif);letter-spacing:-.07em}.art-caption{position:relative;z-index:1;max-width:12ch;color:var(--soft);font:400 clamp(1.1rem,2vw,1.6rem)/1.05 var(--serif)}.slide-art i,.slide-art b{position:absolute;z-index:1;top:28%;right:25%;width:8px;height:8px;border-radius:50%;background:var(--card);box-shadow:0 0 20px 6px rgba(var(--card-rgb),.38)}.slide-art b{top:auto;right:auto;bottom:26%;left:26%;width:5px;height:5px;opacity:.6}.slide-copy{position:relative;max-width:550px}.slide-copy>.eyebrow{margin:0;color:var(--card);font-size:.65rem}.slide-copy h3{margin:.5rem 0 .65rem;font:400 clamp(2.3rem,4.2vw,4rem)/.96 var(--serif);letter-spacing:-.035em;text-wrap:balance}.slide-summary{max-width:50ch;margin:0;color:var(--ink);font-size:1.03rem;line-height:1.55}.build-note{margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--line)}.build-note h4{margin:0 0 .35rem;color:var(--card);font:500 .65rem var(--mono);letter-spacing:.11em;text-transform:uppercase}.build-note p{margin:0;color:var(--soft);font-size:.93rem;line-height:1.55}.slide-links{display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;margin-top:1.15rem}.slide-links>a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink);font-size:.9rem;text-decoration:underline;text-decoration-color:rgba(var(--card-rgb),.58);text-underline-offset:4px}.slide-links>a:hover{color:var(--card)}.projects-controls{width:min(100% - 2*var(--gutter),var(--max));margin-inline:auto;display:flex;align-items:center;gap:1.2rem}.project-position{min-width:56px;margin:0;color:var(--soft);font:11px var(--mono);letter-spacing:.08em}.project-position span{color:var(--ink)}.project-position i{display:inline-block;width:18px;height:1px;margin:0 5px 3px;background:var(--line)}.project-progress{height:1px;flex:1;background:var(--line)}.project-progress span{display:block;width:12.5%;height:2px;background:var(--accent);transform-origin:left;transition:width .16s linear}.project-buttons{display:flex;gap:.55rem}.project-buttons button{width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:rgba(255,255,255,.025);color:var(--ink);font-size:1.2rem;cursor:pointer;transition:background .2s,border-color .2s,transform .2s}.project-buttons button:hover{background:rgba(255,255,255,.09);border-color:rgba(244,193,107,.5);transform:translateY(-2px)}.project-buttons button:disabled{opacity:.35;cursor:not-allowed;transform:none}
+    html[data-theme="dawn"] .project-slide{background-color:rgba(255,255,255,.35)}html[data-theme="dawn"] .project-slide .slide-summary{color:#292a31}
+    @media(max-width:1000px){.compass{max-width:calc(100vw - 1rem);overflow:visible}.compass .tooltip{display:none}.compass a,.compass button,.compass .tools button{width:44px;height:44px}.experience .section-head{margin-bottom:3rem}}
+    @media(max-width:700px){.experience-list{gap:.85rem}.experience .role{padding:1.25rem;border-radius:19px}.role-details{grid-template-columns:1fr;gap:1.25rem}.experience .role>p:not(.role-lede),.role-details p,.role-points{font-size:.9rem}.projects-section{height:800vh;height:800svh}.projects-stage{justify-content:flex-start;gap:.75rem;padding:5.4rem 0 5.5rem}.projects-heading{align-items:start;display:block}.projects-heading h2{font-size:clamp(2.55rem,10vw,3.4rem)}.projects-window{flex:1;min-height:0;display:flex;align-items:center}.project-track{height:100%;align-items:center;gap:1rem}.project-slide{width:100%;height:min(55svh,520px);min-height:450px;padding:1.1rem;border-radius:22px}.slide-meta{font-size:9px;letter-spacing:.035em}.slide-main{display:block;overflow-y:auto;overscroll-behavior:contain}.slide-art{display:none}.slide-copy{max-width:none}.slide-copy h3{font-size:2.35rem}.slide-summary{font-size:.95rem}.build-note{margin-top:1rem;padding-top:.8rem}.build-note p{font-size:.86rem}.build-note h4{font-size:.6rem}.slide-links{gap:.45rem .8rem;margin-top:.7rem}.slide-links>a{font-size:.82rem}.projects-controls{gap:.7rem}.project-position{min-width:45px;font-size:10px}.project-buttons{gap:.3rem}.project-buttons button{width:42px;height:42px}.compass{gap:.1rem;padding:.35rem .4rem}.compass a,.compass button,.compass .tools button{width:42px;height:42px}.compass .tools{padding-left:.25rem;margin-left:.1rem}.compass .tools button{width:42px;height:42px}}
+    @media(max-height:760px) and (min-width:701px){.projects-stage{padding:2rem 0;gap:.5rem}.projects-heading h2{font-size:clamp(2.4rem,4vw,3.5rem)}.project-slide{height:420px;min-height:420px}}
+    @media(max-width:370px){.compass{transform:translateX(-50%) scale(.91);transform-origin:center bottom}.project-slide{width:87vw;min-height:430px;padding:.9rem}.slide-copy h3{font-size:2.1rem}}
+    @media(prefers-reduced-motion:reduce){.projects-stage{position:sticky}.project-track{will-change:auto}.project-slide,.project-buttons button{transition:none!important}}
+    html:not(.js) .projects-section{height:auto}html:not(.js) .projects-stage{position:relative;height:auto;overflow:visible;padding-block:5rem}html:not(.js) .projects-window{overflow-x:auto}html:not(.js) .project-track{transform:none!important}html:not(.js) .project-slide{height:auto;min-height:480px}html:not(.js) .project-buttons{display:none}
+  </style>
 </head>
-
 <body>
-
-  <!-- Ambient Fluid Canvas & Atmospheric Overlays -->
-  <canvas id="ambient-canvas"></canvas>
-  <div class="ambient-noise" aria-hidden="true"></div>
-  <div class="ambient-grid" aria-hidden="true"></div>
-
-  <!-- Real-Time Top Scroll Progress Bar -->
-  <div id="scroll-telemetry" aria-hidden="true">
-    <div id="scroll-progress-bar"></div>
-  </div>
-
-  <!-- Custom Precision Reticle Cursor & Telemetry (Fine Pointer Only) -->
-  <div class="custom-cursor" aria-hidden="true"></div>
-  <div class="cursor-follower" aria-hidden="true"></div>
-  <div class="cursor-telemetry" aria-hidden="true">[X:0 Y:0]</div>
-
-  <!-- Toast Notification Container -->
-  <div id="system-toast" role="status" aria-live="polite">
-    <span class="toast-dot"></span>
-    <span id="toast-text">Address copied to clipboard</span>
-  </div>
-
-  <!-- Interactive Terminal CLI Drawer -->
-  <aside id="system-terminal-drawer" aria-label="Interactive Systems Console">
-    <div class="terminal-inner">
-      <div class="terminal-header-bar">
-        <div class="terminal-header-left">
-          <span class="terminal-dot active"></span>
-          <span class="terminal-dot"></span>
-          <span class="terminal-dot"></span>
-          <span class="terminal-title">TERMINAL // AGRIM SRIVASTAVA REPL</span>
-        </div>
-        <div class="terminal-header-right">
-          <span class="terminal-shortcut-hint">TOGGLE: [`] BACKTICK</span>
-          <button id="btn-terminal-close" class="terminal-close-btn" aria-label="Close terminal">&times;</button>
-        </div>
-      </div>
-
-      <!-- Quick Command Chips for Fast Access / Mobile -->
-      <div class="terminal-quick-chips">
-        <span class="chip-label">Quick Run:</span>
-        <button class="terminal-chip" data-cmd="whoami">whoami</button>
-        <button class="terminal-chip" data-cmd="skills">skills</button>
-        <button class="terminal-chip" data-cmd="projects">projects</button>
-        <button class="terminal-chip" data-cmd="experience">experience</button>
-        <button class="terminal-chip" data-cmd="contact">contact</button>
-        <button class="terminal-chip" data-cmd="help">help</button>
-      </div>
-
-      <div class="terminal-logs" id="terminal-logs-view">
-        <div class="terminal-line system">Interactive Console initialized. Connected to node: agrimsri.github.io.</div>
-        <div class="terminal-line system">Type 'help' to inspect commands, click any quick chip above, or type 'whoami'.</div>
-      </div>
-
-      <div class="terminal-input-row">
-        <span class="terminal-prompt-symbol">agrim@node:~$</span>
-        <input type="text" id="terminal-cli-input" class="terminal-input" placeholder="type command (e.g. 'help', 'whoami', 'skills', 'projects', 'contact')..." autocomplete="off" spellcheck="false" />
-      </div>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="world" aria-hidden="true"><canvas id="stars"></canvas><span class="world-orb"></span></div>
+  <nav class="compass" aria-label="Page sections">
+    <a href="#experience" aria-label="Experience" aria-current="location"><svg viewBox="0 0 24 24"><path d="M4 7h16v13H4zM8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M4 12h16M10 12v2h4v-2"/></svg><span class="tooltip">Experience</span></a>
+    <a href="#about" aria-label="About"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2"/><path d="M5 21c.4-4 2.8-6 7-6s6.6 2 7 6"/></svg><span class="tooltip">About</span></a>
+    <a href="#projects" aria-label="Projects"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="8" height="7" rx="1.5"/><rect x="13" y="4" width="8" height="7" rx="1.5"/><rect x="3" y="13" width="8" height="7" rx="1.5"/><rect x="13" y="13" width="8" height="7" rx="1.5"/></svg><span class="tooltip">Projects</span></a>
+    <a href="#education" aria-label="Education and skills"><svg viewBox="0 0 24 24"><path d="M3 9 12 4l9 5-9 5-9-5Z"/><path d="M6 11v5c3 3 9 3 12 0v-5M21 9v6"/></svg><span class="tooltip">Education &amp; skills</span></a>
+    <a href="#contact" aria-label="Contact"><svg viewBox="0 0 24 24"><path d="M3 6h18v13H3zM4 7l8 6 8-6"/></svg><span class="tooltip">Contact</span></a>
+    <div class="tools">
+      <button type="button" id="theme-toggle" aria-label="Switch to light theme"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.6"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg><span class="tooltip">Toggle theme · T</span></button>
+      <button type="button" id="calm-toggle" aria-label="Enable calm mode"><svg viewBox="0 0 24 24"><path d="M4 14c4.5 0 7-2.5 7-7 4.5 0 7 2.5 7 7s-2.5 7-7 7-7-2.5-7-7Z"/><path d="M11 7c0-2 1-3 3-4"/></svg><span class="tooltip">Calm mode · C</span></button>
     </div>
-  </aside>
-
-  <!-- Site Navigation Header -->
-  <header class="site-header">
-    <div class="site-nav-container">
-      
-      <!-- Brand Emblem -->
-      <a href="#hero" class="brand-emblem" aria-label="Agrim Srivastava Home">
-        <div class="brand-monogram">AS</div>
-        <div class="brand-meta">
-          <span class="brand-name">Agrim Srivastava</span>
-          <span class="brand-status">
-            <span class="status-pulse-dot"></span>
-            <span>IIT MADRAS &bull; SDE &amp; AI SYSTEMS</span>
-          </span>
+  </nav>
+  <main id="main" class="page">
+    <header class="hero" id="home" data-section="home">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="hero-kicker eyebrow">Software · systems · learning</p>
+          <h1>Agrim<span>Srivastava</span></h1>
+          <p class="hero-lede">I build useful software at the meeting point of intelligent systems and human problems.</p>
+          <div class="hero-links"><a class="text-link" href="#projects">Explore the projects <span aria-hidden="true">↘</span></a><a class="text-link" href="mailto:agrimsri26@gmail.com">Say hello <span aria-hidden="true">↗</span></a></div>
         </div>
-      </a>
-
-      <!-- Desktop Navigation Links -->
-      <nav class="nav-links-desktop" aria-label="Primary Navigation">
-        <a href="#projects" class="nav-link" data-scramble>Projects</a>
-        <a href="#experience" class="nav-link" data-scramble>Experience</a>
-        <a href="#skills" class="nav-link" data-scramble>Skills</a>
-        <a href="#sandbox" class="nav-link" data-scramble>EM Lab</a>
-        <a href="#contact" class="nav-link" data-scramble>Contact</a>
-      </nav>
-
-      <!-- Action Buttons (Terminal Drawer Toggle & Resume) -->
-      <div class="nav-action-group">
-        <button id="btn-terminal-toggle" class="btn-terminal-toggle" title="Toggle interactive terminal">
-          <span class="terminal-prompt-icon">[~]</span>
-          <span>Terminal</span>
-        </button>
-
-        <a href="./assets/Agrim_Srivastava_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-resume">
-          <span>Resume</span>
-          <svg class="external-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-        </a>
-
-        <button id="btn-hamburger" class="btn-hamburger" aria-label="Toggle mobile menu">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-        </button>
-      </div>
-
-    </div>
-
-    <!-- Mobile Dropdown Drawer -->
-    <div id="mobile-nav-drawer" class="mobile-nav-drawer">
-      <div class="mobile-nav-links">
-        <a href="#projects" class="mobile-nav-link">Projects</a>
-        <a href="#experience" class="mobile-nav-link">Experience</a>
-        <a href="#skills" class="mobile-nav-link">Skills</a>
-        <a href="#sandbox" class="mobile-nav-link">EM Lab</a>
-        <a href="#contact" class="mobile-nav-link">Contact</a>
-        <a href="./assets/Agrim_Srivastava_Resume.pdf" target="_blank" rel="noopener noreferrer" class="mobile-nav-link resume-highlight">Download Resume ↗</a>
-      </div>
-    </div>
-  </header>
-
-  <!-- Main Content Container -->
-  <main class="main-wrapper">
-
-    <!-- ==================== HERO SECTION ==================== -->
-    <section id="hero" class="hero-grid">
-      
-      <!-- Narrative Left Column -->
-      <div class="hero-content-column reveal-on-scroll">
-        
-        <div class="hero-telemetry-badge">
-          <span class="badge-icon"></span>
-          <span>IIT MADRAS &bull; BS DATA SCIENCE &bull; ACTIVE TA ROSTER</span>
-        </div>
-
-        <h1 class="hero-headline">
-          I build <span class="gold-gradient-text">software &amp; AI systems</span> that hold when things get messy.
-        </h1>
-
-        <p class="hero-narrative">
-          Hey, I'm <strong>Agrim Srivastava</strong>. I'm a software engineer and AI practitioner at IIT Madras. 
-          I build systems where correctness isn't optional — from seed-randomized 
-          <span class="highlight-gold">adversarial exam architectures</span> on Cloudflare Workers co-taught alongside <strong>S. Anand</strong>, 
-          to LangGraph <span class="highlight-gold">multi-agent pipelines</span> that eliminate calorie estimation error, and real-time audio transcript generation at annam.ai.
-        </p>
-
-        <!-- Dynamic Animated Telemetry Metrics Grid -->
-        <div class="telemetry-metrics-grid">
-          <div class="telemetry-cell spotlight-card">
-            <div class="telemetry-value"><span class="counter" data-target="8.88" data-decimals="2">0.00</span><span class="unit">/10</span></div>
-            <div class="telemetry-label">IIT Madras Academic CGPA</div>
-          </div>
-          <div class="telemetry-cell spotlight-card">
-            <div class="telemetry-value"><span class="counter" data-target="19" data-suffix="+">0</span><span class="unit">Exams</span></div>
-            <div class="telemetry-label">Dynamic TDS Edge Infra</div>
-          </div>
-          <div class="telemetry-cell spotlight-card">
-            <div class="telemetry-value"><span class="counter" data-target="254">0</span><span class="unit">/254</span></div>
-            <div class="telemetry-label">NutriAgent Pytests Passing</div>
-          </div>
-          <div class="telemetry-cell spotlight-card">
-            <div class="telemetry-value"><span class="counter" data-target="45">0</span><span class="unit">Repos</span></div>
-            <div class="telemetry-label">Applied Systems on GitHub</div>
-          </div>
-        </div>
-
-        <!-- Hero Actions -->
-        <div class="hero-cta-group">
-          <a href="#projects" class="btn-primary-action">
-            <span>Explore Systems Deck</span>
-            <span class="action-arrow">↓</span>
-          </a>
-
-          <button id="hero-btn-copy-email" class="btn-secondary-action">
-            <span>Copy Direct Email</span>
-          </button>
-
-          <div class="hero-social-links">
-            <a href="https://github.com/agrimsri" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="GitHub Profile (@agrimsri)">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-            </a>
-            <a href="https://www.linkedin.com/in/agrim-srivastava-26l" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="LinkedIn Profile">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 6a2 2 0 1 1-2-2 2 2 0 0 1 2 2z"/></svg>
-            </a>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Right Column: Interactive Portrait & Optical Chamber -->
-      <div class="hero-specimen-chamber reveal-on-scroll">
-        <div class="specimen-frame-wrapper">
-          <div class="specimen-ambient-glow"></div>
-          <div class="specimen-card-container spotlight-card">
-            
-            <!-- Corner Reticle Indicators -->
-            <div class="specimen-reticle tl"></div>
-            <div class="specimen-reticle tr"></div>
-            <div class="specimen-reticle bl"></div>
-            <div class="specimen-reticle br"></div>
-
-            <div class="specimen-media-view">
-              <img src="./assets/profile.jpg" alt="Agrim Srivastava portrait" class="specimen-image" loading="eager" />
-              
-              <div class="specimen-overlay-telemetry">
-                <span class="specimen-role-tag">Software &amp; AI Systems Engineer</span>
-                <span class="specimen-subject-name">Agrim Srivastava</span>
-                <span class="specimen-subtext">Lucknow, India &bull; IIT Madras BS (CGPA 8.88)</span>
-              </div>
-            </div>
-
-          </div>
+        <div class="portrait-stage">
+          <canvas id="portrait-dither" role="img" aria-label="An animated grayscale dither portrait of Agrim Srivastava"></canvas>
+          <img class="portrait-static" src="assets/portrait-dither.webp" alt="" aria-hidden="true" width="1024" height="1024">
         </div>
       </div>
+      <a class="scroll-cue" href="#experience" aria-label="Scroll to experience"><span>Follow the thread</span><i></i></a>
+    </header>
 
+    <section class="section experience" id="experience" data-section="experience" style="--glow:#7fd6d0;--accent:#6ec2be" aria-labelledby="experience-title">
+      <div class="wrap">
+        <header class="section-head" data-reveal><p class="section-index eyebrow">01 / Experience</p><h2 id="experience-title">People, systems,<br><em>and the work between.</em></h2><p class="section-intro">Teaching, product engineering, and a close look at what makes technology useful in real life.</p></header>
+        <div class="experience-list">
+          <article class="role role-featured" data-reveal>
+            <div class="role-top"><span class="meta">May 2026 — Present · IIT Madras</span><span class="role-mark">01</span></div>
+            <h3>Teaching Assistant &amp; Exam Administrator</h3>
+            <p class="role-lede">Tools in Data Science · working with S. Anand and the course team</p>
+            <p>The course treats AI as a practical tool while keeping responsibility with the person using it. The emphasis is on checking generated answers, understanding system boundaries, and reasoning through the cases where a tool fails—not accepting output on trust.</p>
+            <div class="role-details"><div><h4>Assessment &amp; operations</h4><p>Help design dynamic, seed-randomized assignments and server-side checks that test whether a solution holds up when conditions change. Administer exam workflows across 19+ assessments using Cloudflare Workers, Durable Objects, and SQLite archives.</p></div><div><h4>Teaching &amp; mentorship</h4><p>Support students with Python and CLI workflows, FastAPI and Docker, local model serving with vLLM and Ollama, prompt caching, WebMCP, and multi-agent coordination. I also answer technical questions and help learners debug their own setup.</p></div></div>
+          </article>
+          <article class="role" data-reveal><div class="role-top"><span class="meta">2026 — Present · IIT Madras</span><span class="role-mark">02</span></div><h3>Tech Intern · Study Portal</h3><p class="role-lede">Student-facing infrastructure across IIT Madras programmes</p><p>I contribute to the study portal and its programme microsites, improving how course and faculty data moves from structured source files into published pages.</p><ul class="role-points"><li>Modernize static-site generation and shared portal templates.</li><li>Add schema checks that catch incomplete or inconsistent programme data before release.</li><li>Work across staged changes and production branches; contribute to the portal and IIM Udaipur microsite.</li></ul></article>
+          <article class="role" data-reveal><div class="role-top"><span class="meta">February — April 2026 · annam.ai</span><span class="role-mark">03</span></div><h3>Software Development Engineer Intern</h3><p class="role-lede">Live cohost polling and question-generation platform</p><p>I shipped seven verified production commits across the React and TypeScript platform, improving the experience for hosts, cohosts, and participants during live sessions.</p><ul class="role-points"><li>Built interval-based question generation from lecture segments and fixed the first-segment edge case.</li><li>Closed an authorization bug that allowed an unprivileged user to end a room.</li><li>Corrected participant and timer synchronization, and replaced disruptive full-page errors with non-blocking feedback.</li></ul></article>
+          <article class="role" data-reveal><div class="role-top"><span class="meta">October 2025 — January 2026 · IIT Madras</span><span class="role-mark">04</span></div><h3>Teaching Assistant Intern · Statistics</h3><p class="role-lede">Statistics for Data Science I &amp; II</p><p>Ran review sessions on probability and statistical inference, evaluated student submissions, and responded to course questions on Discourse.</p><ul class="role-points"><li>Built a citation-grounded retrieval assistant over course materials and more than 100 resolved forum threads.</li><li>Helped students connect statistical concepts with the practical details of assignments and tools.</li></ul></article>
+        </div>
+      </div>
     </section>
 
-    <!-- ==================== SECTION: ARCHITECTURAL SPECIMEN DECK (PROJECTS) ==================== -->
-    <section id="projects" class="section-block">
-      
-      <div class="section-label-tape">01 // FEATURED SYSTEMS &amp; ARCHITECTURE</div>
-      
-      <div class="projects-header-row reveal-on-scroll">
-        <div>
-          <h2 class="section-title">Engineered Systems &amp; Artifacts</h2>
-          <p class="section-subtitle">
-            Not a passive grid of screenshots. Inspect live architectural topologies, deterministic guardrail traces, and verified production benchmarks.
-          </p>
-        </div>
-
-        <!-- View Mode Switcher -->
-        <div class="view-mode-bar">
-          <button class="view-mode-btn active" data-mode="deck" title="Interactive split deck with architecture topology">Specimen Chamber</button>
-          <button class="view-mode-btn" data-mode="mosaic" title="Full catalog grid of all systems">Catalog Grid</button>
-        </div>
+    <section class="section" id="about" data-section="about" style="--glow:#cfe6f5;--accent:#bfd7ea" aria-labelledby="about-title">
+      <div class="wrap">
+        <header class="section-head" data-reveal><p class="section-index eyebrow">02 / About</p><h2 id="about-title">Curious by nature.<br><em>Grounded in the details.</em></h2><p class="section-intro">I’m a software engineer and an undergraduate at IIT Madras, interested in how careful engineering can make complex things feel clear.</p></header>
+        <div class="about-grid"><blockquote class="pull-quote" data-reveal>“Good systems make room for people to think, learn, and do <em>more meaningful work.</em>”</blockquote><div class="about-prose" data-reveal><p>I work across applied AI, full-stack products, and the infrastructure that supports them.</p><p>In practice, that means checking what a model says against a source, tracing a bug to its actual cause, and sweating the small interaction that makes a tool easier to use.</p><p>I also teach and mentor. Explaining a technical idea clearly is one of my favourite ways to find out whether I understand it.</p><div class="values" aria-label="Areas of interest"><span class="value">Applied AI</span><span class="value">Reliable systems</span><span class="value">Developer tools</span><span class="value">Teaching</span></div></div></div>
       </div>
-
-      <!-- Category Filter Pills -->
-      <div class="category-filter-bar reveal-on-scroll">
-        <button class="filter-pill-btn active" data-filter="all">
-          <span>All Systems</span>
-          <span class="pill-counter" id="count-all">7</span>
-        </button>
-        <button class="filter-pill-btn" data-filter="agentic">
-          <span>Multi-Agent AI &amp; LLMs</span>
-          <span class="pill-counter" id="count-agentic">3</span>
-        </button>
-        <button class="filter-pill-btn" data-filter="distributed">
-          <span>Distributed &amp; Full-Stack</span>
-          <span class="pill-counter" id="count-distributed">2</span>
-        </button>
-        <button class="filter-pill-btn" data-filter="visualizer">
-          <span>Math &amp; Simulations</span>
-          <span class="pill-counter" id="count-visualizer">1</span>
-        </button>
-        <button class="filter-pill-btn" data-filter="systems">
-          <span>Compilers &amp; Tools</span>
-          <span class="pill-counter" id="count-systems">1</span>
-        </button>
-      </div>
-
-      <!-- Split Specimen Deck Container -->
-      <div class="specimen-deck-container" id="specimen-deck-container">
-        <!-- Left: Index Column -->
-        <div class="specimen-index-column" id="specimen-index-column">
-          <!-- Injected dynamically via JS -->
-        </div>
-
-        <!-- Right: Active Specimen Stage -->
-        <div class="specimen-stage-chamber" id="specimen-stage-chamber">
-          <!-- Injected dynamically via JS -->
-        </div>
-      </div>
-
-      <!-- Alternative Full Mosaic Grid View -->
-      <div class="projects-mosaic-grid" id="projects-mosaic-grid">
-        <!-- Injected dynamically via JS when 'Catalog Grid' is toggled -->
-      </div>
-
     </section>
 
-    <!-- ==================== SECTION: THE CHRONICLE (EXPERIENCE) ==================== -->
-    <section id="experience" class="section-block">
-      
-      <div class="section-label-tape">02 // OPERATIONAL CHRONICLE</div>
-
-      <div class="reveal-on-scroll">
-        <h2 class="section-title">Verified Engagements &amp; Missions</h2>
-        <p class="section-subtitle" style="margin-bottom: 50px;">
-          High-responsibility technical roles spanning academic edge platforms, production startups, and instructional leadership.
-        </p>
+    <section class="projects-section" id="projects" data-section="projects" style="--glow:#f7a265;--accent:#f4c16b" aria-labelledby="projects-title">
+      <div class="projects-stage">
+        <div class="projects-heading wrap"><div><p class="eyebrow section-index">03 / Selected projects</p><h2 id="projects-title">Problems worth<br><em>getting into.</em></h2></div></div>
+        <div class="projects-window wrap"><div class="project-track">
+          <article class="project-slide" style="--card:#e89b63;--card-rgb:232,155,99">
+            <header class="slide-meta"><span>Independent client project</span><span>01 / 08 · 2025–26</span></header><div class="slide-main"><div class="slide-art" aria-hidden="true"><span class="art-number">01</span><span class="art-caption">A marketplace<br>with real workflows</span><i></i><b></b></div><div class="slide-copy"><p class="eyebrow">Live product · Full stack</p><h3>TutorSolve</h3><p class="slide-summary">A live assignment marketplace connecting students with vetted subject experts.</p><div class="build-note"><h4>Engineering the transaction</h4><p>Built the student, expert, and admin workflows around verified quotations, funded milestones, approval-based release, and protected file previews. Added real-time chat and background task handling for the work around each transaction.</p></div><div class="slide-links"><a href="https://github.com/agrimsri/tutorsolve-website" target="_blank" rel="noreferrer">View repository ↗</a></div></div></div>
+          </article>
+          <article class="project-slide" style="--card:#a7d6d1;--card-rgb:110,194,190">
+            <header class="slide-meta"><span>Independent product</span><span>02 / 08 · 2025–26</span></header><div class="slide-main"><div class="slide-art" aria-hidden="true"><span class="art-number">02</span><span class="art-caption">Your notes.<br>Still yours.</span><i></i><b></b></div><div class="slide-copy"><p class="eyebrow">Desktop systems · Local first</p><h3>Inkpage</h3><p class="slide-summary">A cross-platform infinite-canvas notes app, built around local storage and a path out of proprietary OneNote archives.</p><div class="build-note"><h4>Reading a closed file format</h4><p>Implemented a Rust parser for OneNote’s revision store and page structures, then mapped rich text, images, and pen strokes into open data. Added SQLite FTS5 search and a local server connecting the Rust core to the canvas UI.</p></div><div class="slide-links"><a href="https://github.com/agrimsri/inkpage" target="_blank" rel="noreferrer">View repository ↗</a></div></div></div>
+          </article>
+          <article class="project-slide" style="--card:#b8b9e4;--card-rgb:140,145,210">
+            <header class="slide-meta"><span>Team project · Team Kernel Panic</span><span>03 / 08 · 2025–26</span></header><div class="slide-main"><div class="slide-art" aria-hidden="true"><span class="art-number">03</span><span class="art-caption">Consent, before<br>the first packet</span><i></i><b></b></div><div class="slide-copy"><p class="eyebrow">Android · Privacy engineering</p><h3>TraceVeil</h3><p class="slide-summary">A team-built Android privacy auditor that checks whether apps contact tracking services before a person gives consent.</p><div class="build-note"><h4>Inspecting locally, without root</h4><p>Combined an Android VpnService DNS inspector with an on-device INT8 TensorFlow Lite model for dark-pattern detection. The project includes a Python device-testing CLI and a GitHub Actions gate for pre-consent network activity.</p></div><div class="slide-links"><a href="https://github.com/agrimsri/IQOO-Kernel-Panic" target="_blank" rel="noreferrer">View repository ↗</a></div></div></div>
+          </article>
+          <article class="project-slide" style="--card:#f1bd7b;--card-rgb:240,137,74">
+            <header class="slide-meta"><span>Developer tools · Agent retrieval</span><span>04 / 08 · 2025–26</span></header><div class="slide-main"><div class="slide-art" aria-hidden="true"><span class="art-number">04</span><span class="art-caption">A map through<br>the codebase</span><i></i><b></b></div><div class="slide-copy"><p class="eyebrow">Code intelligence · MCP</p><h3>Code-Crawler</h3><p class="slide-summary">A local code intelligence engine that helps coding agents find symbols, understand dependencies, and trace calls.</p><div class="build-note"><h4>Search across three kinds of context</h4><p>Routes queries across Tantivy BM25, LanceDB semantic search, and SCIP code graphs with reciprocal-rank fusion. Syntax-aware chunking, caller/callee pointers, and Merkle-based incremental indexing preserve useful structure as a repository changes.</p></div><div class="slide-links"><a href="https://github.com/agrimsri/code-crawler" target="_blank" rel="noreferrer">View repository ↗</a></div></div></div>
+          </article>
+          <article class="project-slide" style="--card:#dbb8a1;--card-rgb:184,138,98">
+            <header class="slide-meta"><span>Kaggle competition</span><span>05 / 08 · 2024–26</span></header><div class="slide-main"><div class="slide-art" aria-hidden="true"><span class="art-number">05</span><span class="art-caption">Small defects.<br>High-resolution eyes.</span><i></i><b></b></div><div class="slide-copy"><p class="eyebrow">Computer vision · Segmentation</p><h3>Steel defect detection</h3><p class="slide-summary">A steel-surface inspection model designed for thin scratches and rare defects in high-resolution grayscale images.</p><div class="build-note"><h4>Keep the tiny signal</h4><p>Used a single-channel EfficientNetV2-S encoder with a stride-2 feature pyramid to retain fine boundaries. Combined Dice and weighted classification losses with stochastic weight averaging and four-view test-time augmentation; reached a 0.69420 leaderboard Dice score (top 18.8%).</p></div><div class="slide-links"><a href="https://github.com/agrimsri/industrial-surface-defect-detection" target="_blank" rel="noreferrer">View repository ↗</a></div></div></div>
+          </article>
+          <article class="project-slide" style="--card:#a7d1a3;--card-rgb:141,161,106">
+            <header class="slide-meta"><span>Applied AI · Active project</span><span>06 / 08 · 2026</span></header><div class="slide-main"><div class="slide-art" aria-hidden="true"><span class="art-number">06</span><span class="art-caption">Food context<br>matters.</span><i></i><b></b></div><div class="slide-copy"><p class="eyebrow">Multimodal · Multi-agent</p><h3>Nutri Agent</h3><p class="slide-summary">A nutrition assistant built around Indian meals, portions, ingredients, and the safety limits of generated advice.</p><div class="build-note"><h4>Make the answer earn its confidence</h4><p>A LangGraph supervisor routes between image understanding, retrieval, and structured nutrition data. A custom food dataset covers regional dishes and everyday portion terms; a guard layer checks recommendations and adversarial prompts before they reach a user.</p></div><div class="slide-links"><a href="https://github.com/agrimsri/nutri_agent" target="_blank" rel="noreferrer">View repository ↗</a></div></div></div>
+          </article>
+          <article class="project-slide" style="--card:#c7d9e7;--card-rgb:191,215,234">
+            <header class="slide-meta"><span>Teaching tool · IIT Madras</span><span>07 / 08 · 2025–26</span></header><div class="slide-main"><div class="slide-art" aria-hidden="true"><span class="art-number">07</span><span class="art-caption">Answers with<br>their sources</span><i></i><b></b></div><div class="slide-copy"><p class="eyebrow">Information retrieval · Education</p><h3>Teaching Assistant RAG</h3><p class="slide-summary">A course-support assistant that grounds answers in official material and resolved student discussions.</p><div class="build-note"><h4>Retrieve, cite, or say it doesn’t know</h4><p>Indexed more than 100 resolved Discourse threads alongside the course curriculum. Retrieval returns relevant passages with source references; response instructions limit the model to that context and route out-of-syllabus questions back to a human TA.</p></div><div class="slide-links"><a href="https://github.com/agrimsri/Teaching-Assistant-RAG-Implementation" target="_blank" rel="noreferrer">View repository ↗</a></div></div></div>
+          </article>
+          <article class="project-slide" style="--card:#e0c99b;--card-rgb:141,161,106">
+            <header class="slide-meta"><span>Production infrastructure · IIT Madras</span><span>08 / 08 · 2026</span></header><div class="slide-main"><div class="slide-art" aria-hidden="true"><span class="art-number">08</span><span class="art-caption">One portal.<br>Many programmes.</span><i></i><b></b></div><div class="slide-copy"><p class="eyebrow">Web infrastructure · Tech intern</p><h3>Study portal &amp; microsites</h3><p class="slide-summary">Shared site-generation infrastructure for student portals and programme microsites across multiple academic divisions.</p><div class="build-note"><h4>Make updates safer to publish</h4><p>Contributed 41 verified commits across the main portal and IIM Udaipur microsite. Work spans data schemas, Pelican builds, Jinja2 templates, responsive navigation, staged releases, and an integrated student-query assistant.</p></div><div class="slide-links"><a href="https://github.com/study-iitm/study-iitm-website" target="_blank" rel="noreferrer">View repository ↗</a></div></div></div>
+          </article>
+        </div></div>
+        <div class="projects-controls"><p class="project-position" aria-live="polite"><span id="project-current">01</span><i></i>08</p><div class="project-progress" aria-hidden="true"><span id="project-progress-fill"></span></div><div class="project-buttons"><button type="button" id="project-prev" aria-label="Previous project">←</button><button type="button" id="project-next" aria-label="Next project">→</button></div></div>
       </div>
-
-      <div class="chronicle-container">
-        <!-- Vertical Dynamic Laser Fill Progress Line -->
-        <div class="chronicle-track-line" aria-hidden="true">
-          <div class="chronicle-track-fill" id="chronicle-track-fill"></div>
-        </div>
-
-        <!-- Role 1: TDS Teaching Assistant & Exam Administrator -->
-        <article class="chronicle-item reveal-on-scroll">
-          <div class="chronicle-node-point active"></div>
-          
-          <div class="chronicle-card spotlight-card">
-            <div class="chronicle-top-bar">
-              <div>
-                <div class="chronicle-status-indicator">
-                  <span class="status-pulse-dot"></span>
-                  <span class="status-text">ACTIVE ROSTER &bull; TERM 26T3</span>
-                </div>
-                <h3 class="chronicle-role-title">Teaching Assistant &amp; Exam Administrator</h3>
-                <div class="chronicle-organization">
-                  <span>Tools in Data Science (TDS) &bull; Indian Institute of Technology Madras</span>
-                </div>
-              </div>
-              <span class="chronicle-timeframe">May 2026 – Present &bull; Terms 26T2 &amp; 26T3</span>
-            </div>
-
-            <div class="chronicle-lead-instructor">
-              Co-administered alongside <strong>S. Anand</strong> (LLM Psychologist at Straive, Founder of Gramener)
-            </div>
-
-            <ul class="chronicle-bullet-list">
-              <li>
-                <strong>Exam Platform Administration (`sanand0/exam`):</strong> Hardcoded privileged Exam Admin managing high-stakes assessments across 19+ exams and assignments on <strong>Cloudflare Workers, Durable Objects, SQLite archives, and Cloudflare Tunnels</strong>.
-              </li>
-              <li>
-                <strong>Adversarial Question Design &amp; Hardening:</strong> Engineered seed-randomized assessment questions and server-side evaluation logic (`a-*.js`) that dynamically defend exams against automated heuristic LLM solvers using cryptographic check tokens.
-              </li>
-              <li>
-                <strong>Forensic Terminal Telemetry:</strong> Performed real-time student terminal replay forensics via `termlog_review.py` to audit keystrokes, execution workflows, and solve-time anomalies across thousands of candidates.
-              </li>
-              <li>
-                <strong>AI Curriculum Co-Teaching:</strong> Mentored students on cutting-edge AI: Model Context Protocol (WebMCP), local LLM inference (vLLM, llama.cpp, Ollama quantization), prompt caching, and FastAPI container services.
-              </li>
-            </ul>
-
-            <div class="chronicle-proof-row">
-              <a href="https://tds.s-anand.net/" target="_blank" rel="noopener noreferrer" class="proof-link-pill">
-                <span>Official TA Roster (tds.s-anand.net)</span> ↗
-              </a>
-              <a href="https://github.com/sanand0/exam" target="_blank" rel="noopener noreferrer" class="proof-link-pill">
-                <span>Exam Platform Repo (sanand0/exam)</span> ↗
-              </a>
-              <span class="proof-link-pill verified-badge">
-                <span>Verified Active Term 26T3</span>
-              </span>
-            </div>
-          </div>
-        </article>
-
-        <!-- Role 2: SDE Intern annam.ai -->
-        <article class="chronicle-item reveal-on-scroll">
-          <div class="chronicle-node-point"></div>
-          
-          <div class="chronicle-card spotlight-card">
-            <div class="chronicle-top-bar">
-              <div>
-                <h3 class="chronicle-role-title">Software Development Engineer Intern</h3>
-                <div class="chronicle-organization">
-                  <span>annam.ai &bull; Remote</span>
-                </div>
-              </div>
-              <span class="chronicle-timeframe">Jan 2026 – Apr 2026</span>
-            </div>
-
-            <ul class="chronicle-bullet-list">
-              <li>
-                <strong>Security &amp; RBAC Hardening:</strong> Resolved critical room-termination and unauthorized state manipulation vulnerabilities by overhauling session authentication and role validation filters in production.
-              </li>
-              <li>
-                <strong>Live Transcript Question Pipeline:</strong> Engineered a real-time interval question generation engine from live meeting audio transcripts, enabling dynamic interactive polling during student sessions.
-              </li>
-              <li>
-                <strong>Production React Dashboards:</strong> Architected instructor command cockpit using <strong>React</strong> (Vite, Zustand, TanStack Router, TanStack Query), replacing legacy interfaces with sub-100ms transitions.
-              </li>
-              <li>
-                <strong>Full-Stack Backend Integration:</strong> Authored backend services across <strong>Node.js, Express, MongoDB, and Firebase Admin</strong> with strict Git-flow discipline and automated linting.
-              </li>
-            </ul>
-
-            <div class="chronicle-proof-row">
-              <span class="proof-link-pill">
-                <span>Production Experience Verified</span>
-              </span>
-              <span class="proof-link-pill">
-                <span>Feature: Dynamic Transcript Polling</span>
-              </span>
-            </div>
-          </div>
-        </article>
-
-        <!-- Role 3: Tech Intern study-iitm Portal -->
-        <article class="chronicle-item reveal-on-scroll">
-          <div class="chronicle-node-point"></div>
-          
-          <div class="chronicle-card spotlight-card">
-            <div class="chronicle-top-bar">
-              <div>
-                <h3 class="chronicle-role-title">Tech Intern — Portal Architecture</h3>
-                <div class="chronicle-organization">
-                  <span>Indian Institute of Technology Madras &bull; Chennai, India</span>
-                </div>
-              </div>
-              <span class="chronicle-timeframe">2026</span>
-            </div>
-
-            <ul class="chronicle-bullet-list">
-              <li>
-                Contributed to the modern portal architecture and microsites for the official IIT Madras BS student ecosystem (`study-iitm`).
-              </li>
-              <li>
-                Refined semantic markup, improved responsiveness across mobile viewports, and integrated consistent navigation layouts.
-              </li>
-            </ul>
-
-            <div class="chronicle-proof-row">
-              <span class="proof-link-pill">
-                <span>IIT Madras Official Microsite Team</span>
-              </span>
-            </div>
-          </div>
-        </article>
-
-        <!-- Role 4: Teaching Assistant — Probability & Statistics -->
-        <article class="chronicle-item reveal-on-scroll">
-          <div class="chronicle-node-point"></div>
-          
-          <div class="chronicle-card spotlight-card">
-            <div class="chronicle-top-bar">
-              <div>
-                <h3 class="chronicle-role-title">Teaching Assistant — Probability &amp; Statistics</h3>
-                <div class="chronicle-organization">
-                  <span>Indian Institute of Technology Madras &bull; Chennai, India</span>
-                </div>
-              </div>
-              <span class="chronicle-timeframe">Oct 2025 – Apr 2026</span>
-            </div>
-
-            <ul class="chronicle-bullet-list">
-              <li>
-                Mentored undergraduate cohorts through weekly problem-solving labs, breaking down random variables, expectation bounds, and hypothesis testing.
-              </li>
-              <li>
-                Triaged hundreds of Discourse queries at scale, delivering structured conceptual explanations and resolving edge-case grading disputes.
-              </li>
-            </ul>
-
-            <div class="chronicle-proof-row">
-              <span class="proof-link-pill" style="color:var(--accent-gold);">
-                <span>Academic Record: Stats II Grade S</span>
-              </span>
-            </div>
-          </div>
-        </article>
-
-      </div>
-
     </section>
 
-    <!-- ==================== SECTION: SKILL REGISTER & EVIDENCE MATRIX ==================== -->
-    <section id="skills" class="section-block">
-      
-      <div class="section-label-tape">03 // EVIDENCE-BACKED SKILL REGISTER</div>
-
-      <div class="skills-matrix-intro reveal-on-scroll">
-        <h2 class="section-title">Demonstrated Capabilities</h2>
-        <p class="section-subtitle">
-          Directly referenced from the verified skill register, backed by official IIT Madras course grades, course leadership, and production deployments.
-        </p>
+    <section class="section" id="education" data-section="education" style="--glow:#c9b88f;--accent:#8da16a" aria-labelledby="roots-title">
+      <div class="wrap">
+        <header class="section-head" data-reveal><p class="section-index eyebrow">04 / Education &amp; practice</p><h2 id="roots-title">Built on <em>good roots.</em></h2><p class="section-intro">A foundation in data science, shaped by software engineering, systems work, and a habit of staying curious.</p></header>
+        <div class="ground-grid">
+          <article class="study-card" data-reveal><p class="eyebrow">Current chapter</p><h3>Indian Institute of Technology Madras</h3><p>Bachelor of Science in Data Science and Applications. My studies have moved from programming and statistics to machine learning, software engineering, and large language models.</p><div class="study-line">Degree-level study · enrolled 2023</div></article>
+          <div data-reveal><dl class="soil"><div class="soil-row"><dt>Build</dt><dd>Python · TypeScript · JavaScript · SQL · Java</dd></div><div class="soil-row"><dt>Systems</dt><dd>Linux · Docker · Cloudflare Workers · distributed workflows</dd></div><div class="soil-row"><dt>Intelligence</dt><dd>Retrieval · multi-agent systems · evaluation · computer vision</dd></div><div class="soil-row"><dt>Practice</dt><dd>Clear writing · teaching · debugging · careful review</dd></div></dl><p class="principle"><span>✳</span><span>Start from evidence. Make complexity earn its place. Leave things easier to understand.</span></p></div>
+        </div>
       </div>
-
-      <!-- Domain Filters -->
-      <div class="skills-filter-tags reveal-on-scroll">
-        <button class="skill-tag-filter active" data-domain="all">All Disciplines</button>
-        <button class="skill-tag-filter" data-domain="ai">AI &amp; Agent Protocols</button>
-        <button class="skill-tag-filter" data-domain="systems">Systems &amp; Evals</button>
-        <button class="skill-tag-filter" data-domain="web">Full-Stack &amp; Distributed</button>
-        <button class="skill-tag-filter" data-domain="data">Math &amp; Data Engineering</button>
-      </div>
-
-      <!-- Cards Grid -->
-      <div class="skills-cards-grid">
-        
-        <!-- Skill 1 -->
-        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="ai">
-          <div class="skill-card-top">
-            <h4 class="skill-name">Agent Protocols &amp; WebMCP</h4>
-            <span class="skill-status-tag demonstrated">Demonstrated</span>
-          </div>
-          <p class="skill-evidence-text">
-            Model Context Protocol (WebMCP), agent-to-agent durable delegation, budget loops, and execution tool guardrails.
-          </p>
-          <div class="skill-course-badge">
-            <span>Proof: TDS TA &amp; NutriAgent multi-agent routing</span>
-          </div>
-        </div>
-
-        <!-- Skill 2 -->
-        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="ai">
-          <div class="skill-card-top">
-            <h4 class="skill-name">Local LLMs &amp; Model Serving</h4>
-            <span class="skill-status-tag demonstrated">Demonstrated</span>
-          </div>
-          <p class="skill-evidence-text">
-            Quantization (GGUF/AWQ), latency benchmarks, and local model serving on vLLM, llama.cpp, LM Studio, and Ollama.
-          </p>
-          <div class="skill-course-badge">
-            <span>Proof: TDS TA Week 2 curriculum co-teaching</span>
-          </div>
-        </div>
-
-        <!-- Skill 3 -->
-        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="ai">
-          <div class="skill-card-top">
-            <h4 class="skill-name">Prompt &amp; Context Engineering</h4>
-            <span class="skill-status-tag demonstrated">Demonstrated</span>
-          </div>
-          <p class="skill-evidence-text">
-            Reliable reasoning harnesses, structured JSON/Pydantic schemas, prompt caching, and context window optimization.
-          </p>
-          <div class="skill-course-badge">
-            <span>Proof: TDS TA Week 3 &amp; Discourse QA RAG Assistant</span>
-          </div>
-        </div>
-
-        <!-- Skill 4 -->
-        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="systems">
-          <div class="skill-card-top">
-            <h4 class="skill-name">Adversarial Evals &amp; Forensics</h4>
-            <span class="skill-status-tag strong-evidence">Strong Evidence</span>
-          </div>
-          <p class="skill-evidence-text">
-            Defending high-stakes exams against heuristic LLM solvers, seed randomization, and terminal replay forensics (`termlog_review.py`).
-          </p>
-          <div class="skill-course-badge">
-            <span>Proof: TDS Exam Admin (19+ exams) &amp; Software Testing Grade A</span>
-          </div>
-        </div>
-
-        <!-- Skill 5 -->
-        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="systems">
-          <div class="skill-card-top">
-            <h4 class="skill-name">Edge Compute &amp; Serverless</h4>
-            <span class="skill-status-tag demonstrated">Demonstrated</span>
-          </div>
-          <p class="skill-evidence-text">
-            Cloudflare Workers, Durable Objects, zero-trust Cloudflare Tunnels, OAuth integration, and distributed SQLite archives.
-          </p>
-          <div class="skill-course-badge">
-            <span>Proof: TDS Exam Platform (`sanand0/exam`)</span>
-          </div>
-        </div>
-
-        <!-- Skill 6 -->
-        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="systems">
-          <div class="skill-card-top">
-            <h4 class="skill-name">Linux Systems &amp; Shell Automation</h4>
-            <span class="skill-status-tag strong-evidence">Strong Evidence</span>
-          </div>
-          <p class="skill-evidence-text">
-            Shell automation, headless server management, security permissions, CLI tools, and kernel diagnostic utilities.
-          </p>
-          <div class="skill-course-badge">
-            <span>Proof: System Commands (Grade S - Top 1% Distinction)</span>
-          </div>
-        </div>
-
-        <!-- Skill 7 -->
-        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="web">
-          <div class="skill-card-top">
-            <h4 class="skill-name">Python &amp; Modern CLI Tooling</h4>
-            <span class="skill-status-tag strong-evidence">Strong Evidence</span>
-          </div>
-          <p class="skill-evidence-text">
-            Fast packaging with `uv`/`uvx`, PEP 723 single-file metadata, and 45+ open-source repositories.
-          </p>
-          <div class="skill-course-badge">
-            <span>Proof: Programming in Python (Grade S), PDSA (Grade A)</span>
-          </div>
-        </div>
-
-        <!-- Skill 8 -->
-        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="web">
-          <div class="skill-card-top">
-            <h4 class="skill-name">Vue.js &amp; Reactive Frontend</h4>
-            <span class="skill-status-tag strong-evidence">Strong Evidence</span>
-          </div>
-          <p class="skill-evidence-text">
-            Reactive SPAs, Pinia store architecture, role-based route guards, and component design systems.
-          </p>
-          <div class="skill-course-badge">
-            <span>Proof: MAD II Capstone Project (Grade S - 10/10)</span>
-          </div>
-        </div>
-
-        <!-- Skill 9 -->
-        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="web">
-          <div class="skill-card-top">
-            <h4 class="skill-name">Flask REST APIs &amp; Full-Stack</h4>
-            <span class="skill-status-tag strong-evidence">Strong Evidence</span>
-          </div>
-          <p class="skill-evidence-text">
-            Multi-tier transaction platforms, JWT authentication, isolated Socket.IO channels, and Stripe escrow integration.
-          </p>
-          <div class="skill-course-badge">
-            <span>Proof: MAD I Capstone (Grade S) &amp; TutorSolve Deployed</span>
-          </div>
-        </div>
-
-        <!-- Skill 10 -->
-        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="web">
-          <div class="skill-card-top">
-            <h4 class="skill-name">Celery &amp; Redis Queues</h4>
-            <span class="skill-status-tag demonstrated">Demonstrated</span>
-          </div>
-          <p class="skill-evidence-text">
-            Periodic beat schedules, asynchronous background CSV exports, query caching, and worker failover handling.
-          </p>
-          <div class="skill-course-badge">
-            <span>Proof: Household-Application Capstone (Grade S)</span>
-          </div>
-        </div>
-
-        <!-- Skill 11 -->
-        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="data">
-          <div class="skill-card-top">
-            <h4 class="skill-name">Probability &amp; Mathematical Stats</h4>
-            <span class="skill-status-tag strong-evidence">Strong Evidence</span>
-          </div>
-          <p class="skill-evidence-text">
-            Hypothesis testing, regression bounds, Bayesian parameter estimation, and cohort lab leadership.
-          </p>
-          <div class="skill-course-badge">
-            <span>Proof: Stats I (Grade A), Stats II (Grade S), IITM TA Role</span>
-          </div>
-        </div>
-
-        <!-- Skill 12 -->
-        <div class="skill-evidence-card spotlight-card reveal-on-scroll" data-domain="data">
-          <div class="skill-card-top">
-            <h4 class="skill-name">DBMS &amp; Relational SQL</h4>
-            <span class="skill-status-tag strong-evidence">Strong Evidence</span>
-          </div>
-          <p class="skill-evidence-text">
-            Relational schemas, indexing strategies, complex joins, AST-validated query parsing, and production maintenance at annam.ai.
-          </p>
-          <div class="skill-course-badge">
-            <span>Proof: DBMS (Grade A), BDM (Grade A), NutriAgent AST SQL</span>
-          </div>
-        </div>
-
-      </div>
-
     </section>
 
-    <!-- ==================== SECTION: INTERACTIVE EXPECTATION-MAXIMIZATION SANDBOX ==================== -->
-    <section id="sandbox" class="section-block">
-      
-      <div class="section-label-tape">04 // LIVE MATHEMATICAL SIMULATION</div>
-
-      <div class="reveal-on-scroll">
-        <h2 class="section-title">Expectation-Maximization Sandbox</h2>
-        <p class="section-subtitle" style="margin-bottom: 24px;">
-          Live Gaussian Mixture Model (GMM) simulation running on HTML5 Canvas. Click anywhere to inject 2D sample points, or hit <strong>Auto Converge</strong> to observe covariance contours adaptively adapt and rotate in real time.
-        </p>
+    <footer class="section contact" id="contact" data-section="contact" style="--glow:#b7bceb;--accent:#d4c2a1" aria-labelledby="contact-title">
+      <div class="wrap">
+        <div class="contact-stage" data-reveal><div class="contact-stars" aria-hidden="true"><i style="top:12%;left:70%;--phase:-1s"></i><i style="top:30%;left:91%;--phase:-3s"></i><i style="top:78%;left:78%;--phase:-2s"></i><i style="top:68%;left:58%;--phase:-.5s"></i><i style="top:20%;left:53%;--phase:-2.5s"></i></div><p class="eyebrow">05 / Contact · the next chapter</p><h2 id="contact-title">Have a good<br><em>problem in mind?</em></h2><p class="contact-text">I’m always interested in thoughtful teams, interesting systems, and ideas worth making real.</p><div class="contact-links"><a class="text-link" href="mailto:agrimsri26@gmail.com">Write me an email <span aria-hidden="true">↗</span></a><a class="text-link" href="https://www.linkedin.com/in/agrim-srivastava-26l/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><a class="text-link" href="https://github.com/agrimsri" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a></div></div>
+        <div class="footer"><span>Made slowly, with curiosity and care.</span><span>© <span id="year">2026</span> Agrim Srivastava</span><a class="back-top" href="#home">Back to the top ↑</a></div>
       </div>
-
-      <div class="sandbox-card spotlight-card reveal-on-scroll">
-        
-        <div class="sandbox-controls-row">
-          <div class="sandbox-btn-group">
-            <button class="sandbox-btn btn-run" id="em-btn-step">Step EM Once →</button>
-            <button class="sandbox-btn btn-auto" id="em-btn-auto">Auto Converge ▶</button>
-            <button class="sandbox-btn btn-reset" id="em-btn-reset">Re-randomize Priors</button>
-          </div>
-
-          <!-- Presets -->
-          <div class="sandbox-presets-group">
-            <span class="preset-label">Presets:</span>
-            <button class="preset-btn active" data-preset="bimodal">Bimodal</button>
-            <button class="preset-btn" data-preset="triangular">3-Cluster</button>
-            <button class="preset-btn" data-preset="ring">Donut + Core</button>
-            <button class="preset-btn" data-preset="clear">Clear All</button>
-          </div>
-
-          <div class="sandbox-telemetry-readout" id="em-telemetry-readout">
-            Iteration: 0 &bull; Points: 55 &bull; K = 2 Components &bull; Log-L: -
-          </div>
-        </div>
-
-        <div class="canvas-container-outer">
-          <canvas id="dedicated-em-canvas"></canvas>
-          <div class="sandbox-canvas-hint">Click or drag on the canvas to add 2D data points</div>
-        </div>
-
-        <div class="sandbox-footer-legend">
-          <div class="legend-item">
-            <span class="legend-color-dot comp1"></span>
-            <span>Gaussian Component A (Gold Prior)</span>
-          </div>
-          <div class="legend-item">
-            <span class="legend-color-dot comp2"></span>
-            <span>Gaussian Component B (Cyan Prior)</span>
-          </div>
-          <div class="legend-item">
-            <span class="legend-color-dot blend"></span>
-            <span>Soft Responsibility Blended Samples (E-Step)</span>
-          </div>
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- ==================== SECTION: CONTACT & CONNECT ==================== -->
-    <section id="contact" class="section-block" style="border-bottom:none;">
-      
-      <div class="contact-manifesto-box spotlight-card reveal-on-scroll">
-        <div class="section-label-tape" style="justify-content:center; margin-bottom:12px;">05 // INQUIRIES &amp; DIALOGUE</div>
-        
-        <h2 class="contact-title">Let's build systems that matter.</h2>
-        
-        <p class="contact-text">
-          I'm open to Software Engineering (SWE), Applied AI / Agent Systems, and high-impact infrastructure roles. 
-          If you are building products where correctness, resilience, and architectural discipline are valued, my inbox is always open.
-        </p>
-
-        <div class="contact-actions-row">
-          <a href="mailto:agrimsri26@gmail.com" class="btn-email-primary">
-            <span>agrimsri26@gmail.com</span>
-          </a>
-
-          <button id="contact-btn-copy" class="btn-copy-address">
-            <span>Copy Address</span>
-          </button>
-        </div>
-
-        <div class="contact-direct-links">
-          <a href="https://github.com/agrimsri" target="_blank" rel="noopener noreferrer" class="contact-direct-link">
-            <span>github.com/agrimsri</span> ↗
-          </a>
-          <span>&bull;</span>
-          <a href="https://www.linkedin.com/in/agrim-srivastava-26l" target="_blank" rel="noopener noreferrer" class="contact-direct-link">
-            <span>linkedin.com/in/agrim-srivastava-26l</span> ↗
-          </a>
-          <span>&bull;</span>
-          <a href="./face.html" class="contact-direct-link" title="Interactive 3D Face Model Viewer">
-            <span>3D Model Lab</span> ↗
-          </a>
-          <span>&bull;</span>
-          <span>Lucknow, India</span>
-        </div>
-
-      </div>
-
-    </section>
-
+    </footer>
   </main>
-
-  <!-- Site Footer -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-left">
-        <span class="footer-bullet"></span>
-        <span>Agrim Srivastava &bull; Indian Institute of Technology Madras</span>
-      </div>
-      <div class="footer-right">
-        <span>Obsidian Editorial Systems Design &bull; Hosted via GitHub Pages</span>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Main JavaScript Engine -->
-  <script src="./js/main.js"></script>
+  <script>
+    (()=>{
+      const root=document.documentElement,sections=[...document.querySelectorAll('[data-section]')],navLinks=[...document.querySelectorAll('.compass a')],canvas=document.querySelector('#stars'),ctx=canvas.getContext('2d',{alpha:true});
+      document.querySelector('#year').textContent=new Date().getFullYear();
+      const prefersCalm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const savedTheme=localStorage.getItem('agrim-theme');if(savedTheme==='dawn'||savedTheme==='dusk')root.dataset.theme=savedTheme;
+      const calm=localStorage.getItem('agrim-calm')==='true'||prefersCalm;root.dataset.calm=calm;document.body.classList.toggle('calm',calm);
+      const themeButton=document.querySelector('#theme-toggle'),calmButton=document.querySelector('#calm-toggle');
+      function updateControls(){const dawn=root.dataset.theme==='dawn';themeButton.setAttribute('aria-label',`Switch to ${dawn?'dark':'light'} theme`);calmButton.setAttribute('aria-label',document.body.classList.contains('calm')?'Disable calm mode':'Enable calm mode')}
+      themeButton.addEventListener('click',()=>{root.dataset.theme=root.dataset.theme==='dawn'?'dusk':'dawn';localStorage.setItem('agrim-theme',root.dataset.theme);updateControls()});
+      calmButton.addEventListener('click',()=>{document.body.classList.toggle('calm');root.dataset.calm=document.body.classList.contains('calm');localStorage.setItem('agrim-calm',root.dataset.calm);if(document.body.classList.contains('calm')){cancelAnimationFrame(portraitFrame);paintPortrait(true)}else paintPortrait();updateControls()});updateControls();
+      const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('seen');revealObserver.unobserve(entry.target)}}),{threshold:.12,rootMargin:'0px 0px -5% 0px'});document.querySelectorAll('[data-reveal]').forEach(el=>revealObserver.observe(el));
+      const sectionObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){sections.forEach(s=>s.classList.toggle('is-active',s===entry.target));navLinks.forEach(a=>{const active=a.getAttribute('href')==='#'+entry.target.id;if(active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')});document.title=entry.target.dataset.section.replace(/^./,c=>c.toUpperCase())+' — Agrim Srivastava';document.querySelector('meta[name="theme-color"]').content=root.dataset.theme==='dawn'?'#f3f2f9':({experience:'#0c1a1e',about:'#111923',projects:'#1b1310',education:'#16130e',contact:'#090b14',home:'#090b14'}[entry.target.dataset.section]||'#090b14')} }),{threshold:0,rootMargin:'-48% 0px -48% 0px'});sections.forEach(s=>sectionObserver.observe(s));
+      const projectSection=document.querySelector('#projects'),projectStage=projectSection.querySelector('.projects-stage'),projectWindow=projectSection.querySelector('.projects-window'),projectTrack=projectSection.querySelector('.project-track'),projectSlides=[...projectTrack.querySelectorAll('.project-slide')],projectCurrent=document.querySelector('#project-current'),projectFill=document.querySelector('#project-progress-fill'),previousProject=document.querySelector('#project-prev'),nextProject=document.querySelector('#project-next');
+      const clamp=(n,min,max)=>Math.min(max,Math.max(min,n));
+      function updateProjectStatus(progress){const index=Math.round(progress*(projectSlides.length-1));projectCurrent.textContent=String(index+1).padStart(2,'0');projectFill.style.width=`${Math.max(12.5,progress*100)}%`;previousProject.disabled=index===0;nextProject.disabled=index===projectSlides.length-1}
+      function getProjectProgress(){const top=projectSection.getBoundingClientRect().top+scrollY,range=Math.max(1,projectSection.offsetHeight-innerHeight);return clamp((scrollY-top)/range,0,1)}
+      let projectTween;
+      if(window.gsap&&window.ScrollTrigger){gsap.registerPlugin(ScrollTrigger);projectTween=gsap.to(projectTrack,{x:()=>-Math.max(0,projectTrack.scrollWidth-projectWindow.clientWidth),ease:'none',scrollTrigger:{trigger:projectSection,start:'top top',end:'bottom bottom',scrub:document.body.classList.contains('calm')?true:.65,invalidateOnRefresh:true,onUpdate:self=>updateProjectStatus(self.progress)}});ScrollTrigger.refresh()}else{const rail=()=>{const progress=getProjectProgress(),travel=Math.max(0,projectTrack.scrollWidth-projectWindow.clientWidth);projectTrack.style.transform=`translate3d(${-travel*progress}px,0,0)`;updateProjectStatus(progress)};addEventListener('scroll',rail,{passive:true});addEventListener('resize',rail,{passive:true});rail()}
+      function goToProject(delta){const top=projectSection.getBoundingClientRect().top+scrollY,range=Math.max(1,projectSection.offsetHeight-innerHeight),progress=getProjectProgress(),index=clamp(Math.round(progress*(projectSlides.length-1))+delta,0,projectSlides.length-1);scrollTo({top:top+range*index/(projectSlides.length-1),behavior:document.body.classList.contains('calm')?'auto':'smooth'})}
+      previousProject.addEventListener('click',()=>goToProject(-1));nextProject.addEventListener('click',()=>goToProject(1));
+      const portraitCanvas=document.querySelector('#portrait-dither'),portraitCtx=portraitCanvas.getContext('2d',{alpha:true}),sampleCanvas=document.createElement('canvas'),sampleCtx=sampleCanvas.getContext('2d',{willReadFrequently:true}),portraitImage=new Image();portraitImage.src='assets/portrait-grayscale.webp';let portraitFrame=0,portraitWidth=0,portraitHeight=0,portraitDpr=1,portraitVisible=true,lastPortraitPaint=0,portraitPointer={x:-1000,y:-1000,active:false};
+      function sizePortrait(){const box=portraitCanvas.getBoundingClientRect();if(!box.width||!box.height)return;portraitDpr=Math.min(devicePixelRatio||1,1.5);portraitWidth=Math.round(box.width);portraitHeight=Math.round(box.height);portraitCanvas.width=Math.round(portraitWidth*portraitDpr);portraitCanvas.height=Math.round(portraitHeight*portraitDpr);sampleCanvas.width=portraitWidth;sampleCanvas.height=portraitHeight;cancelAnimationFrame(portraitFrame);paintPortrait()}
+      function paintPortrait(still=false){if(!portraitImage.complete||!portraitImage.naturalWidth||!portraitWidth)return;const now=performance.now(),calm=document.body.classList.contains('calm')||prefersCalm;if(!still&&!calm&&now-lastPortraitPaint<32){portraitFrame=requestAnimationFrame(()=>paintPortrait(false));return}lastPortraitPaint=now;const w=portraitWidth,h=portraitHeight,cell=5;sampleCtx.clearRect(0,0,w,h);const scale=Math.max(w/portraitImage.naturalWidth,h/portraitImage.naturalHeight),sw=w/scale,sh=h/scale,sx=(portraitImage.naturalWidth-sw)/2,sy=(portraitImage.naturalHeight-sh)*.27;sampleCtx.drawImage(portraitImage,sx,sy,sw,sh,0,0,w,h);const pixels=sampleCtx.getImageData(0,0,w,h).data,t=now*.001;portraitCtx.setTransform(portraitDpr,0,0,portraitDpr,0,0);portraitCtx.clearRect(0,0,w,h);const bayer=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5];for(let y=0;y<h;y+=cell){for(let x=0;x<w;x+=cell){let r=0,g=0,b=0,alpha=0,n=0;for(let py=y;py<Math.min(y+cell,h);py+=3)for(let px=x;px<Math.min(x+cell,w);px+=3){const i=(py*w+px)*4;r+=pixels[i];g+=pixels[i+1];b+=pixels[i+2];alpha+=pixels[i+3];n++}r/=n;g/=n;b/=n;alpha/=n;if(alpha<160)continue;let lum=(.2126*r+.7152*g+.0722*b)/255;lum=clamp((lum-.5)*1.58+.5,0,1);if(lum<.12)continue;const cx=x+cell/2,cy=y+cell/2,dist=Math.hypot(cx-portraitPointer.x,cy-portraitPointer.y),influence=portraitPointer.active&&!calm?clamp(1-dist/165,0,1):0,shimmer=calm?0:Math.sin(t*1.25+y*.018+x*.006)*.035,hoverWave=influence*Math.sin(t*3.1-dist*.035+(x+y)*.004)*.14,threshold=(bayer[(Math.floor(y/cell)%4)*4+Math.floor(x/cell)%4]+.5)/16;if(lum+shimmer+hoverWave<(threshold*.92))continue;const edge=Math.min(cx,w-cx,cy,h-cy),edgeT=clamp(edge/(Math.min(w,h)*.14),0,1),edgeFade=edgeT*edgeT*(3-2*edgeT),phase=t*3-dist*.03+(x+y)*.008,pulse=.9+.1*Math.sin(t*1.65-(cx+cy)*.006),driftX=influence*Math.sin(phase)*2.6,driftY=influence*Math.cos(phase*1.13)*2.6,density=.19+lum*.26+influence*.035*Math.sin(phase),rad=cell*density*pulse;portraitCtx.globalAlpha=clamp((.3+lum*.48+influence*.12*Math.sin(phase))*pulse*edgeFade*(alpha/255),0,.82);portraitCtx.fillStyle=`rgb(${Math.round(r)},${Math.round(g)},${Math.round(b)})`;portraitCtx.beginPath();portraitCtx.arc(cx+driftX,cy+driftY,rad,0,Math.PI*2);portraitCtx.fill()}}portraitCtx.globalAlpha=1;if(!still&&!calm&&portraitVisible)portraitFrame=requestAnimationFrame(()=>paintPortrait(false))}
+      portraitCanvas.addEventListener('pointerenter',()=>{portraitPointer.active=true});portraitCanvas.addEventListener('pointermove',event=>{const rect=portraitCanvas.getBoundingClientRect();portraitPointer.x=event.clientX-rect.left;portraitPointer.y=event.clientY-rect.top;portraitPointer.active=true});portraitCanvas.addEventListener('pointerleave',()=>{portraitPointer.active=false;portraitPointer.x=-1000;portraitPointer.y=-1000});portraitImage.addEventListener('load',sizePortrait,{once:true});addEventListener('resize',sizePortrait,{passive:true});if('ResizeObserver'in window)new ResizeObserver(sizePortrait).observe(portraitCanvas);if('IntersectionObserver'in window)new IntersectionObserver(entries=>{portraitVisible=entries[0].isIntersecting;if(portraitVisible){cancelAnimationFrame(portraitFrame);paintPortrait()}}).observe(portraitCanvas);if(portraitImage.complete)sizePortrait();
+      const icons=Array.from({length:84},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.15+.25,a:Math.random()*.54+.12,p:Math.random()*Math.PI*2,s:Math.random()*.00045+.00012}));let width=0,height=0,dpr=1,frame=0;
+      function resize(){dpr=Math.min(devicePixelRatio||1,1.5);width=innerWidth;height=innerHeight;canvas.width=width*dpr;canvas.height=height*dpr;canvas.style.width=width+'px';canvas.style.height=height+'px';ctx.setTransform(dpr,0,0,dpr,0,0)}
+      function draw(){if(document.hidden||document.body.classList.contains('calm')){frame=requestAnimationFrame(draw);return}ctx.clearRect(0,0,width,height);const t=performance.now()*.001;for(const star of icons){star.y-=star.s;if(star.y<0)star.y=1;const twinkle=.65+.35*Math.sin(t*.45+star.p);ctx.beginPath();ctx.arc(star.x*width,star.y*height,star.r,0,Math.PI*2);ctx.fillStyle=`rgba(210,214,232,${star.a*twinkle})`;ctx.fill()}frame=requestAnimationFrame(draw)}
+      resize();addEventListener('resize',resize,{passive:true});if(!prefersCalm)draw();
+      document.addEventListener('keydown',event=>{if(event.altKey||event.ctrlKey||event.metaKey||/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName))return;const keys={'1':'#experience','2':'#about','3':'#projects','4':'#education','5':'#contact','0':'#home'};if(event.key.toLowerCase()==='t')themeButton.click();if(event.key.toLowerCase()==='c')calmButton.click();if(keys[event.key])document.querySelector(keys[event.key]).scrollIntoView({behavior:document.body.classList.contains('calm')?'auto':'smooth'})});
+    })();
+  </script>
 </body>
 </html>
