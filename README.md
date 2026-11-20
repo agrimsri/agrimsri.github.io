@@ -21,5 +21,5 @@ Then visit `http://localhost:8000`.
 - Self-contained, dependency-light static architecture with zero build step.
 - Scroll-choreographed experience powered by GSAP and ScrollTrigger.
 - Responsive typography with Instrument Serif, DM Sans, and DM Mono.
-- Accessible navigation, keyboard-friendly focus management, and a contrast-checked light/dark theme toggle stored in localStorage.
+- Accessible navigation and keyboard-friendly focus management.
 - Optimized portrait assets rendered in WebP with dithering fallback.
