@@ -12,6 +12,7 @@
   <meta property="og:type" content="website">
   <title>Agrim Srivastava — Systems with a human pulse</title>
   <script>document.documentElement.classList.add('js')</script>
+  <noscript><style>.welcome-gate{display:none!important}</style></noscript>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 2 23 16 38 20 23 23 20 38 17 23 2 20 17 16Z' fill='%23d4c2a1'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,8 +65,38 @@
     @keyframes starBreathe{0%,100%{transform:scale(.92);opacity:.75}50%{transform:scale(1.12);opacity:1;filter:drop-shadow(0 0 20px rgba(212,194,161,.95))}}
     @media(prefers-reduced-motion:reduce){.welcome-star{animation:none}.welcome-overlay{transition-duration:.3s}}
   </style>
+  <style>
+    html.intro-active{overflow:hidden}
+    .welcome-gate{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;overflow:hidden;isolation:isolate;pointer-events:auto;color:#f4f0e8}
+    .welcome-curtain{position:absolute;inset-block:0;width:50.1%;background:radial-gradient(ellipse at 50% 50%,rgba(116,133,188,.11),transparent 60%),#090b14;transition:transform .82s cubic-bezier(.76,0,.18,1);transition-delay:.94s}
+    .welcome-curtain--left{left:0;border-right:1px solid rgba(217,219,240,.13)}
+    .welcome-curtain--right{right:0;border-left:1px solid rgba(217,219,240,.13)}
+    .welcome-copy{position:relative;z-index:2;text-align:center;opacity:1;transform:translateY(0);transition:opacity .24s ease,transform .5s cubic-bezier(.2,.7,.2,1);transition-delay:.72s}
+    .welcome-kicker{display:block;margin-bottom:.65rem;color:rgba(228,229,239,.58);font:10px var(--mono);letter-spacing:.22em;text-transform:uppercase}
+    .welcome-title{margin:0;font:400 clamp(3.8rem,10vw,7.5rem)/.9 var(--serif);letter-spacing:-.045em}
+    .welcome-light{position:absolute;z-index:3;left:50%;top:50%;width:9px;height:9px;border-radius:50%;background:#fff9e9;opacity:0;box-shadow:0 0 12px 5px rgba(255,246,215,.84),0 0 42px 16px rgba(191,205,255,.38);transform:translate(-50%,-50%)}
+    .welcome-light:after{position:absolute;top:4px;width:min(44vw,620px);height:1px;content:"";background:linear-gradient(90deg,transparent,rgba(255,248,223,.7),rgba(184,202,255,.14));filter:blur(.35px)}
+    .welcome-light--left:after{right:4px;transform:translateX(-100%)}
+    .welcome-light--right:after{left:4px;transform:rotate(180deg)}
+    .welcome-gate.is-opening .welcome-curtain--left{transform:translateX(-102%)}
+    .welcome-gate.is-opening .welcome-curtain--right{transform:translateX(102%)}
+    .welcome-gate.is-opening .welcome-copy{opacity:0;transform:translateY(-8px);transition-delay:.64s}
+    .welcome-gate.is-opening .welcome-light--left{animation:welcome-travel-left .92s cubic-bezier(.3,.7,.2,1) forwards}
+    .welcome-gate.is-opening .welcome-light--right{animation:welcome-travel-right .92s cubic-bezier(.3,.7,.2,1) forwards}
+    @keyframes welcome-travel-left{0%{opacity:0;transform:translate(-50%,-50%) translateX(0)}12%{opacity:1}100%{opacity:.92;transform:translate(-50%,-50%) translateX(-48vw)}}
+    @keyframes welcome-travel-right{0%{opacity:0;transform:translate(-50%,-50%) translateX(0)}12%{opacity:1}100%{opacity:.92;transform:translate(-50%,-50%) translateX(48vw)}}
+    .welcome-gate.is-gone{display:none}
+    @media(prefers-reduced-motion:reduce){.welcome-curtain,.welcome-copy{transition:none!important}.welcome-light{display:none}}
+  </style>
 </head>
 <body>
+  <div class="welcome-gate" id="welcome-gate" role="status" aria-label="Welcome">
+    <div class="welcome-curtain welcome-curtain--left" aria-hidden="true"></div>
+    <div class="welcome-curtain welcome-curtain--right" aria-hidden="true"></div>
+    <div class="welcome-copy"><span class="welcome-kicker">Agrim Srivastava · portfolio</span><p class="welcome-title">Welcome</p></div>
+    <span class="welcome-light welcome-light--left" aria-hidden="true"></span>
+    <span class="welcome-light welcome-light--right" aria-hidden="true"></span>
+  </div>
   <div id="welcome-overlay" class="welcome-overlay" aria-hidden="true">
     <div class="welcome-mark">
       <svg class="welcome-star" viewBox="0 0 40 40" aria-hidden="true">
@@ -192,6 +223,23 @@
       function goToProject(delta){const top=projectSection.getBoundingClientRect().top+scrollY,range=Math.max(1,projectSection.offsetHeight-innerHeight),progress=getProjectProgress(),index=clamp(Math.round(progress*(projectSlides.length-1))+delta,0,projectSlides.length-1);scrollTo({top:top+range*index/(projectSlides.length-1),behavior:prefersReducedMotion?'auto':'smooth'})}
       previousProject.addEventListener('click',()=>goToProject(-1));nextProject.addEventListener('click',()=>goToProject(1));
       const portraitCanvas=document.querySelector('#portrait-dither'),portraitCtx=portraitCanvas.getContext('2d',{alpha:true}),sampleCanvas=document.createElement('canvas'),sampleCtx=sampleCanvas.getContext('2d',{willReadFrequently:true}),portraitImage=new Image();portraitImage.decoding='async';portraitImage.fetchPriority='high';portraitImage.src='assets/portrait-grayscale.webp';let portraitFrame=0,portraitWidth=0,portraitHeight=0,portraitDpr=1,portraitVisible=true,lastPortraitPaint=0,portraitRevealStart=0,portraitRevealDuration=880,portraitStage=document.querySelector('.portrait-stage'),portraitPointer={x:-1000,y:-1000,active:false};
+      const welcomeGate=document.querySelector('#welcome-gate');
+      if(welcomeGate){
+        document.documentElement.classList.add('intro-active');
+        const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const closeWelcome=()=>{welcomeGate.classList.add('is-gone');welcomeGate.setAttribute('aria-hidden','true');document.documentElement.classList.remove('intro-active')};
+        if(reducedMotion)closeWelcome();
+        else{
+          const poster=document.querySelector('.portrait-static');
+          const ready=[poster?.decode?.().catch(()=>{}),portraitImage.decode?.().catch(()=>{}),document.fonts?.ready].filter(Boolean);
+          const waitForAssets=Promise.allSettled(ready);
+          const safetyLimit=new Promise(resolve=>setTimeout(resolve,1100));
+          Promise.race([waitForAssets,safetyLimit]).then(()=>{
+            welcomeGate.classList.add('is-opening');
+            setTimeout(closeWelcome,1900);
+          });
+        }
+      }
       function sizePortrait(){const box=portraitCanvas.getBoundingClientRect();if(!box.width||!box.height)return;portraitDpr=Math.min(devicePixelRatio||1,1.5);portraitWidth=Math.round(box.width);portraitHeight=Math.round(box.height);portraitCanvas.width=Math.round(portraitWidth*portraitDpr);portraitCanvas.height=Math.round(portraitHeight*portraitDpr);sampleCanvas.width=portraitWidth;sampleCanvas.height=portraitHeight;cancelAnimationFrame(portraitFrame);paintPortrait()}
       function paintPortrait(still=false){if(!portraitImage.complete||!portraitImage.naturalWidth||!portraitWidth)return;const now=performance.now(),reduced=prefersReducedMotion;if(!still&&!reduced&&now-lastPortraitPaint<32){portraitFrame=requestAnimationFrame(()=>paintPortrait(false));return}lastPortraitPaint=now;const w=portraitWidth,h=portraitHeight,cell=5;sampleCtx.clearRect(0,0,w,h);const scale=Math.max(w/portraitImage.naturalWidth,h/portraitImage.naturalHeight),sw=w/scale,sh=h/scale,sx=(portraitImage.naturalWidth-sw)/2,sy=(portraitImage.naturalHeight-sh)*.27;sampleCtx.drawImage(portraitImage,sx,sy,sw,sh,0,0,w,h);const pixels=sampleCtx.getImageData(0,0,w,h).data,t=now*.001,revealTime=reduced?1:clamp((now-portraitRevealStart)/portraitRevealDuration,0,1),revealProgress=revealTime*revealTime*(3-2*revealTime);portraitStage.style.setProperty('--portrait-reveal',revealProgress.toFixed(3));portraitCtx.setTransform(portraitDpr,0,0,portraitDpr,0,0);portraitCtx.clearRect(0,0,w,h);const bayer=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5];for(let y=0;y<h;y+=cell){for(let x=0;x<w;x+=cell){const seedValue=Math.sin((x+17)*127.1+(y+31)*311.7)*43758.5453,scatter=seedValue-Math.floor(seedValue);if(scatter>revealProgress)continue;let r=0,g=0,b=0,alpha=0,n=0;for(let py=y;py<Math.min(y+cell,h);py+=3)for(let px=x;px<Math.min(x+cell,w);px+=3){const i=(py*w+px)*4;r+=pixels[i];g+=pixels[i+1];b+=pixels[i+2];alpha+=pixels[i+3];n++}r/=n;g/=n;b/=n;alpha/=n;if(alpha<160)continue;let lum=(.2126*r+.7152*g+.0722*b)/255;lum=clamp((lum-.5)*1.58+.5,0,1);const renderLum=lum;if(renderLum<.12)continue;const cx=x+cell/2,cy=y+cell/2,dist=Math.hypot(cx-portraitPointer.x,cy-portraitPointer.y),influence=portraitPointer.active&&!reduced?clamp(1-dist/165,0,1):0,shimmer=reduced?0:Math.sin(t*1.25+y*.018+x*.006)*.035,hoverWave=influence*Math.sin(t*3.1-dist*.035+(x+y)*.004)*.14,threshold=(bayer[(Math.floor(y/cell)%4)*4+Math.floor(x/cell)%4]+.5)/16;if(renderLum+shimmer+hoverWave<(threshold*.92))continue;const edge=Math.min(cx,w-cx,cy,h-cy),edgeT=clamp(edge/(Math.min(w,h)*.14),0,1),edgeFade=edgeT*edgeT*(3-2*edgeT),phase=t*3-dist*.03+(x+y)*.008,pulse=.9+.1*Math.sin(t*1.65-(cx+cy)*.006),driftX=influence*Math.sin(phase)*2.6,driftY=influence*Math.cos(phase*1.13)*2.6,density=.19+renderLum*.26+influence*.035*Math.sin(phase),rad=cell*density*pulse;portraitCtx.globalAlpha=clamp((.3+renderLum*.48+influence*.12*Math.sin(phase))*pulse*edgeFade*(alpha/255),0,.82);const tone=Math.round((r+g+b)/3);portraitCtx.fillStyle=`rgb(${tone},${tone},${tone})`;portraitCtx.beginPath();portraitCtx.arc(cx+driftX,cy+driftY,rad,0,Math.PI*2);portraitCtx.fill()}}portraitCtx.globalAlpha=1;if(!still&&!reduced&&portraitVisible)portraitFrame=requestAnimationFrame(()=>paintPortrait(false))}
       portraitCanvas.addEventListener('pointerenter',()=>{portraitPointer.active=true});portraitCanvas.addEventListener('pointermove',event=>{const rect=portraitCanvas.getBoundingClientRect();portraitPointer.x=event.clientX-rect.left;portraitPointer.y=event.clientY-rect.top;portraitPointer.active=true});portraitCanvas.addEventListener('pointerleave',()=>{portraitPointer.active=false;portraitPointer.x=-1000;portraitPointer.y=-1000});if(portraitImage.complete&&portraitImage.naturalWidth){portraitRevealStart=performance.now();sizePortrait()}else portraitImage.addEventListener('load',()=>{portraitRevealStart=performance.now();sizePortrait()},{once:true});addEventListener('resize',sizePortrait,{passive:true});if('ResizeObserver'in window)new ResizeObserver(sizePortrait).observe(portraitCanvas);if('IntersectionObserver'in window)new IntersectionObserver(entries=>{portraitVisible=entries[0].isIntersecting;if(portraitVisible){cancelAnimationFrame(portraitFrame);paintPortrait()}}).observe(portraitCanvas);
